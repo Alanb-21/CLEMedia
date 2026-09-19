@@ -1,0 +1,139 @@
+@import "tailwindcss";
+
+/* ---------------------------------------------------------------------------
+   Typefaces — self-hosted WOFF2, SIL OFL 1.1. See public/fonts/OFL.txt.
+   Calistoga ships one weight and no italic; hierarchy comes from size, case
+   and colour, never weight. Montserrat's variable axis carries weight.
+--------------------------------------------------------------------------- */
+@font-face {
+  font-family: "Calistoga";
+  src: url("/fonts/calistoga-latin.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA,
+    U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193,
+    U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: "Calistoga";
+  src: url("/fonts/calistoga-latin-ext.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF,
+    U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020,
+    U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+  font-family: "Montserrat";
+  src: url("/fonts/montserrat-latin.woff2") format("woff2");
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA,
+    U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193,
+    U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: "Montserrat";
+  src: url("/fonts/montserrat-latin-ext.woff2") format("woff2");
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF,
+    U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020,
+    U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+
+/* ---------------------------------------------------------------------------
+   Tokens. Every value traced in DESIGN-TOKENS.md. Do not introduce a raw hex
+   anywhere else in the codebase — components use token names only.
+--------------------------------------------------------------------------- */
+@theme {
+  --color-clay: #bc9e86;
+  --color-cream: #e6d4bc;
+  --color-red: #a32e32;
+  --color-red-deep: #8e2428;
+  --color-ink: #1a1614;
+  --color-body: #4a352a;
+  --color-muted: #6b4e3a;
+  --color-hairline: #d8c6ae;
+  --color-pups: #b5e2f6;
+  --color-paper: #ffffff;
+
+  --font-display: "Calistoga", Georgia, "Times New Roman", serif;
+  --font-body: "Montserrat", system-ui, -apple-system, "Segoe UI", sans-serif;
+
+  --ease-house: cubic-bezier(0.22, 1, 0.36, 1);
+
+  /* Type scale — 1.25 major third, clamped for fluid sizing */
+  --text-display: clamp(2.5rem, 1.6rem + 4.2vw, 4.5rem);
+  --text-h1: clamp(2rem, 1.4rem + 2.8vw, 3.25rem);
+  --text-h2: clamp(1.5rem, 1.2rem + 1.5vw, 2.25rem);
+  --text-h3: clamp(1.25rem, 1.1rem + 0.7vw, 1.5rem);
+  --text-lead: clamp(1.0625rem, 1rem + 0.35vw, 1.25rem);
+}
+
+@layer base {
+  html {
+    -webkit-text-size-adjust: 100%;
+    scroll-behavior: smooth;
+  }
+  body {
+    background: var(--color-paper);
+    color: var(--color-body);
+    font-family: var(--font-body);
+    font-size: 1rem;
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+  h1, h2, h3, h4 {
+    font-family: var(--font-display);
+    font-weight: 400;
+    color: var(--color-ink);
+    text-wrap: balance;
+    line-height: 1.12;
+  }
+  p { text-wrap: pretty; }
+
+  /* Visible focus on everything interactive — WCAG 2.4.7 */
+  :focus-visible {
+    outline: 3px solid var(--color-red);
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+
+  ::selection {
+    background: var(--color-cream);
+    color: var(--color-ink);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+@layer utilities {
+  /* Scroll reveal — starts VISIBLE so the page reads with JS off or before
+     the observer fires. The animation only adds polish on top. */
+  .reveal {
+    animation: reveal var(--dur, 560ms) var(--ease-house) both;
+    animation-timeline: view();
+    animation-range: entry 0% entry 40%;
+  }
+  @keyframes reveal {
+    from { opacity: 0; transform: translateY(12px); }
+    to { opacity: 1; transform: none; }
+  }
+  @supports not (animation-timeline: view()) {
+    .reveal { animation: none; }
+  }
+}

@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
+  <!-- Placeholder mark. No vector CLÉ logo exists in the brand kit.
+       QUESTIONS.md #21. Replace once a wordmark is supplied. -->
+  <rect width="32" height="32" fill="#A32E32"/>
+  <text x="16" y="22" font-family="Georgia, serif" font-size="17" fill="#FFFFFF"
+        text-anchor="middle">C</text>
+</svg>
