@@ -36,11 +36,17 @@ two core colours, which is why they are proposed as authoritative:
 
 **This is the one real decision in this document and it needs explicit approval.**
 
-Clay on white is **2.51:1**. Cream on white is **1.45:1**. Neither is usable for
-text at any size. The show site gets away with it because text there sits on
-white or black; a type-led corporate site cannot. So the palette needs a dark
-ink and a darkened clay ramp derived from the brand hue, not invented from
-nowhere.
+To be precise about what the palette can and cannot do: **brand red `#A32E32`
+passes AAA on white at 7.01:1**, and white on red is also 7.01:1, so red is a
+valid text colour and a valid button fill. The palette does have an accessible
+colour.
+
+What it does not have is an accessible **neutral**. Clay on white is **2.51:1**,
+cream on white is **1.45:1** — neither carries text at any size. Red is the
+accent, rationed to roughly 10% of the page, so it cannot carry body copy
+either; a page set in red is unreadable regardless of what the ratio says. So
+the palette needs a dark ink and a clay ramp derived from the brand hue, not
+invented from nowhere.
 
 | Token | Hex | On white | On cream `#E6D4BC` | Role |
 |---|---|---|---|---|
@@ -51,6 +57,32 @@ nowhere.
 | `--red-deep` | `#8E2428` | 8.63:1 AAA | 5.96:1 AA | Red when it carries text |
 
 `--muted` is the floor. Nothing lighter carries text anywhere on the site.
+
+### Contrast matrix — every pairing, measured
+
+```
+fg/bg         white    cream     clay      red     pups
+ink          17.97+   12.41+    7.16+    2.56-   12.98+
+body         11.45+    7.91+    4.57+    1.63-    8.27+
+muted         7.56+    5.23+    3.02~    1.08-    5.47+
+red           7.01+    4.85+    2.80-    1.00-    5.07+
+white         1.00-    1.45-    2.51-    7.01+    1.38-
+
++ = AA body (4.5:1)   ~ = AA large/UI only (3:1)   - = fails
+```
+
+### Pairing rules that follow
+
+- **Clay is the difficult surface.** It takes `--ink` comfortably (7.16), `--body`
+  only just (4.57), and `--muted` at large sizes or UI only (3.02). Set clay
+  sections in `--ink` and keep the copy short.
+- **Red is never used on clay** (2.80, fails). Red on cream is 4.85, which passes
+  but is tight — prefer red on white.
+- **Cream and PupsPlayer blue take everything.** Any of the three neutrals works
+  on either.
+- **Red as a fill** takes white text at 7.01:1. That is the button pattern.
+- Red stays rationed to accents, kickers, one hero keyword and active states,
+  even though it passes for body text.
 
 ### Rules
 

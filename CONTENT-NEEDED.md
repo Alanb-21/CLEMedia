@@ -23,7 +23,7 @@ resolved (`DESIGN-TOKENS.md`). The logo is not.
 |---|---|---|---|
 | Brand colour palette, exact hex | ✅ | Design tokens, stage 1 gate | `#BC9E86` clay · `#E6D4BC` cream · `#A32E32` red · `#B5E2F6` PupsPlayer. Confirmed against live site CSS + `wall 000.jpg` |
 | Typefaces + web-licensed font files | ✅ | Type scale, stage 1 gate | **Calistoga** + **Montserrat**, both SIL OFL 1.1. Free to embed and self-host. No licence to buy |
-| Accessible text colours | ⚠️ | Every page | Not in the kit — no brand colour passes AA as text. Ink ramp proposed, awaiting approval. QUESTIONS.md #20 |
+| Accessible neutral text colours | ⚠️ | Every page | Brand red `#A32E32` passes AAA on white (7.01:1), but clay and cream carry no text at any size and red is the rationed accent. Ink ramp proposed, awaiting approval. QUESTIONS.md #20 |
 | Show logo, mono (Pawsitive Pugs & Pals) | ✅ | Show cross-link, footer | `logo-black.png` 1000×333, `logo white.png` 1871×523. Flat, clean, vectorises fine |
 | PupsPlayer™ mark | ✅ | `/app` | `PP-logo.png` 2713×2681, flat `#B5E2F6`, 95.7% single colour |
 | **CLÉ Family Media logo, vector** | ❌ | Header, footer, OG, favicon | **Does not exist in any usable form.** Only a 3D felted render and an AI 3D monogram. Zero SVG/AI/EPS in the entire kit. QUESTIONS.md #21 |

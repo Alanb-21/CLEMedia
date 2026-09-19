@@ -177,12 +177,18 @@ Schema supports more; the question is what to seed.
 
 ## Raised by the stage 1 asset audit — 2026-09-19
 
-### 20. The brand palette has no accessible text colour. Approve the added ink ramp?
+### 20. The brand palette has no accessible *neutral*. Approve the added ink ramp?
 **BLOCKING — stage 1 token gate.**
 
-Measured, not assumed: clay `#BC9E86` on white is **2.51:1**. Cream `#E6D4BC` on
-white is **1.45:1**. WCAG 2.1 AA needs 4.5:1 for body text. Neither core brand
-colour can carry text anywhere, at any size.
+**Corrected 2026-09-19** — the first version of this entry said the palette had
+no accessible colour at all. That was wrong. Brand red `#A32E32` is **7.01:1 on
+white**, which passes AAA, and white on red is also 7.01:1, so red works as text
+and as a button fill.
+
+The real gap is narrower and still real: there is no accessible **neutral**.
+Clay `#BC9E86` on white is **2.51:1**, cream `#E6D4BC` on white is **1.45:1**;
+WCAG 2.1 AA needs 4.5:1. Red is the rationed accent, so it cannot carry body
+copy either — a page set in red is unreadable whatever the ratio says.
 
 The show site sidesteps this by setting text in black or white. A type-led
 corporate site cannot, so `DESIGN-TOKENS.md` proposes a dark ink plus a clay
