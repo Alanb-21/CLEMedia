@@ -32,7 +32,7 @@ two core colours, which is why they are proposed as authoritative:
 | `--cle-red` | `#A32E32` | Live site CSS (also `#A32E30`) | The single rationed accent |
 | `--pups-blue` | `#B5E2F6` | `LOGOS + ICONS/PP-logo.png`, 95.7% flat | PupsPlayer™ mark only. Not a site colour |
 
-### Added — required, because the brand palette has no accessible text colour
+### Added — required, because the brand palette has no accessible *neutral*
 
 **This is the one real decision in this document and it needs explicit approval.**
 
@@ -54,11 +54,13 @@ invented from nowhere.
 | `--body` | `#4A352A` | 11.45:1 AAA | 7.91:1 AAA | Body copy |
 | `--muted` | `#6B4E3A` | 7.56:1 AAA | 5.23:1 AA | Secondary text, captions |
 | `--hairline` | `#D8C6AE` | — | — | Rules, dividers, table borders |
-| `--red-deep` | `#8E2428` | 8.63:1 AAA | 5.96:1 AA | Red when it carries text |
+| `--red-deep` | `#8E2428` | 8.63:1 AAA | 5.96:1 AA | Red on cream, where `--cle-red` is tight at 4.85 |
 
 `--muted` is the floor. Nothing lighter carries text anywhere on the site.
 
 ### Contrast matrix — every pairing, measured
+
+Also carried in `docs/BUILD-PROMPTS.md`; keep the two in step if either changes.
 
 ```
 fg/bg         white    cream     clay      red     pups
