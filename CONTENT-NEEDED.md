@@ -14,27 +14,36 @@ Status: ❌ not supplied · ⚠️ partial or unconfirmed · ✅ received
 
 ---
 
-## Brand assets — all blocked on the BRAND TOOL KIT
+## Brand assets — BRAND TOOL KIT received and audited 2026-09-19
+
+Kit audited in full: 741MB, 355 files, 13 folders. Palette and typefaces are
+resolved (`DESIGN-TOKENS.md`). The logo is not.
 
 | Item | Status | Needed for | Notes |
 |---|---|---|---|
-| Logo, primary lockup (vector) | ❌ | Header, footer, OG, favicon | SVG or AI preferred |
-| Logo, secondary / stacked / mono | ❌ | Footer, small sizes, dark backgrounds | |
-| CLÉ Family Media wordmark | ❌ | Header | Distinct from the show logo |
-| Brand colour palette, exact hex | ❌ | Design tokens, stage 1 gate | Must come from the kit or a palette sheet |
-| Typefaces + web-licensed font files | ❌ | Type scale, stage 1 gate | Web licence must be confirmed |
-| Character art (Finn, Fia, others) | ❌ | Show handoff module, small accents | Supporting cast only, never leading a page |
-| Favicon / app icon source | ❌ | Favicon set | Generated from the logo once supplied |
+| Brand colour palette, exact hex | ✅ | Design tokens, stage 1 gate | `#BC9E86` clay · `#E6D4BC` cream · `#A32E32` red · `#B5E2F6` PupsPlayer. Confirmed against live site CSS + `wall 000.jpg` |
+| Typefaces + web-licensed font files | ✅ | Type scale, stage 1 gate | **Calistoga** + **Montserrat**, both SIL OFL 1.1. Free to embed and self-host. No licence to buy |
+| Accessible text colours | ⚠️ | Every page | Not in the kit — no brand colour passes AA as text. Ink ramp proposed, awaiting approval. QUESTIONS.md #20 |
+| Show logo, mono (Pawsitive Pugs & Pals) | ✅ | Show cross-link, footer | `logo-black.png` 1000×333, `logo white.png` 1871×523. Flat, clean, vectorises fine |
+| PupsPlayer™ mark | ✅ | `/app` | `PP-logo.png` 2713×2681, flat `#B5E2F6`, 95.7% single colour |
+| **CLÉ Family Media logo, vector** | ❌ | Header, footer, OG, favicon | **Does not exist in any usable form.** Only a 3D felted render and an AI 3D monogram. Zero SVG/AI/EPS in the entire kit. QUESTIONS.md #21 |
+| CLÉ wordmark, flat / mono | ❌ | Header, small sizes, dark grounds | Same gap. Needs supplying or approval to draw one |
+| Favicon / app icon source | ❌ | Favicon set | Blocked on the CLÉ mark above |
+| Character art (Finn, Fia, others) | ✅ | Show handoff module, small accents | Plentiful in `GENERAL EPISODE STILLS/`. Supporting cast only |
 
-## Photography
+## Photography — none exists
+
+**There is no photograph anywhere in the BRAND TOOL KIT.** Every image is
+AI-generated or a render; filenames and XMP carry the prompts. See QUESTIONS.md
+#22 and #23.
 
 | Item | Status | Needed for | Notes |
 |---|---|---|---|
-| Garden photography | ❌ | Home hero, full-bleed section breaks | Candidate hero. High-res, landscape. Rights must be cleared |
-| Founder photography — Conor and Lydia Sexton | ❌ | `/story`, `/team` | Real photography only |
-| Team and advisor headshots | ❌ | `/team` | One per person, consistent treatment |
-| Process / behind-the-scenes / workspace | ❌ | `/story`, `/ethical-ai` | Faces, hands, workspaces |
-| Real-dog photography | ❌ | Show handoff, `/story` | The pugs behind the characters. Commercial clearance needed |
+| Garden photography | ❌ | Home hero, section breaks | The "garden" stills are AI-generated. Cannot be used as the real garden |
+| Founder photography — Conor, Lydia | ❌ | `/story`, `/team` | `PEOPLE/` holds five AI cartoon avatars. Unusable under the brief's hard rules |
+| Team and advisor headshots | ❌ | `/team` | None exist. Shoot or supplied headshots required |
+| Process / behind-the-scenes / workspace | ❌ | `/story`, `/ethical-ai` | None exist |
+| Real-dog photography | ❌ | Show handoff, `/story` | The pugs in the kit are animated characters, not the real dogs |
 
 ## Copy
 
@@ -46,7 +55,7 @@ Status: ❌ not supplied · ⚠️ partial or unconfirmed · ✅ received
 | Company at a glance | ❌ | `/` | What CLÉ is, produces, and where it is going |
 | Research and credibility strip | ❌ | `/` | **No claim ships unsupplied.** Empty until provided |
 | Founder story, long-form | ❌ | `/story` | Carries the emotional weight of the site |
-| Team and advisor bios | ⚠️ | `/team` | Names only, from the show site, unconfirmed. See QUESTIONS.md #5 |
+| Team and advisor bios | ⚠️ | `/team` | Names + credited roles recovered from `CREDITS/`, and they correct the earlier list (Lydia **Harding**, not Sexton). Still no bios. See QUESTIONS.md #5 |
 | Ethical AI — position statement | ❌ | `/ethical-ai` | AI as production tool in a human-led process |
 | Ethical AI — process stages | ❌ | `/ethical-ai` | Concept → scripting → creative dev → review. Where a human decides, where a tool assists |
 | Ethical AI — safeguards and red lines | ❌ | `/ethical-ai` | The lines the company will not cross |
