@@ -1,10 +1,12 @@
 import { Seo } from "@/components/Seo";
 import { Container, Kicker, Lead, Panel, Section, SectionHeading } from "@/components/ui";
+import { Reveal } from "@/components/Reveal";
+import { IconInterview, IconMic, IconPress } from "@/components/icons";
 
 const ROUTES = [
-  { title: "Interviews", body: "Conversations with Conor and the team about the company, the model and the state of children's media." },
-  { title: "Podcasts", body: "Appearances on shows covering early years education, family media and Irish creative business." },
-  { title: "Press", body: "Coverage of the company, the series and the app as it appears." },
+  { icon: IconInterview, title: "Interviews", body: "Conversations with Conor and the team about the company, the model and the state of children's media." },
+  { icon: IconMic, title: "Podcasts", body: "Appearances on shows covering early years education, family media and Irish creative business." },
+  { icon: IconPress, title: "Press", body: "Coverage of the company, the series and the app as it appears." },
 ];
 
 export default function Media() {
@@ -32,13 +34,16 @@ export default function Media() {
       <Section className="!pt-0">
         <Container>
           <ul className="grid gap-5 sm:grid-cols-3">
-            {ROUTES.map((r) => (
-              <li key={r.title}>
-                <Panel className="h-full p-7">
+            {ROUTES.map((r, i) => (
+              <Reveal as="li" key={r.title} delay={i * 80}>
+                <Panel className="h-full p-7 transition-transform duration-300 hover:-translate-y-1">
+                  <span className="mb-4 flex h-11 w-11 items-center justify-center rounded-[var(--radius-md)] bg-white/70 text-red-deep hairline-ring">
+                    <r.icon size={21} />
+                  </span>
                   <h2 className="text-[length:var(--text-h3)]">{r.title}</h2>
                   <p className="mt-2.5 font-body text-[14.5px] leading-relaxed text-body">{r.body}</p>
                 </Panel>
-              </li>
+              </Reveal>
             ))}
           </ul>
 

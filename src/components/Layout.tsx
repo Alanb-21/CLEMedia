@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import { Link, NavLink, Outlet, useLocation } from "react-router-dom";
 import { NAV, SITE } from "@/lib/site";
+import { Mark, Wordmark } from "@/components/Wordmark";
+import { IconExternal, IconMail } from "@/components/icons";
 
 function ShowSiteLink({ className = "" }: { className?: string }) {
   return (
@@ -11,9 +13,7 @@ function ShowSiteLink({ className = "" }: { className?: string }) {
       className={`inline-flex items-center gap-1.5 ${className}`}
     >
       Visit the show site
-      <svg width="11" height="11" viewBox="0 0 12 12" fill="none" aria-hidden="true">
-        <path d="M3 9L9 3M9 3H4.5M9 3v4.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-      </svg>
+      <IconExternal size={13} />
       <span className="sr-only">(opens in a new tab)</span>
     </a>
   );
@@ -28,10 +28,7 @@ function Header() {
     <header className="glass-bar sticky top-0 z-50 border-b border-white/60">
       <div className="mx-auto flex max-w-6xl items-center gap-4 px-5 py-3.5">
         <Link to="/" className="shrink-0" aria-label={`${SITE.name}, home`}>
-          {/* No vector CLÉ mark exists in the brand kit. QUESTIONS.md #21. */}
-          <span className="font-display text-[19px] leading-none text-ink">
-            CLÉ<span className="text-muted"> Family Media</span>
-          </span>
+          <Wordmark markSize={32} />
         </Link>
 
         <nav aria-label="Main" className="ml-auto hidden lg:block">
@@ -104,7 +101,8 @@ function Footer() {
       <div className="mx-auto max-w-6xl px-5 py-14">
         <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-4">
           <div>
-            <p className="font-display text-[19px] text-ink">CLÉ Family Media</p>
+            <Mark size={36} />
+            <p className="mt-3 font-display text-[19px] text-ink">CLÉ Family Media</p>
             <p className="mt-2.5 max-w-[28ch] font-body text-[14px] text-muted">
               Calm, purposeful edutainment for young children, built on research and made by people.
             </p>
@@ -134,7 +132,8 @@ function Footer() {
             <p className="mt-3 max-w-[28ch] font-body text-[14px] text-body">
               Partnership, distribution and press enquiries all reach us directly.
             </p>
-            <Link to="/contact" className="mt-2.5 inline-block font-body text-[14px] font-medium text-red-deep underline underline-offset-4">
+            <Link to="/contact" className="mt-2.5 inline-flex items-center gap-1.5 font-body text-[14px] font-semibold text-red-deep underline underline-offset-4">
+              <IconMail size={15} />
               Partnership enquiries
             </Link>
           </div>

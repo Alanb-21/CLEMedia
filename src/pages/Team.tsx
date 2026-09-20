@@ -1,6 +1,7 @@
 import { Seo } from "@/components/Seo";
 import { AssetPlaceholder } from "@/components/AssetPlaceholder";
 import { Container, Kicker, Lead, Panel, Section, SectionHeading } from "@/components/ui";
+import { Reveal } from "@/components/Reveal";
 import type { Person } from "@/lib/types";
 
 /**
@@ -51,9 +52,9 @@ const SEED: Person[] = [
   },
 ];
 
-function PersonCard({ p, advisor = false }: { p: Person; advisor?: boolean }) {
+function PersonCard({ p, advisor = false, delay = 0 }: { p: Person; advisor?: boolean; delay?: number }) {
   return (
-    <li>
+    <Reveal as="li" delay={delay}>
       <Panel className="flex h-full flex-col overflow-hidden">
         <div className={advisor ? "flex gap-5 p-6" : "flex flex-col"}>
           <div className={advisor ? "w-[88px] shrink-0" : ""}>
@@ -79,7 +80,7 @@ function PersonCard({ p, advisor = false }: { p: Person; advisor?: boolean }) {
           </div>
         </div>
       </Panel>
-    </li>
+    </Reveal>
   );
 }
 
@@ -113,7 +114,7 @@ export default function Team() {
         <Container>
           <SectionHeading id="core-h" kicker="Core team" title="Who runs the company" />
           <ul className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {team.map((p) => <PersonCard key={p.id} p={p} />)}
+            {team.map((p, i) => <PersonCard key={p.id} p={p} delay={i * 80} />)}
           </ul>
         </Container>
       </Section>
@@ -127,7 +128,7 @@ export default function Team() {
             lead="Advisors shape the pedagogy and review the content. They are not employees, and they are shown separately for exactly that reason."
           />
           <ul className="mt-10 grid gap-6 lg:grid-cols-2">
-            {advisors.map((p) => <PersonCard key={p.id} p={p} advisor />)}
+            {advisors.map((p, i) => <PersonCard key={p.id} p={p} advisor delay={i * 80} />)}
           </ul>
         </Container>
       </Section>

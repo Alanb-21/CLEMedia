@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Seo } from "@/components/Seo";
 import { Button, Container, Kicker, Lead, Section } from "@/components/ui";
+import { IconMail } from "@/components/icons";
 
 type Route = "partnership" | "general" | "press";
 
@@ -147,7 +148,7 @@ export default function Contact() {
                     <p role="alert" className="font-body text-[14px] text-red-deep">{error}</p>
                   )}
                   <Button type="submit" disabled={busy}>
-                    {busy ? "Sending…" : "Send message"}
+                    {busy ? "Sending" : "Send message"}<IconMail size={16} />
                   </Button>
                   <p className="font-body text-[12.5px] text-muted">
                     We use what you send here to reply to you, and nothing else.

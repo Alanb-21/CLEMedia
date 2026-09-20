@@ -1,10 +1,12 @@
 import { Seo } from "@/components/Seo";
 import { Container, Kicker, Lead, Panel, Section } from "@/components/ui";
+import { Reveal } from "@/components/Reveal";
+import { IconCard, IconDownload, IconPrint } from "@/components/icons";
 
 const STEPS = [
-  { n: "01", t: "Pick your printable", b: "Colouring books, puzzle packs and activity sheets built around the series." },
-  { n: "02", t: "Pay with card", b: "Handled by Stripe. No account, no sign up, no password to forget." },
-  { n: "03", t: "Download it there and then", b: "Your file is ready immediately. Save it somewhere safe and print it as often as you like." },
+  { icon: IconPrint, n: "01", t: "Pick your printable", b: "Colouring books, puzzle packs and activity sheets built around the series." },
+  { icon: IconCard, n: "02", t: "Pay with card", b: "Handled by Stripe. No account, no sign up, no password to forget." },
+  { icon: IconDownload, n: "03", t: "Download it there and then", b: "Your file is ready immediately. Save it somewhere safe and print it as often as you like." },
 ];
 
 export default function Shop() {
@@ -32,14 +34,19 @@ export default function Shop() {
       <Section className="!pt-0">
         <Container>
           <ol className="grid gap-5 sm:grid-cols-3">
-            {STEPS.map((s) => (
-              <li key={s.n}>
-                <Panel className="h-full p-7">
-                  <span className="font-display text-[15px] text-clay" aria-hidden="true">{s.n}</span>
-                  <h2 className="mt-2 text-[length:var(--text-h3)]">{s.t}</h2>
+            {STEPS.map((s, i) => (
+              <Reveal as="li" key={s.n} delay={i * 80}>
+                <Panel className="h-full p-7 transition-transform duration-300 hover:-translate-y-1">
+                  <div className="flex items-center gap-3">
+                    <span className="wash-cream hairline-ring flex h-11 w-11 items-center justify-center rounded-[var(--radius-md)] text-red-deep">
+                      <s.icon size={21} />
+                    </span>
+                    <span className="font-display text-[14px] text-clay" aria-hidden="true">{s.n}</span>
+                  </div>
+                  <h2 className="mt-4 text-[length:var(--text-h3)]">{s.t}</h2>
                   <p className="mt-2.5 font-body text-[14.5px] leading-relaxed text-body">{s.b}</p>
                 </Panel>
-              </li>
+              </Reveal>
             ))}
           </ol>
 

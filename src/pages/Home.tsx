@@ -2,20 +2,28 @@ import { Link } from "react-router-dom";
 import { Seo, organizationJsonLd } from "@/components/Seo";
 import { AssetPlaceholder } from "@/components/AssetPlaceholder";
 import { Button, Container, Kicker, Lead, Panel, Section, SectionHeading } from "@/components/ui";
+import { Reveal } from "@/components/Reveal";
+import {
+  IconArrow, IconExternal, IconHuman, IconLearn, IconParents, IconPlay,
+  IconResearch, IconWatch,
+} from "@/components/icons";
 import { SITE } from "@/lib/site";
 
 const MODEL = [
   {
+    icon: IconWatch,
     step: "Watch",
     body:
       "Calm, purposeful animation, paced for how young children actually take things in. Stories that hold attention without racing for it, and that a parent can sit through without wincing.",
   },
   {
+    icon: IconPlay,
     step: "Play",
     body:
       "Interactive follow-on that turns a story into something a child does rather than only sees. Play that continues away from the screen as readily as on it.",
   },
   {
+    icon: IconLearn,
     step: "Learn",
     body:
       "An educational spine running through the whole thing, shaped with early years specialists from the first idea rather than bolted on once the episode is finished.",
@@ -24,16 +32,19 @@ const MODEL = [
 
 const PILLARS = [
   {
+    icon: IconParents,
     title: "Parents helping parents",
     body:
       "CLÉ was started by two parents who could not find what they were looking for. That is still who makes the decisions here, and it is why the company talks to parents as equals rather than as a market.",
   },
   {
+    icon: IconHuman,
     title: "Human led, always",
     body:
       "Production tools have a place in modern animation. Deciding what a child learns, writing what they hear and approving what they see are not among them. A person is accountable at every one of those points.",
   },
   {
+    icon: IconResearch,
     title: "Research underneath",
     body:
       "The Watch, Play, Learn model is built on early years practice and reviewed by specialists. The thinking behind it is published openly in our journal rather than kept as a selling point.",
@@ -67,18 +78,24 @@ export default function Home() {
                 research, made by people.
               </Lead>
               <div className="mt-8 flex flex-wrap gap-3">
-                <Button to="/story">Read the founders' story</Button>
+                <Button to="/story">
+                  Read the founders' story
+                  <IconArrow size={17} />
+                </Button>
                 <Button href={SITE.showUrl} variant="secondary">
                   Visit the show site
+                  <IconExternal size={16} />
                 </Button>
               </div>
             </div>
 
+            <Reveal delay={120} from="right">
             <AssetPlaceholder
               label="The garden that inspired the show's world, or the founders at work"
               source="Photography"
               ratio="4/3"
             />
+            </Reveal>
           </div>
         </Container>
       </Section>
@@ -92,7 +109,7 @@ export default function Home() {
               kicker="The problem"
               title="Most children's media is built to hold attention, not to earn it."
             />
-            <div className="max-w-[60ch] space-y-5 font-body">
+            <Reveal delay={90} className="max-w-[60ch] space-y-5 font-body">
               <p>
                 Parents of young children are handed an enormous amount of content and very little
                 help judging any of it. Most of what fills the market is fast, loud and designed
@@ -109,7 +126,7 @@ export default function Home() {
                 CLÉ Family Media exists to make that content, and to be open enough about how it is
                 made that no parent has to take it on trust.
               </p>
-            </div>
+            </Reveal>
           </div>
         </Container>
       </Section>
@@ -125,15 +142,20 @@ export default function Home() {
           />
           <ol className="mt-12 grid gap-5 sm:grid-cols-3">
             {MODEL.map((m, i) => (
-              <li key={m.step}>
-                <Panel className="h-full p-7">
-                  <span className="font-display text-[15px] text-clay" aria-hidden="true">
-                    {String(i + 1).padStart(2, "0")}
-                  </span>
-                  <h3 className="mt-2 text-[length:var(--text-h3)]">{m.step}</h3>
+              <Reveal as="li" key={m.step} delay={i * 80}>
+                <Panel className="group h-full p-7 transition-transform duration-300 hover:-translate-y-1">
+                  <div className="flex items-center gap-3">
+                    <span className="wash-cream hairline-ring flex h-11 w-11 items-center justify-center rounded-[var(--radius-md)] text-red-deep">
+                      <m.icon size={21} />
+                    </span>
+                    <span className="font-display text-[14px] text-clay" aria-hidden="true">
+                      {String(i + 1).padStart(2, "0")}
+                    </span>
+                  </div>
+                  <h3 className="mt-4 text-[length:var(--text-h3)]">{m.step}</h3>
                   <p className="mt-2.5 font-body text-[14.5px] leading-relaxed text-body">{m.body}</p>
                 </Panel>
-              </li>
+              </Reveal>
             ))}
           </ol>
         </Container>
@@ -195,7 +217,10 @@ export default function Home() {
                   a mid October 2026 launch, alongside this site.
                 </p>
                 <div className="mt-7 flex flex-wrap gap-3">
-                  <Button to="/app">See what's coming</Button>
+                  <Button to="/app">
+                    See what's coming
+                    <IconArrow size={17} />
+                  </Button>
                 </div>
               </div>
               <AssetPlaceholder
@@ -219,13 +244,16 @@ export default function Home() {
             lead="Three things we would want to know if we were assessing this company from the outside."
           />
           <ul className="mt-10 grid gap-5 lg:grid-cols-3">
-            {PILLARS.map((p) => (
-              <li key={p.title}>
-                <Panel className="h-full p-7">
+            {PILLARS.map((p, i) => (
+              <Reveal as="li" key={p.title} delay={i * 80}>
+                <Panel className="h-full p-7 transition-transform duration-300 hover:-translate-y-1">
+                  <span className="mb-4 flex h-11 w-11 items-center justify-center rounded-[var(--radius-md)] bg-white/70 text-red-deep hairline-ring">
+                    <p.icon size={21} />
+                  </span>
                   <h3 className="text-[length:var(--text-h3)]">{p.title}</h3>
                   <p className="mt-3 font-body text-[14.5px] leading-relaxed text-body">{p.body}</p>
                 </Panel>
-              </li>
+              </Reveal>
             ))}
           </ul>
           <p className="mt-6 max-w-[64ch] font-body text-[13.5px] text-muted">
@@ -252,6 +280,7 @@ export default function Home() {
                 </p>
                 <Button href={SITE.showUrl} className="mt-7">
                   Go to pawsitivepugs.com
+                  <IconExternal size={16} />
                 </Button>
               </div>
               <AssetPlaceholder
@@ -297,7 +326,10 @@ export default function Home() {
               your questions directly than have you piece it together.
             </p>
             <div className="mt-8 flex flex-wrap gap-3">
-              <Button to="/contact">Partnership enquiries</Button>
+              <Button to="/contact">
+                Partnership enquiries
+                <IconArrow size={17} />
+              </Button>
               <Button to="/ethical-ai" variant="secondary">
                 How we use AI
               </Button>

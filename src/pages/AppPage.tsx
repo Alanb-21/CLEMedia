@@ -2,6 +2,8 @@ import { useState, type FormEvent } from "react";
 import { Seo } from "@/components/Seo";
 import { AssetPlaceholder } from "@/components/AssetPlaceholder";
 import { Button, Container, Kicker, Lead, Panel, Section, SectionHeading } from "@/components/ui";
+import { Reveal } from "@/components/Reveal";
+import { IconBell, IconCheck, IconDevice, IconLock, IconNoAds, IconPlay, IconPrint, IconResearch } from "@/components/icons";
 
 /**
  * Two states behind one flag in `settings`. The client flips it in /admin at
@@ -11,31 +13,37 @@ const APP_LAUNCHED = false;
 
 const FEATURES = [
   {
+    icon: IconNoAds,
     title: "Every episode, ad free",
     body:
       "The full run of The Pawsitive Pugs & Pals in one place, with nothing competing for your child's attention around it. No autoplay into something you did not choose.",
   },
   {
+    icon: IconPlay,
     title: "Play that follows the story",
     body:
       "Each episode has activities built from what just happened in it, so the play reinforces the idea rather than sitting beside it as a separate game.",
   },
   {
+    icon: IconPrint,
     title: "Printables for off screen",
     body:
       "Colouring, puzzles and activity sheets you can print and take to the table, because not all of this should happen on a screen.",
   },
   {
+    icon: IconDevice,
     title: "Built for small hands",
     body:
       "Large targets, simple navigation and no dark patterns. A young child can find their way around it, and cannot accidentally find their way out of it.",
   },
   {
+    icon: IconLock,
     title: "Parents stay in control",
     body:
       "Clear settings, no surprise purchases inside the app, and no advertising to children anywhere in it.",
   },
   {
+    icon: IconResearch,
     title: "Grounded in the learning",
     body:
       "Every activity maps back to the early years objective behind its episode, reviewed by the same advisors who shape the series.",
@@ -74,7 +82,8 @@ function NotifyForm() {
   if (sent) {
     return (
       <Panel tone="warm" className="px-5 py-4">
-        <p role="status" className="font-body text-[14.5px] text-ink">
+        <p role="status" className="flex items-center gap-2.5 font-body text-[14.5px] text-ink">
+          <span className="text-red-deep"><IconCheck size={18} /></span>
           Thanks. We will email you once, when it is live, and not for anything else.
         </p>
       </Panel>
@@ -96,7 +105,7 @@ function NotifyForm() {
           className="glass w-full rounded-[var(--radius-pill)] px-5 py-3 font-body text-[15px] text-ink placeholder:text-muted/70"
         />
       </div>
-      <Button type="submit" disabled={busy}>{busy ? "Signing up" : "Notify me"}</Button>
+      <Button type="submit" disabled={busy}>{busy ? "Signing up" : "Notify me"}<IconBell size={16} /></Button>
       {error && <p role="alert" className="font-body text-[13.5px] text-red-deep sm:basis-full">{error}</p>}
     </form>
   );
@@ -105,13 +114,16 @@ function NotifyForm() {
 function FeatureGrid() {
   return (
     <ul className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-      {FEATURES.map((f) => (
-        <li key={f.title}>
-          <Panel className="h-full p-7">
+      {FEATURES.map((f, i) => (
+        <Reveal as="li" key={f.title} delay={(i % 3) * 80}>
+          <Panel className="h-full p-7 transition-transform duration-300 hover:-translate-y-1">
+            <span className="mb-4 flex h-11 w-11 items-center justify-center rounded-[var(--radius-md)] bg-white/70 text-red-deep hairline-ring">
+              <f.icon size={21} />
+            </span>
             <h3 className="text-[length:var(--text-h3)]">{f.title}</h3>
             <p className="mt-2.5 font-body text-[14.5px] leading-relaxed text-body">{f.body}</p>
           </Panel>
-        </li>
+        </Reveal>
       ))}
     </ul>
   );

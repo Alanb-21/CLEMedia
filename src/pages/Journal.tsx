@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Seo } from "@/components/Seo";
 import { Container, Kicker, Lead, Panel, Section } from "@/components/ui";
+import { Reveal } from "@/components/Reveal";
 
 /**
  * Four rotating strands, one published per week. Names drafted from the
@@ -80,9 +81,9 @@ export default function Journal() {
           </nav>
 
           <ul className="mt-10 grid gap-5 sm:grid-cols-2">
-            {shown.map((c) => (
-              <li key={c.slug}>
-                <Panel className="h-full p-7">
+            {shown.map((c, i) => (
+              <Reveal as="li" key={c.slug} delay={i * 70}>
+                <Panel className="h-full p-7 transition-transform duration-300 hover:-translate-y-1">
                   <p className="font-body text-[11px] font-semibold uppercase tracking-[0.14em] text-red-deep">
                     {c.name}
                   </p>
@@ -91,7 +92,7 @@ export default function Journal() {
                     First post arriving shortly.
                   </p>
                 </Panel>
-              </li>
+              </Reveal>
             ))}
           </ul>
 

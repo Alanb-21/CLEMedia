@@ -2,6 +2,7 @@ import { useCallback, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { Seo } from "@/components/Seo";
 import { Button, Container, Section } from "@/components/ui";
+import { IconDownload } from "@/components/icons";
 
 type ErrorCode = "not_found" | "expired" | "exhausted" | "server_error";
 
@@ -89,7 +90,7 @@ export default function Download() {
                 </div>
 
                 <div className="mt-7 flex flex-wrap gap-3">
-                  <Button href={state.url}>Download {state.title}</Button>
+                  <Button href={state.url}>Download {state.title}<IconDownload size={17} /></Button>
                   <Button to="/shop" variant="secondary">Back to the shop</Button>
                 </div>
               </>

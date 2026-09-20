@@ -1,5 +1,7 @@
 import { Seo } from "@/components/Seo";
 import { Container, Kicker, Lead, Panel, Section, SectionHeading } from "@/components/ui";
+import { Reveal } from "@/components/Reveal";
+import { IconArrow, IconCheck, IconHands, IconHuman, IconLock, IconNoAds, IconResearch } from "@/components/icons";
 
 /**
  * The stages are the ones named in the client brief. What a human decides at
@@ -41,22 +43,27 @@ const STAGES = [
 
 const LINES = [
   {
+    icon: IconHands,
     title: "AI never authors the story",
     body: "Narrative, characters and dialogue are written by people. A generative tool is never the source of what a child is being told.",
   },
   {
+    icon: IconCheck,
     title: "Nothing reaches a child unreviewed",
     body: "There is no path from a tool's output to a screen that does not pass through a person who is accountable for it.",
   },
   {
+    icon: IconNoAds,
     title: "No synthetic children, no synthetic people",
     body: "We do not generate images of children, and we do not present generated imagery of real people as photography.",
   },
   {
+    icon: IconResearch,
     title: "Educational integrity comes first",
     body: "Where a tool would make production faster but weaken the learning outcome, the learning outcome wins.",
   },
   {
+    icon: IconLock,
     title: "We will say what we use",
     body: "If our production process changes, this page changes with it. Ambiguity about this is itself a failure.",
   },
@@ -126,7 +133,7 @@ export default function EthicalAi() {
 
           <ol className="mt-12">
             {STAGES.map((s, i) => (
-              <li key={s.n} className="relative grid gap-5 border-t border-hairline/70 py-8 sm:grid-cols-[64px_1fr_1fr] sm:gap-8">
+              <Reveal as="li" key={s.n} delay={i * 60} className="relative grid gap-5 border-t border-hairline/70 py-8 sm:grid-cols-[64px_1fr_1fr] sm:gap-8">
                 <div className="flex items-start gap-3 sm:block">
                   <span className="font-display text-[26px] leading-none text-clay" aria-hidden="true">
                     {s.n}
@@ -139,7 +146,8 @@ export default function EthicalAi() {
 
                 <div>
                   <h3 className="hidden text-[length:var(--text-h3)] sm:block">{s.title}</h3>
-                  <p className="mt-2 font-body text-[11px] font-semibold uppercase tracking-[0.14em] text-red-deep">
+                  <p className="mt-2 inline-flex items-center gap-1.5 font-body text-[11px] font-semibold uppercase tracking-[0.14em] text-red-deep">
+                    <IconHuman size={14} />
                     A person decides
                   </p>
                   <p className="mt-2 max-w-[42ch] font-body text-[14.5px] leading-relaxed text-body">
@@ -155,7 +163,7 @@ export default function EthicalAi() {
                     {s.tool}
                   </p>
                 </div>
-              </li>
+              </Reveal>
             ))}
           </ol>
 
@@ -179,19 +187,17 @@ export default function EthicalAi() {
             className="[&_h2]:text-ink [&_p]:text-ink"
           />
           <ul className="mt-10 grid gap-5 sm:grid-cols-2">
-            {LINES.map((l) => (
-              <li key={l.title} className="rounded-[var(--radius-lg)] border border-white/45 bg-white/25 p-7 backdrop-blur-sm">
+            {LINES.map((l, i) => (
+              <Reveal as="li" key={l.title} delay={i * 70}
+                className="rounded-[var(--radius-lg)] border border-white/45 bg-white/25 p-7 backdrop-blur-sm">
                 <h3 className="flex items-start gap-3 text-[length:var(--text-h3)]">
-                  <svg width="18" height="18" viewBox="0 0 18 18" className="mt-1 shrink-0" aria-hidden="true">
-                    <circle cx="9" cy="9" r="8" fill="none" stroke="currentColor" strokeWidth="1.4" />
-                    <path d="M5.5 9.5l2.2 2.2L12.5 7" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
-                  </svg>
+                  <span className="mt-0.5 shrink-0"><l.icon size={20} /></span>
                   {l.title}
                 </h3>
-                <p className="mt-2.5 pl-[30px] font-body text-[14.5px] leading-relaxed text-ink/90">
+                <p className="mt-2.5 pl-[32px] font-body text-[14.5px] leading-relaxed text-ink/90">
                   {l.body}
                 </p>
-              </li>
+              </Reveal>
             ))}
           </ul>
         </Container>
@@ -209,9 +215,10 @@ export default function EthicalAi() {
             </p>
             <a
               href="/contact"
-              className="mt-6 inline-block font-body text-[15px] font-semibold text-red-deep underline underline-offset-4"
+              className="mt-6 inline-flex items-center gap-2 font-body text-[15px] font-semibold text-red-deep underline underline-offset-4"
             >
               Get in touch
+              <IconArrow size={16} />
             </a>
           </div>
         </Container>
