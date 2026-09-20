@@ -1,17 +1,16 @@
-import type { VercelRequest, VercelResponse } from "@vercel/node";
-import { adminClient } from "./_lib/admin";
+import { adminClient, json } from "./_lib/admin";
 
 const SIGNED_URL_SECONDS = 120;
 
 /**
  * Exchanges a download token for a short-lived signed URL.
  *
- * Runs server side because the product-files bucket has no public read policy
- * and the anon key cannot reach it. The browser never sees a durable file URL.
+ * Runs server side because product-files has no public read policy and the
+ * anon key cannot reach it. The browser never receives a durable file URL.
  */
-export default async function handler(req: VercelRequest, res: VercelResponse) {
-  const token = (req.query.token ?? "") as string;
-  if (!token) return res.status(400).json({ error: "Missing token." });
+export async function GET(request: Request) {
+  const token = new URL(request.url).searchParams.get("token");
+  if (!token) return json({ error: "not_found" }, 400);
 
   try {
     const supabase = adminClient();
@@ -22,14 +21,9 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
       .eq("download_token", token)
       .maybeSingle();
 
-    if (!order) return res.status(404).json({ error: "not_found" });
-
-    if (new Date(order.expires_at) < new Date()) {
-      return res.status(410).json({ error: "expired" });
-    }
-    if (order.download_count >= order.max_downloads) {
-      return res.status(429).json({ error: "exhausted" });
-    }
+    if (!order) return json({ error: "not_found" }, 404);
+    if (new Date(order.expires_at) < new Date()) return json({ error: "expired" }, 410);
+    if (order.download_count >= order.max_downloads) return json({ error: "exhausted" }, 429);
 
     const { data: product } = await supabase
       .from("products")
@@ -37,7 +31,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
       .eq("id", order.product_id)
       .single();
 
-    if (!product) return res.status(404).json({ error: "not_found" });
+    if (!product) return json({ error: "not_found" }, 404);
 
     const { data: signed, error: signErr } = await supabase.storage
       .from("product-files")
@@ -51,7 +45,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
       .update({ download_count: order.download_count + 1 })
       .eq("id", order.id);
 
-    return res.status(200).json({
+    return json({
       url: signed.signedUrl,
       title: product.title,
       downloadsUsed: order.download_count + 1,
@@ -60,6 +54,6 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     });
   } catch (err) {
     console.error("download failed", err);
-    return res.status(500).json({ error: "server_error" });
+    return json({ error: "server_error" }, 500);
   }
 }

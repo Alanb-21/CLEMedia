@@ -16,3 +16,11 @@ export function requireEnv(name: string): string {
   if (!v) throw new Error(`${name} is not configured`);
   return v;
 }
+
+/** JSON response helper for the Web-standard handler signature. */
+export function json(body: unknown, status = 200): Response {
+  return new Response(JSON.stringify(body), {
+    status,
+    headers: { "content-type": "application/json" },
+  });
+}
