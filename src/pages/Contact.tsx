@@ -13,6 +13,8 @@ const ROUTES: { id: Route; label: string; blurb: string }[] = [
 export default function Contact() {
   const [route, setRoute] = useState<Route>("partnership");
   const [sent, setSent] = useState(false);
+  const [busy, setBusy] = useState(false);
+  const [error, setError] = useState<string | null>(null);
   const active = ROUTES.find((r) => r.id === route)!;
 
   return (
@@ -84,7 +86,29 @@ export default function Contact() {
               ) : (
                 <form
                   className="space-y-5"
-                  onSubmit={(e) => { e.preventDefault(); setSent(true); }}
+                  onSubmit={async (e) => {
+                    e.preventDefault();
+                    setBusy(true);
+                    setError(null);
+                    const fd = new FormData(e.currentTarget);
+                    try {
+                      const r = await fetch("/api/contact", {
+                        method: "POST",
+                        headers: { "Content-Type": "application/json" },
+                        body: JSON.stringify({ route, ...Object.fromEntries(fd) }),
+                      });
+                      if (!r.ok) {
+                        const d = await r.json().catch(() => ({}));
+                        setError(d.error ?? "Could not send your message. Please try again.");
+                      } else {
+                        setSent(true);
+                      }
+                    } catch {
+                      setError("Could not send your message. Please check your connection.");
+                    } finally {
+                      setBusy(false);
+                    }
+                  }}
                 >
                   <p className="font-body text-[13.5px] text-muted">
                     Sending as: <strong className="text-ink">{active.label}</strong>
@@ -119,7 +143,12 @@ export default function Contact() {
                     <textarea id="message" name="message" rows={6} required className="mt-1.5 w-full border border-hairline bg-paper px-3.5 py-2.5 font-body text-[15px] text-ink" />
                   </div>
 
-                  <Button type="submit">Send message</Button>
+                  {error && (
+                    <p role="alert" className="font-body text-[14px] text-red-deep">{error}</p>
+                  )}
+                  <Button type="submit" disabled={busy}>
+                    {busy ? "Sending…" : "Send message"}
+                  </Button>
                   <p className="font-body text-[12.5px] text-muted">
                     We use what you send here to reply to you, and nothing else.
                   </p>

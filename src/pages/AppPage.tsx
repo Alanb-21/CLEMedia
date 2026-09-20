@@ -13,16 +13,38 @@ const APP_LAUNCHED = false;
 function NotifyForm() {
   const [email, setEmail] = useState("");
   const [sent, setSent] = useState(false);
+  const [busy, setBusy] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+
+  async function submit(e: React.FormEvent) {
+    e.preventDefault();
+    setBusy(true);
+    setError(null);
+    try {
+      const r = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ route: "notify", email }),
+      });
+      if (!r.ok) {
+        const d = await r.json().catch(() => ({}));
+        setError(d.error ?? "Could not sign you up. Please try again.");
+      } else {
+        setSent(true);
+      }
+    } catch {
+      setError("Could not sign you up. Please check your connection.");
+    } finally {
+      setBusy(false);
+    }
+  }
 
   return sent ? (
     <p role="status" className="border border-hairline bg-cream/50 px-5 py-4 font-body text-[14.5px] text-ink">
       Thanks — we'll email you once when it's live, and not for anything else.
     </p>
   ) : (
-    <form
-      className="flex flex-col gap-3 sm:flex-row"
-      onSubmit={(e) => { e.preventDefault(); setSent(true); }}
-    >
+    <form className="flex flex-col gap-3 sm:flex-row" onSubmit={submit}>
       <div className="flex-1">
         <label htmlFor="notify-email" className="sr-only">Email address</label>
         <input
@@ -36,7 +58,8 @@ function NotifyForm() {
           className="w-full border border-hairline bg-paper px-4 py-3 font-body text-[15px] text-ink placeholder:text-muted/70"
         />
       </div>
-      <Button type="submit">Notify me</Button>
+      <Button type="submit" disabled={busy}>{busy ? "…" : "Notify me"}</Button>
+      {error && <p role="alert" className="font-body text-[13.5px] text-red-deep sm:basis-full">{error}</p>}
     </form>
   );
 }
