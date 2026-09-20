@@ -3,7 +3,7 @@ import { Button, Container } from "@/components/ui";
 import { PreviewChrome } from "./PreviewChrome";
 import { SITE } from "@/lib/site";
 
-/** C — Corporate Warm. Type-first, tight editorial grid, rules instead of cards,
+/** C, Corporate Warm. Type-first, tight editorial grid, rules instead of cards,
  *  colour rationed to accent, photography in disciplined framed blocks.
  *  Closest to the m.ind.coach reference and the direction this build defaults to. */
 export default function PreviewC() {
@@ -20,7 +20,7 @@ export default function PreviewC() {
               <span className="align-super text-[0.38em]">®</span>
             </h1>
             <p className="mt-7 max-w-[52ch] font-body text-[17px] leading-relaxed">
-              An Irish children's media company making calm, purposeful content for young children —
+              An Irish children's media company making calm, purposeful content for young children,
               and for the parents watching alongside them. Built on research, made by people.
             </p>
             <div className="mt-8 flex flex-wrap gap-3">
@@ -29,7 +29,7 @@ export default function PreviewC() {
             </div>
           </div>
           <div className="lg:col-span-5">
-            <AssetPlaceholder label="Framed photograph — founders or the garden" ratio="4/5" />
+            <AssetPlaceholder label="Framed photograph, founders or the garden" ratio="4/5" />
           </div>
         </div>
       </Container>
@@ -39,7 +39,7 @@ export default function PreviewC() {
         <div className="border-t border-hairline">
           {[
             ["The problem", "Most children's media is built to hold attention rather than earn it. Parents get volume, not judgement."],
-            ["The model", "Watch, Play, Learn — three parts that work together, not a show with activities attached."],
+            ["The model", "Watch, Play, Learn: three parts that work together, not a show with activities attached."],
             ["The process", "AI assists production inside a human-led pipeline. It never authors what a child is told."],
           ].map(([t, b], i) => (
             <div key={t} className="grid gap-3 border-b border-hairline py-8 sm:grid-cols-12 sm:gap-8">
@@ -55,7 +55,7 @@ export default function PreviewC() {
         <div className="grid gap-8 lg:grid-cols-3">
           {["Founders", "The studio", "The process"].map((t) => (
             <figure key={t}>
-              <AssetPlaceholder label={`${t} — framed photograph`} ratio="3/4" tone="cream" />
+              <AssetPlaceholder label={`${t}, framed photograph`} ratio="3/4" tone="cream" />
               <figcaption className="mt-2.5 font-body text-[12.5px] uppercase tracking-wider text-muted">{t}</figcaption>
             </figure>
           ))}

@@ -13,7 +13,7 @@ export default function NotFound() {
             <h1 className="mt-5 text-[length:var(--text-h1)]">That page has wandered off</h1>
             <p className="mt-4 font-body text-[length:var(--text-lead)] leading-relaxed">
               The link may be old, or we may have moved something. If you were looking for episodes,
-              characters or colouring pages, those live on the show site.
+              characters or colouring pages, those all live on the show site.
             </p>
             <div className="mt-8 flex flex-wrap gap-3">
               <Button to="/">Back to home</Button>

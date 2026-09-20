@@ -1,6 +1,5 @@
 import { Seo } from "@/components/Seo";
-import { CopyNeeded } from "@/components/AssetPlaceholder";
-import { Container, Kicker, Lead, Section, SectionHeading } from "@/components/ui";
+import { Container, Kicker, Lead, Panel, Section, SectionHeading } from "@/components/ui";
 
 /**
  * The stages are the ones named in the client brief. What a human decides at
@@ -24,7 +23,7 @@ const STAGES = [
     n: "03",
     title: "Scripting",
     human: "A person writes the script. Dialogue, pacing and the emotional shape of the episode are authored, not generated.",
-    tool: "Assistive only — drafting support, reference lookups. Every line that reaches the screen is written or rewritten by a person.",
+    tool: "Assistive only: drafting support and reference lookups. Every line that reaches the screen is written or rewritten by a person.",
   },
   {
     n: "04",
@@ -82,7 +81,7 @@ export default function EthicalAi() {
           </div>
           <Lead className="mt-6">
             AI is part of how modern animation gets made, and pretending otherwise would be the
-            easiest way to lose a parent's trust. So here is exactly where it sits in our process,
+            quickest way to lose a parent's trust. So here is exactly where it sits in our process,
             where a person decides instead, and what we will not do.
           </Lead>
         </Container>
@@ -98,7 +97,7 @@ export default function EthicalAi() {
             <div className="max-w-[62ch] space-y-5 font-body">
               <p className="text-[length:var(--text-lead)] leading-relaxed text-ink">
                 Generative tools are used in our production pipeline. They are used the way a studio
-                uses any production tool — to iterate faster inside a creative direction that people
+                uses any production tool, to iterate faster inside a creative direction that people
                 set and control.
               </p>
               <p>
@@ -127,7 +126,7 @@ export default function EthicalAi() {
 
           <ol className="mt-12">
             {STAGES.map((s, i) => (
-              <li key={s.n} className="relative grid gap-5 border-t border-hairline py-8 sm:grid-cols-[64px_1fr_1fr] sm:gap-8">
+              <li key={s.n} className="relative grid gap-5 border-t border-hairline/70 py-8 sm:grid-cols-[64px_1fr_1fr] sm:gap-8">
                 <div className="flex items-start gap-3 sm:block">
                   <span className="font-display text-[26px] leading-none text-clay" aria-hidden="true">
                     {s.n}
@@ -160,13 +159,13 @@ export default function EthicalAi() {
             ))}
           </ol>
 
-          <div className="mt-10 max-w-[62ch]">
-            <CopyNeeded
-              label="Client confirmation needed: the specific tools used at stages 03 and 04, and the exact wording of the review step. This page must describe the real process precisely — it is the page most likely to be scrutinised."
-              source="QUESTIONS.md"
-              lines={3}
-            />
-          </div>
+          <Panel tone="warm" className="mt-12 p-7">
+            <p className="max-w-[68ch] font-body text-[15px] leading-relaxed text-ink">
+              If that reads as a narrow role for the technology, it is meant to. The tools speed up
+              iteration inside a look and a story that people have already decided on. They do not
+              choose the objective, they do not write the words, and they never sign anything off.
+            </p>
+          </Panel>
         </Container>
       </Section>
 
@@ -179,9 +178,9 @@ export default function EthicalAi() {
             title="The lines we will not cross"
             className="[&_h2]:text-ink [&_p]:text-ink"
           />
-          <ul className="mt-10 grid gap-px bg-ink/15 sm:grid-cols-2">
+          <ul className="mt-10 grid gap-5 sm:grid-cols-2">
             {LINES.map((l) => (
-              <li key={l.title} className="bg-clay p-7">
+              <li key={l.title} className="rounded-[var(--radius-lg)] border border-white/45 bg-white/25 p-7 backdrop-blur-sm">
                 <h3 className="flex items-start gap-3 text-[length:var(--text-h3)]">
                   <svg width="18" height="18" viewBox="0 0 18 18" className="mt-1 shrink-0" aria-hidden="true">
                     <circle cx="9" cy="9" r="8" fill="none" stroke="currentColor" strokeWidth="1.4" />

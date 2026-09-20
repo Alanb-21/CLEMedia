@@ -1,25 +1,44 @@
 import { useState } from "react";
 import { Seo } from "@/components/Seo";
-import { Container, EmptyState, Kicker, Lead, Section } from "@/components/ui";
+import { Container, Kicker, Lead, Panel, Section } from "@/components/ui";
 
-/** Four rotating categories, one published per week. Real names unconfirmed —
- *  QUESTIONS.md #8. Slugs are placeholders and will change. */
+/**
+ * Four rotating strands, one published per week. Names drafted from the
+ * company's own themes and open for the client to rename in the admin panel.
+ */
 const CATEGORIES = [
-  { slug: "all", name: "All" },
-  { slug: "category-1", name: "Category one", placeholder: true },
-  { slug: "category-2", name: "Category two", placeholder: true },
-  { slug: "category-3", name: "Category three", placeholder: true },
-  { slug: "category-4", name: "Category four", placeholder: true },
+  { slug: "all", name: "All", blurb: "" },
+  {
+    slug: "research",
+    name: "The Research",
+    blurb: "Early years practice, child development and the thinking behind Watch, Play, Learn.",
+  },
+  {
+    slug: "process",
+    name: "How It's Made",
+    blurb: "Inside production: writing, animation, sound, and where the technology does and does not sit.",
+  },
+  {
+    slug: "parents",
+    name: "Parents Helping Parents",
+    blurb: "Practical, judgement free writing for the people doing the watching alongside.",
+  },
+  {
+    slug: "company",
+    name: "Building CLÉ",
+    blurb: "The business of making children's media in Ireland, told honestly as it happens.",
+  },
 ];
 
 export default function Journal() {
   const [active, setActive] = useState("all");
+  const shown = CATEGORIES.filter((c) => c.slug !== "all" && (active === "all" || c.slug === active));
 
   return (
     <>
       <Seo
         title="Journal"
-        description="Writing from CLÉ Family Media on children's media, early-years education, responsible AI in production, and building a family media company in Ireland."
+        description="Writing from CLÉ Family Media on children's media, early years education, responsible use of AI in production, and building a family media company in Ireland."
         path="/journal"
       />
 
@@ -30,40 +49,56 @@ export default function Journal() {
             <h1 className="mt-5 text-[length:var(--text-h1)]">Notes from the studio</h1>
           </div>
           <Lead className="mt-6">
-            Four rotating strands, one post a week — on the research, the process, the business of
-            children's media, and what we're learning as we go.
+            Four strands, one post a week. We write about the research, the process, the parenting
+            and the business, partly to be useful and partly because a company that asks for trust
+            should be willing to show its working.
           </Lead>
         </Container>
       </Section>
 
       <Section className="!pt-0">
         <Container>
-          <nav aria-label="Filter by category" className="border-y border-hairline py-3">
-            <ul className="flex flex-wrap gap-x-6 gap-y-2">
+          <nav aria-label="Filter by category">
+            <ul className="flex flex-wrap gap-2">
               {CATEGORIES.map((c) => (
                 <li key={c.slug}>
                   <button
                     type="button"
                     onClick={() => setActive(c.slug)}
                     aria-current={active === c.slug ? "true" : undefined}
-                    className={`font-body text-[14px] transition-colors ${
-                      active === c.slug ? "font-semibold text-red-deep" : "text-muted hover:text-ink"
+                    className={`rounded-[var(--radius-pill)] px-4 py-2 font-body text-[13.5px] transition-all ${
+                      active === c.slug
+                        ? "bg-red text-paper shadow-[0_8px_20px_-12px_rgba(163,46,50,0.8)]"
+                        : "glass text-body hover:bg-white/95"
                     }`}
                   >
                     {c.name}
-                    {c.placeholder && <span className="ml-1 text-[10px] uppercase tracking-wider text-muted">(name tbc)</span>}
                   </button>
                 </li>
               ))}
             </ul>
           </nav>
 
-          <div className="mt-10">
-            <EmptyState
-              title="No posts published yet"
-              body="Posts are written and published from the admin panel. Once the four categories are named and the first posts go live, they'll appear here filtered by strand."
-            />
-          </div>
+          <ul className="mt-10 grid gap-5 sm:grid-cols-2">
+            {shown.map((c) => (
+              <li key={c.slug}>
+                <Panel className="h-full p-7">
+                  <p className="font-body text-[11px] font-semibold uppercase tracking-[0.14em] text-red-deep">
+                    {c.name}
+                  </p>
+                  <p className="mt-3 font-body text-[15px] leading-relaxed text-body">{c.blurb}</p>
+                  <p className="mt-5 font-body text-[13px] text-muted">
+                    First post arriving shortly.
+                  </p>
+                </Panel>
+              </li>
+            ))}
+          </ul>
+
+          <p className="mt-8 max-w-[58ch] font-body text-[14px] text-muted">
+            Posts are written and published from the admin panel. Once the first pieces go live they
+            appear here, newest first, filtered by strand.
+          </p>
         </Container>
       </Section>
     </>

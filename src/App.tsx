@@ -19,7 +19,7 @@ import NotFound from "@/pages/NotFound";
 import PreviewA from "@/pages/preview/PreviewA";
 import PreviewB from "@/pages/preview/PreviewB";
 import PreviewC from "@/pages/preview/PreviewC";
-// Admin is lazy — it pulls in the Supabase client, which the public site
+// Admin is lazy, it pulls in the Supabase client, which the public site
 // should never have to download.
 const Admin = lazy(() => import("@/pages/admin/Admin"));
 
@@ -45,7 +45,7 @@ export default function App() {
         <Route path="*" element={<NotFound />} />
       </Route>
 
-      {/* Design directions for client review — noindex, outside the main shell */}
+      {/* Design directions for client review, noindex, outside the main shell */}
       <Route path="preview/a" element={<PreviewA />} />
       <Route path="preview/b" element={<PreviewB />} />
       <Route path="preview/c" element={<PreviewC />} />

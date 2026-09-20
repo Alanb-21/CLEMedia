@@ -13,19 +13,19 @@ type State =
 const MESSAGES = {
   not_found: {
     h: "We couldn't find that download",
-    p: "The link may be wrong or incomplete. Check the link in your Stripe receipt, or get in touch and we'll sort it out.",
+    p: "The link may be wrong or incomplete. Check the link in your Stripe receipt, or get in touch and we will sort it out.",
   },
   expired: {
     h: "This link has expired",
-    p: "Download links are valid for 24 hours. Get in touch with your receipt and we'll issue a new one.",
+    p: "Download links are valid for 24 hours. Get in touch with your receipt and we will issue a new one.",
   },
   exhausted: {
     h: "This link has been used up",
-    p: "Each link allows five downloads. Get in touch with your receipt and we'll issue a new one.",
+    p: "Each link allows five downloads. Get in touch with your receipt and we will issue a new one.",
   },
   server_error: {
     h: "Something went wrong",
-    p: "That's on us, not you. Try again in a moment, and if it keeps happening let us know.",
+    p: "That is on us, not you. Try again in a moment, and if it keeps happening let us know.",
   },
 } as const;
 
@@ -79,12 +79,12 @@ export default function Download() {
                 </p>
                 <h1 className="mt-4 text-[length:var(--text-h1)]">{state.title} is ready</h1>
 
-                <div className="mt-6 border-l-[3px] border-red bg-cream/50 px-5 py-4">
+                <div className="glass-warm mt-6 rounded-[var(--radius-lg)] border-l-[3px] !border-l-red px-5 py-4">
                   <p className="font-body text-[15px] font-semibold text-ink">Save this file now.</p>
                   <p className="mt-1 font-body text-[14.5px] text-body">
-                    We don't create an account for you, so there's nowhere to come back to. This
+                    We do not create an account for you, so there is nowhere to come back to. This
                     link works for 24 hours and up to {state.allowed} downloads
-                    {state.used > 1 && ` — you've used ${state.used}`}.
+                    {state.used > 1 && `, and you have used ${state.used}`}.
                   </p>
                 </div>
 

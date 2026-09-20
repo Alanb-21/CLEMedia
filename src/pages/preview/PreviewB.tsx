@@ -3,11 +3,11 @@ import { Button, Container } from "@/components/ui";
 import { PreviewChrome } from "./PreviewChrome";
 import { SITE } from "@/lib/site";
 
-/** B — Watercolour Studio. Crafted and illustrative. Paper ground, soft washes
+/** B, Watercolour Studio. Crafted and illustrative. Paper ground, soft washes
  *  between sections, torn edges, type-led hero on a painted backdrop. */
 
 /* Paper grain + wash, drawn in CSS rather than shipped as an image so it costs
-   nothing and scales. No gradients used as decoration — these are textures. */
+   nothing and scales. No gradients used as decoration, these are textures. */
 const paper: React.CSSProperties = {
   backgroundColor: "#FBF7F0",
   backgroundImage:
@@ -41,7 +41,7 @@ export default function PreviewB() {
             </h1>
             <p className="mx-auto mt-6 max-w-[42ch] font-body text-[17px] leading-relaxed text-body">
               CLÉ Family Media is a small Irish studio making calm, purposeful content for young
-              children — and being honest about how it's made.
+              children, and being honest about how it is made.
             </p>
             <div className="mt-9 flex flex-wrap justify-center gap-3">
               <Button to="/story">Our story</Button>
@@ -50,7 +50,7 @@ export default function PreviewB() {
           </div>
 
           <div className="mx-auto mt-16 max-w-[240px] opacity-90">
-            <AssetPlaceholder label="Painted character accent — small, supporting" ratio="1/1" tone="cream" className="!border-0" />
+            <AssetPlaceholder label="Painted character accent, small, supporting" ratio="1/1" tone="cream" className="!border-0" />
           </div>
         </Container>
       </div>
@@ -78,7 +78,7 @@ export default function PreviewB() {
           <div className="grid gap-10 sm:grid-cols-3">
             {[
               ["Watch", "Calm animation, paced for how young children take things in."],
-              ["Play", "Interactive follow-on — something a child does, not only sees."],
+              ["Play", "Interactive follow-on: something a child does, not only sees."],
               ["Learn", "An educational spine, built with specialists from the start."],
             ].map(([step, body], i) => (
               <div key={step} className="text-center">
@@ -101,7 +101,7 @@ export default function PreviewB() {
           <div className="mx-auto max-w-[44ch] text-center">
             <h2 className="font-display text-[clamp(1.6rem,3.4vw,2.3rem)] text-ink">Working with us</h2>
             <p className="mt-4 font-body leading-relaxed">
-              Investors, broadcasters, distributors and educational partners — we'd rather answer
+              Investors, broadcasters, distributors and educational partners. We would rather answer
               your questions directly.
             </p>
             <Button to="/contact" className="mt-7">Get in touch</Button>

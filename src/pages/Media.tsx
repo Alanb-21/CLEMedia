@@ -1,14 +1,18 @@
 import { Seo } from "@/components/Seo";
-import { Container, EmptyState, Kicker, Lead, Section } from "@/components/ui";
+import { Container, Kicker, Lead, Panel, Section, SectionHeading } from "@/components/ui";
+
+const ROUTES = [
+  { title: "Interviews", body: "Conversations with Conor and the team about the company, the model and the state of children's media." },
+  { title: "Podcasts", body: "Appearances on shows covering early years education, family media and Irish creative business." },
+  { title: "Press", body: "Coverage of the company, the series and the app as it appears." },
+];
 
 export default function Media() {
-  /* media_items is empty. A UK podcast appearance is expected in December, so
-     the empty state ships first and has to stand on its own. */
   return (
     <>
       <Seo
         title="Media and podcast"
-        description="Press coverage, interviews and podcast appearances featuring CLÉ Family Media and the team behind The Pawsitive Pugs & Pals."
+        description="Press coverage, interviews and podcast appearances featuring CLE Family Media and the team behind The Pawsitive Pugs and Pals."
         path="/media"
       />
 
@@ -19,17 +23,36 @@ export default function Media() {
             <h1 className="mt-5 text-[length:var(--text-h1)]">Press and appearances</h1>
           </div>
           <Lead className="mt-6">
-            Interviews, podcast appearances and coverage of the company and the show.
+            Interviews, podcast appearances and coverage of the company and the show. Everything
+            here links straight out to the original, and plays in place where the publisher allows it.
           </Lead>
         </Container>
       </Section>
 
       <Section className="!pt-0">
         <Container>
-          <EmptyState
-            title="Nothing to show just yet"
-            body="Press, interviews and podcast appearances will be listed here as they happen. Entries are added from the admin panel and can carry a link or an embedded player."
-          />
+          <ul className="grid gap-5 sm:grid-cols-3">
+            {ROUTES.map((r) => (
+              <li key={r.title}>
+                <Panel className="h-full p-7">
+                  <h2 className="text-[length:var(--text-h3)]">{r.title}</h2>
+                  <p className="mt-2.5 font-body text-[14.5px] leading-relaxed text-body">{r.body}</p>
+                </Panel>
+              </li>
+            ))}
+          </ul>
+
+          <Panel tone="warm" className="mt-8 p-8">
+            <SectionHeading
+              kicker="Coming up"
+              title="First appearances land later this year"
+              lead="A UK podcast appearance is booked for December, with more to follow around the app launch. Entries appear here as they go out."
+            />
+            <p className="mt-6 max-w-[58ch] font-body text-[14px] text-muted">
+              Writing about the company and want to talk to someone? The press route on the contact
+              page reaches us directly.
+            </p>
+          </Panel>
         </Container>
       </Section>
     </>

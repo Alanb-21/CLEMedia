@@ -4,7 +4,9 @@ export const SITE = {
   showName: "The Pawsitive Pugs & Pals",
   playerName: "PupsPlayer",
   url: import.meta.env.VITE_SITE_URL ?? "https://example.com",
-  showUrl: import.meta.env.VITE_SHOW_SITE_URL ?? "https://www.pawsitivepugs.com",
+  /** Fixed destination. Not env-driven: the show site is not going to move,
+   *  and an unset variable must never silently break the cross-link. */
+  showUrl: "https://www.pawsitivepugs.com",
   tagline: "Watch, Play, Learn.",
 } as const;
 

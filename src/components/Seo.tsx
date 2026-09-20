@@ -13,7 +13,7 @@ interface Props {
 
 export function Seo({ title, description, path, image, type = "website", jsonLd, noIndex }: Props) {
   const url = `${SITE.url}${path}`;
-  const full = path === "/" ? `${SITE.name} — ${SITE.tagline}` : `${title} · ${SITE.name}`;
+  const full = path === "/" ? `${SITE.name} · ${SITE.tagline}` : `${title} · ${SITE.name}`;
   const img = image ?? `${SITE.url}/brand/og-default.png`;
 
   return (
@@ -41,7 +41,7 @@ export function Seo({ title, description, path, image, type = "website", jsonLd,
   );
 }
 
-/** Organization JSON-LD. Claims stay minimal — nothing asserted that the client
+/** Organization JSON-LD. Claims stay minimal, nothing asserted that the client
  *  has not supplied. No founding date, no employee count, no awards. */
 export const organizationJsonLd = {
   "@context": "https://schema.org",

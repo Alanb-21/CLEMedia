@@ -25,7 +25,7 @@ function Login() {
     setBusy(true);
     setError(null);
     const { error } = await supabase.auth.signInWithPassword({ email, password });
-    if (error) setError("That email and password didn't match. Try again.");
+    if (error) setError("That email and password did not match. Try again.");
     setBusy(false);
   }
 
@@ -36,7 +36,7 @@ function Login() {
         <h1 className="mt-1 font-display text-[28px] text-ink">Sign in</h1>
 
         {!isSupabaseConfigured && (
-          <p className="mt-6 border border-hairline bg-cream/60 p-4 font-body text-[13.5px] text-ink">
+          <p className="glass-warm mt-6 rounded-[var(--radius-md)] p-4 font-body text-[13.5px] text-ink">
             Supabase isn't configured in this environment yet, so sign-in is unavailable. Add
             <code className="mx-1">VITE_SUPABASE_URL</code> and
             <code className="mx-1">VITE_SUPABASE_ANON_KEY</code> to enable it.
@@ -48,17 +48,17 @@ function Login() {
             <label htmlFor="admin-email" className="block font-body text-[13.5px] font-medium text-ink">Email</label>
             <input id="admin-email" type="email" required autoComplete="username" value={email}
               onChange={(e) => setEmail(e.target.value)}
-              className="mt-1.5 w-full border border-hairline bg-paper px-3.5 py-3 font-body text-[16px] text-ink" />
+              className="glass mt-1.5 w-full rounded-[var(--radius-sm)] px-4 py-3 font-body text-[16px] text-ink" />
           </div>
           <div>
             <label htmlFor="admin-password" className="block font-body text-[13.5px] font-medium text-ink">Password</label>
             <input id="admin-password" type="password" required autoComplete="current-password" value={password}
               onChange={(e) => setPassword(e.target.value)}
-              className="mt-1.5 w-full border border-hairline bg-paper px-3.5 py-3 font-body text-[16px] text-ink" />
+              className="glass mt-1.5 w-full rounded-[var(--radius-sm)] px-4 py-3 font-body text-[16px] text-ink" />
           </div>
           {error && <p role="alert" className="font-body text-[13.5px] text-red-deep">{error}</p>}
           <button type="submit" disabled={busy || !isSupabaseConfigured}
-            className="w-full bg-red px-6 py-3 font-body text-[15px] font-semibold text-paper disabled:opacity-60">
+            className="w-full rounded-[var(--radius-pill)] bg-red px-6 py-3 font-body text-[15px] font-semibold text-paper disabled:opacity-60">
             {busy ? "Signing in…" : "Sign in"}
           </button>
         </form>
@@ -76,15 +76,15 @@ function Dashboard({ email, onSignOut }: { email: string; onSignOut: () => void 
           <p className="font-body text-[13px] text-muted">{email}</p>
         </div>
         <button onClick={onSignOut}
-          className="ml-auto border border-hairline px-4 py-2 font-body text-[13.5px] text-body">
+          className="glass ml-auto rounded-[var(--radius-pill)] px-4 py-2 font-body text-[13.5px] text-body">
           Sign out
         </button>
       </header>
 
-      <ul className="mt-6 space-y-px bg-hairline">
+      <ul className="mt-6 space-y-3">
         {PANELS.map((p) => (
           <li key={p.key}>
-            <button className="flex w-full items-center gap-4 bg-paper p-5 text-left">
+            <button className="glass flex w-full items-center gap-4 rounded-[var(--radius-md)] p-5 text-left transition-all hover:bg-white/95">
               <span className="min-w-0">
                 <span className="block font-body text-[16px] font-semibold text-ink">{p.label}</span>
                 <span className="mt-0.5 block font-body text-[13.5px] text-muted">{p.blurb}</span>

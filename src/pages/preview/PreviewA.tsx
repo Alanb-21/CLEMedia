@@ -3,14 +3,14 @@ import { Button, Container } from "@/components/ui";
 import { PreviewChrome } from "./PreviewChrome";
 import { SITE } from "@/lib/site";
 
-/** A — Garden Light. Photography leads. Full-bleed imagery, type set over image,
+/** A, Garden Light. Photography leads. Full-bleed imagery, type set over image,
  *  generous air, minimal chrome. Sections breathe; the pictures carry the feeling. */
 export default function PreviewA() {
   return (
     <PreviewChrome letter="A" name="Garden Light" note="Photography led · full-bleed · generous white space">
       {/* Full-bleed hero with type over image */}
       <section className="relative">
-        <AssetPlaceholder label="Full-bleed garden hero — landscape, high resolution" ratio="16/9" className="!border-0 min-h-[70vh]" />
+        <AssetPlaceholder label="Full-bleed garden hero, landscape, high resolution" ratio="16/9" className="!border-0 min-h-[70vh]" />
         <div className="absolute inset-0 flex items-end">
           <Container className="pb-12 sm:pb-16">
             <div className="max-w-[20ch] bg-paper/92 p-7 sm:p-10">
@@ -28,7 +28,7 @@ export default function PreviewA() {
       <Container className="py-20">
         <div className="grid gap-12 lg:grid-cols-[1fr_1fr] lg:gap-20">
           <p className="font-display text-[clamp(1.5rem,3vw,2.1rem)] leading-snug text-ink">
-            CLÉ Family Media makes calm, purposeful content for young children — and for the parents
+            CLÉ Family Media makes calm, purposeful content for young children, and for the parents
             watching alongside them.
           </p>
           <div className="space-y-5 font-body">
@@ -48,7 +48,7 @@ export default function PreviewA() {
       {/* Alternating full-bleed image / text */}
       {["Watch", "Play", "Learn"].map((step, i) => (
         <section key={step} className={`grid items-center lg:grid-cols-2 ${i % 2 ? "lg:[direction:rtl]" : ""}`}>
-          <AssetPlaceholder label={`${step} — supporting photograph`} ratio="4/3" className="!border-0" tone={i % 2 ? "cream" : "clay"} />
+          <AssetPlaceholder label={`${step}, supporting photograph`} ratio="4/3" className="!border-0" tone={i % 2 ? "cream" : "clay"} />
           <div className="px-6 py-14 sm:px-12 lg:px-16 lg:[direction:ltr]">
             <p className="font-display text-[15px] text-muted">0{i + 1}</p>
             <h2 className="mt-2 font-display text-[clamp(1.75rem,3.5vw,2.5rem)] text-ink">{step}</h2>
