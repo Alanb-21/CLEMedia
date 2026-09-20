@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { Seo, organizationJsonLd } from "@/components/Seo";
-import { AssetPlaceholder } from "@/components/AssetPlaceholder";
+import { Figure } from "@/components/Figure";
 import { Button, Container, Kicker, Lead, Panel, Section, SectionHeading } from "@/components/ui";
 import { Reveal } from "@/components/Reveal";
 import {
@@ -90,11 +90,7 @@ export default function Home() {
             </div>
 
             <Reveal delay={120} from="right">
-            <AssetPlaceholder
-              label="The garden that inspired the show's world, or the founders at work"
-              source="Photography"
-              ratio="4/3"
-            />
+            <Figure asset="home.hero" priority />
             </Reveal>
           </div>
         </Container>
@@ -192,11 +188,7 @@ export default function Home() {
               </Link>
             </div>
 
-            <AssetPlaceholder
-              label="The team at work, a workspace, or the production process"
-              source="Photography"
-              ratio="3/2"
-            />
+            <Figure asset="home.company" />
           </div>
         </Container>
       </Section>
@@ -223,12 +215,7 @@ export default function Home() {
                   </Button>
                 </div>
               </div>
-              <AssetPlaceholder
-                label="PupsPlayer™ app preview"
-                source="App"
-                ratio="4/3"
-                tone="cream"
-              />
+              <Figure asset="home.app" tone="cream" />
             </div>
           </Panel>
         </Container>
@@ -283,14 +270,7 @@ export default function Home() {
                   <IconExternal size={16} />
                 </Button>
               </div>
-              <AssetPlaceholder
-                label="Character art: Finn, Fia and the rest of the pack"
-                source="Brand assets"
-                ratio="16/10"
-                tone="cream"
-                rounded="rounded-none"
-                className="!shadow-none"
-              />
+              <Figure asset="home.characters" tone="cream" rounded="rounded-none" className="!shadow-none h-full" />
             </div>
           </Panel>
         </Container>

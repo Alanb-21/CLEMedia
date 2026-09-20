@@ -1,5 +1,5 @@
 import { Seo } from "@/components/Seo";
-import { AssetPlaceholder } from "@/components/AssetPlaceholder";
+import { Figure } from "@/components/Figure";
 import { Button, Container, Kicker, Lead, Panel, Section } from "@/components/ui";
 import { SITE } from "@/lib/site";
 
@@ -35,11 +35,7 @@ export default function Story() {
       </Section>
 
       <Container>
-        <AssetPlaceholder
-          label="Conor and Lydia. Real photography only: no stock, no generated imagery."
-          source="Photography"
-          ratio="21/9"
-        />
+        <Figure asset="story.lead" priority sizes="100vw" />
       </Container>
 
       <Section className="!pt-14">
@@ -90,12 +86,7 @@ export default function Story() {
                   make something a child loves.
                 </p>
                 <figure className="!my-9">
-                  <AssetPlaceholder
-                    label="The garden, the house, early sketches, or the real pugs"
-                    source="Photography"
-                    ratio="3/2"
-                    tone="cream"
-                  />
+                  <Figure asset="story.garden" tone="cream" />
                   <figcaption className="mt-2.5 font-body text-[13px] text-muted">
                     The garden that became the world of the show.
                   </figcaption>

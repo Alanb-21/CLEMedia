@@ -1,6 +1,7 @@
 import { useState, type FormEvent } from "react";
 import { Seo } from "@/components/Seo";
 import { AssetPlaceholder } from "@/components/AssetPlaceholder";
+import { Figure } from "@/components/Figure";
 import { Button, Container, Kicker, Lead, Panel, Section, SectionHeading } from "@/components/ui";
 import { Reveal } from "@/components/Reveal";
 import { IconBell, IconCheck, IconDevice, IconLock, IconNoAds, IconPlay, IconPrint, IconResearch } from "@/components/icons";
@@ -153,12 +154,7 @@ function PreLaunch() {
                 </p>
               </div>
             </div>
-            <AssetPlaceholder
-              label="PupsPlayer™ app preview, device mockup or key screen"
-              source="App"
-              ratio="4/5"
-              tone="cream"
-            />
+            <Figure asset="app.hero" tone="cream" />
           </div>
         </Container>
       </Section>
@@ -195,7 +191,7 @@ function Launched() {
                 <AssetPlaceholder label="Google Play badge" source="App" ratio="3/1" className="!w-[150px]" tone="cream" />
               </div>
             </div>
-            <AssetPlaceholder label="App hero, device mockup" source="App" ratio="4/5" tone="cream" />
+            <Figure asset="app.hero" tone="cream" />
           </div>
         </Container>
       </Section>
@@ -205,10 +201,10 @@ function Launched() {
           <SectionHeading kicker="Inside the app" title="What you get" />
           <FeatureGrid />
           <ul className="mt-10 grid gap-6 sm:grid-cols-3">
-            {[1, 2, 3].map((i) => (
-              <li key={i}>
-                <AssetPlaceholder label={`App screenshot ${i}`} source="App" ratio="9/16" />
-              </li>
+            {(["app.screen1", "app.screen2", "app.screen3"] as const).map((k, i) => (
+              <Reveal as="li" key={k} delay={i * 80}>
+                <Figure asset={k} sizes="(min-width: 640px) 33vw, 100vw" />
+              </Reveal>
             ))}
           </ul>
         </Container>
