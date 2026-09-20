@@ -60,7 +60,7 @@ export default function Home() {
 
             <AssetPlaceholder
               label="Hero photograph — the garden that inspired the show's world, or the founders at work"
-              ref="CONTENT-NEEDED · Photography"
+              source="CONTENT-NEEDED · Photography"
               ratio="4/3"
             />
           </div>
@@ -154,7 +154,7 @@ export default function Home() {
 
             <AssetPlaceholder
               label="Photograph — the team at work, a workspace, or the production process"
-              ref="CONTENT-NEEDED · Photography"
+              source="CONTENT-NEEDED · Photography"
               ratio="3/2"
               tone="clay"
             />
@@ -192,12 +192,12 @@ export default function Home() {
           <div className="mt-8 grid gap-5 lg:grid-cols-2">
             <CopyNeeded
               label="The research basis for the Watch, Play, Learn model — the framework, who developed it, and what it draws on."
-              ref="QUESTIONS.md"
+              source="QUESTIONS.md"
               lines={4}
             />
             <CopyNeeded
               label="External validation: accelerator programmes, institutional partners, funding bodies, pilot results. Only claims the client supplies."
-              ref="QUESTIONS.md"
+              source="QUESTIONS.md"
               lines={4}
             />
           </div>
@@ -229,7 +229,7 @@ export default function Home() {
             </div>
             <AssetPlaceholder
               label="Character art — Finn, Fia and the rest. Available in the brand kit, supporting role only."
-              ref="CONTENT-NEEDED · Brand assets"
+              source="CONTENT-NEEDED · Brand assets"
               ratio="16/10"
               tone="cream"
               className="!border-0"

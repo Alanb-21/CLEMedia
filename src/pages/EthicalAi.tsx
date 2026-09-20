@@ -163,7 +163,7 @@ export default function EthicalAi() {
           <div className="mt-10 max-w-[62ch]">
             <CopyNeeded
               label="Client confirmation needed: the specific tools used at stages 03 and 04, and the exact wording of the review step. This page must describe the real process precisely — it is the page most likely to be scrutinised."
-              ref="QUESTIONS.md"
+              source="QUESTIONS.md"
               lines={3}
             />
           </div>

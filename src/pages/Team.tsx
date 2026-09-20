@@ -27,7 +27,7 @@ function PersonCard({ p, advisor = false }: { p: Person; advisor?: boolean }) {
         ) : (
           <AssetPlaceholder
             label={advisor ? "Headshot" : `Photograph of ${p.name}`}
-            ref={advisor ? undefined : "CONTENT-NEEDED · Photography"}
+            source={advisor ? undefined : "CONTENT-NEEDED · Photography"}
             ratio={advisor ? "1/1" : "4/5"}
             tone={advisor ? "cream" : "clay"}
           />

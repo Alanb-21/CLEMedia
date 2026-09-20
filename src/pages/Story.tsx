@@ -36,7 +36,7 @@ export default function Story() {
       <Container>
         <AssetPlaceholder
           label="Lead photograph — Conor and Lydia. Real photography only; no generated or stock imagery on this site."
-          ref="CONTENT-NEEDED · Photography"
+          source="CONTENT-NEEDED · Photography"
           ratio="21/9"
         />
       </Container>
@@ -67,7 +67,7 @@ export default function Story() {
                   <div className="mt-5">
                     <CopyNeeded
                       label={`Founder story, part ${i + 1} of 4: "${s.label}". Needs either interview material with Conor and Lydia, or a written piece.`}
-                      ref="QUESTIONS.md #6"
+                      source="QUESTIONS.md #6"
                       lines={5}
                     />
                   </div>
@@ -75,7 +75,7 @@ export default function Story() {
                     <figure className="mt-8">
                       <AssetPlaceholder
                         label="Supporting photograph — the garden, the house, early sketches, the real pugs"
-                        ref="CONTENT-NEEDED · Photography"
+                        source="CONTENT-NEEDED · Photography"
                         ratio="3/2"
                         tone="cream"
                       />

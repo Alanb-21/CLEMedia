@@ -92,7 +92,7 @@ function PreLaunch() {
             </div>
             <AssetPlaceholder
               label="PupsPlayer™ app preview — device mockup or key screen"
-              ref="CONTENT-NEEDED · App"
+              source="CONTENT-NEEDED · App"
               ratio="4/5"
               tone="cream"
             />
@@ -106,7 +106,7 @@ function PreLaunch() {
           <div className="mt-8 max-w-[62ch]">
             <CopyNeeded
               label="App feature list, screens, age range and availability. Needed before launch."
-              ref="QUESTIONS.md #14"
+              source="QUESTIONS.md #14"
               lines={4}
             />
           </div>
@@ -131,11 +131,11 @@ function Launched() {
                 adults beside them.
               </Lead>
               <div className="mt-8 flex flex-wrap gap-3">
-                <AssetPlaceholder label="App Store badge and link" ref="QUESTIONS.md #14" ratio="3/1" className="!w-[150px]" tone="cream" />
-                <AssetPlaceholder label="Google Play badge and link" ref="QUESTIONS.md #14" ratio="3/1" className="!w-[150px]" tone="cream" />
+                <AssetPlaceholder label="App Store badge and link" source="QUESTIONS.md #14" ratio="3/1" className="!w-[150px]" tone="cream" />
+                <AssetPlaceholder label="Google Play badge and link" source="QUESTIONS.md #14" ratio="3/1" className="!w-[150px]" tone="cream" />
               </div>
             </div>
-            <AssetPlaceholder label="App hero — device mockup" ref="CONTENT-NEEDED · App" ratio="4/5" tone="cream" />
+            <AssetPlaceholder label="App hero — device mockup" source="CONTENT-NEEDED · App" ratio="4/5" tone="cream" />
           </div>
         </Container>
       </Section>
@@ -146,12 +146,12 @@ function Launched() {
           <ul className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {[1, 2, 3].map((i) => (
               <li key={i}>
-                <AssetPlaceholder label={`App screenshot ${i}`} ref="QUESTIONS.md #14" ratio="9/16" />
+                <AssetPlaceholder label={`App screenshot ${i}`} source="QUESTIONS.md #14" ratio="9/16" />
               </li>
             ))}
           </ul>
           <div className="mt-10 max-w-[62ch]">
-            <CopyNeeded label="Feature descriptions, age range, device support, pricing and parental controls." ref="QUESTIONS.md #14" lines={4} />
+            <CopyNeeded label="Feature descriptions, age range, device support, pricing and parental controls." source="QUESTIONS.md #14" lines={4} />
           </div>
         </Container>
       </Section>

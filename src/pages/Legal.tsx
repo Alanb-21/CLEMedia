@@ -47,7 +47,7 @@ export default function Legal({ doc }: { doc: keyof typeof DOCS }) {
                 <section key={s}>
                   <h2 className="text-[length:var(--text-h3)]">{s}</h2>
                   <div className="mt-3">
-                    <CopyNeeded label={`${d.title} — "${s}"`} ref="CONTENT-NEEDED · Legal" lines={2} />
+                    <CopyNeeded label={`${d.title} — "${s}"`} source="CONTENT-NEEDED · Legal" lines={2} />
                   </div>
                 </section>
               ))}

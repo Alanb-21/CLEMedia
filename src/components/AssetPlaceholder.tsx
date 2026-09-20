@@ -1,8 +1,10 @@
 interface Props {
   /** What belongs here, in plain words. Shown on the block. */
   label: string;
-  /** The CONTENT-NEEDED.md row this traces to. */
-  ref?: string;
+  /** The CONTENT-NEEDED.md row this traces to.
+   *  NOT named `ref` — React reserves that, and a string value is treated as a
+   *  legacy string ref, which throws and unmounts the tree. */
+  source?: string;
   /** CSS aspect-ratio, e.g. "16/9". */
   ratio?: string;
   className?: string;
@@ -17,7 +19,7 @@ interface Props {
  *
  * This is NOT a loading skeleton and never renders a fabricated image.
  */
-export function AssetPlaceholder({ label, ref: contentRef, ratio = "16/9", className = "", tone = "clay" }: Props) {
+export function AssetPlaceholder({ label, source, ratio = "16/9", className = "", tone = "clay" }: Props) {
   const bg = tone === "clay" ? "bg-clay" : "bg-cream";
   return (
     <div
@@ -41,8 +43,8 @@ export function AssetPlaceholder({ label, ref: contentRef, ratio = "16/9", class
         <p className="mt-1.5 max-w-[24ch] font-body text-[13px] font-medium leading-snug text-ink">
           {label}
         </p>
-        {contentRef && (
-          <p className="mt-1 font-body text-[10px] uppercase tracking-wider text-ink/55">{contentRef}</p>
+        {source && (
+          <p className="mt-1 font-body text-[10px] uppercase tracking-wider text-ink/55">{source}</p>
         )}
       </div>
     </div>
@@ -52,11 +54,11 @@ export function AssetPlaceholder({ label, ref: contentRef, ratio = "16/9", class
 /**
  * Copy the client has not supplied. Same principle: visible, never invented.
  */
-export function CopyNeeded({ label, ref: contentRef, lines = 3 }: { label: string; ref?: string; lines?: number }) {
+export function CopyNeeded({ label, source, lines = 3 }: { label: string; source?: string; lines?: number }) {
   return (
     <div className="border-l-[3px] border-red/60 bg-cream/40 px-4 py-3">
       <p className="font-body text-[10px] font-semibold uppercase tracking-[0.16em] text-red-deep">
-        Copy needed{contentRef ? ` · ${contentRef}` : ""}
+        Copy needed{source ? ` · ${source}` : ""}
       </p>
       <p className="mt-1 font-body text-sm font-medium text-ink">{label}</p>
       <div aria-hidden="true" className="mt-2.5 space-y-1.5">
