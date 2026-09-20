@@ -1,9 +1,20 @@
 /** Single source of truth for cross-site links and company details. */
+/**
+ * `??` only falls back on null/undefined, so an env var that is present but
+ * empty (easy to do in the Vercel dashboard) survives it and renders href="",
+ * which silently reloads the current page instead of navigating. Treat blank
+ * as unset.
+ */
+function envUrl(value: string | undefined, fallback: string): string {
+  const trimmed = value?.trim();
+  return trimmed ? trimmed : fallback;
+}
+
 export const SITE = {
   name: "CLÉ Family Media",
   showName: "The Pawsitive Pugs & Pals",
   playerName: "PupsPlayer",
-  url: import.meta.env.VITE_SITE_URL ?? "https://example.com",
+  url: envUrl(import.meta.env.VITE_SITE_URL, "https://clefamilymedia.com"),
   /** Fixed destination. Not env-driven: the show site is not going to move,
    *  and an unset variable must never silently break the cross-link. */
   showUrl: "https://www.pawsitivepugs.com",

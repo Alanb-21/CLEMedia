@@ -5,7 +5,7 @@ type Route = (typeof ROUTES)[number];
 
 /**
  * Receives a contact or notify-me submission, stores it and sends a
- * notification. Validated server side — client-side validation is a courtesy
+ * notification. Validated server side. Client-side validation is a courtesy
  * to the user, not a control.
  */
 export async function POST(request: Request) {
@@ -51,7 +51,7 @@ export async function POST(request: Request) {
   }
 }
 
-/** Best effort — a failed notification must not lose the enquiry, which is
+/** Best effort. A failed notification must not lose the enquiry, which is
  *  already safely stored by the time this runs. */
 async function notify(e: { route: string; name: string; email: string; organisation: string; message: string }) {
   const key = process.env.RESEND_API_KEY;
@@ -60,8 +60,8 @@ async function notify(e: { route: string; name: string; email: string; organisat
 
   const subject =
     e.route === "partnership"
-      ? `Partnership enquiry — ${e.name || e.email}`
-      : `${e.route} enquiry — ${e.name || e.email}`;
+      ? `Partnership enquiry from ${e.name || e.email}`
+      : `${e.route} enquiry from ${e.name || e.email}`;
 
   try {
     await fetch("https://api.resend.com/emails", {
@@ -74,9 +74,9 @@ async function notify(e: { route: string; name: string; email: string; organisat
         subject,
         text: [
           `Type: ${e.route}`,
-          `Name: ${e.name || "—"}`,
+          `Name: ${e.name || "Not given"}`,
           `Email: ${e.email}`,
-          `Organisation: ${e.organisation || "—"}`,
+          `Organisation: ${e.organisation || "Not given"}`,
           "",
           e.message || "(no message)",
         ].join("\n"),

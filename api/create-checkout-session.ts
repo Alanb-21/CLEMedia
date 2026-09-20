@@ -5,7 +5,7 @@ import { adminClient, requireEnv, json } from "./_lib/admin";
  * Creates a Stripe Checkout session for one product.
  *
  * The client sends a slug and nothing else. Price, currency and title are read
- * from the database — a browser can send any number it likes, so it is never
+ * from the database. A browser can send any number it likes, so it is never
  * asked for one.
  */
 export async function POST(request: Request) {

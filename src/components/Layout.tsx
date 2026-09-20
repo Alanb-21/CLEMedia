@@ -10,7 +10,7 @@ function ShowSiteLink({ className = "" }: { className?: string }) {
       href={SITE.showUrl}
       target="_blank"
       rel="noopener noreferrer"
-      className={`inline-flex items-center gap-1.5 ${className}`}
+      className={`items-center gap-1.5 ${className}`}
     >
       Visit the show site
       <IconExternal size={13} />
@@ -50,7 +50,7 @@ function Header() {
           </ul>
         </nav>
 
-        <ShowSiteLink className="glass hidden shrink-0 rounded-[var(--radius-pill)] px-4 py-2 font-body text-[13px] font-medium text-ink transition-all hover:bg-white/95 lg:inline-flex" />
+        <ShowSiteLink className="glass hidden shrink-0 items-center rounded-[var(--radius-pill)] px-4 py-2 font-body text-[13px] font-medium text-ink transition-all hover:bg-white/95 lg:inline-flex" />
 
         <button
           type="button"
@@ -86,7 +86,7 @@ function Header() {
               </li>
             ))}
             <li className="py-3">
-              <ShowSiteLink className="font-body text-[15px] text-ink underline underline-offset-4" />
+              <ShowSiteLink className="inline-flex font-body text-[15px] text-ink underline underline-offset-4" />
             </li>
           </ul>
         </nav>
@@ -124,7 +124,7 @@ function Footer() {
             <p className="mt-3 max-w-[30ch] font-body text-[14px] text-body">
               Episodes, characters and activities all live over on the show site.
             </p>
-            <ShowSiteLink className="mt-3 font-body text-[14px] font-semibold text-red-deep underline underline-offset-4" />
+            <ShowSiteLink className="mt-3 inline-flex font-body text-[14px] font-semibold text-red-deep underline underline-offset-4" />
           </div>
 
           <div>
@@ -159,7 +159,7 @@ export function Layout() {
   useEffect(() => { window.scrollTo(0, 0); }, [pathname]);
 
   return (
-    <>
+    <div className="flex min-h-screen flex-col">
       <a
         href="#main"
         className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-[100] focus:rounded-[var(--radius-pill)] focus:bg-ink focus:px-5 focus:py-2.5 focus:font-body focus:text-sm focus:text-paper"
@@ -167,10 +167,12 @@ export function Layout() {
         Skip to content
       </a>
       <Header />
-      <main id="main" tabIndex={-1}>
+      {/* flex-1 pushes the footer to the bottom on short pages (legal, 404),
+          which otherwise left a large band of empty paper below it. */}
+      <main id="main" tabIndex={-1} className="flex-1">
         <Outlet />
       </main>
       <Footer />
-    </>
+    </div>
   );
 }

@@ -7,7 +7,7 @@ import { adminClient, requireEnv, json } from "./_lib/admin";
  * untouched. The Web-standard handler signature is used deliberately:
  * `request.text()` gives the raw payload. The Next.js
  * `config = { api: { bodyParser: false } }` export does nothing in a plain
- * Vercel function — the body arrives pre-parsed and every signature check
+ * Vercel function, so the body arrives pre-parsed and every signature check
  * fails.
  */
 
@@ -77,7 +77,7 @@ export async function POST(request: Request) {
     return json({ received: true });
   } catch (err) {
     // A non-2xx tells Stripe to retry, which is what we want for a transient
-    // fault — the customer has paid and must end up with a token.
+    // fault. The customer has paid and must end up with a token.
     console.error("Webhook processing failed", err);
     return json({ error: "Processing failed" }, 500);
   }

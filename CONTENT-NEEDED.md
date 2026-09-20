@@ -39,7 +39,7 @@ AI-generated or a render; filenames and XMP carry the prompts. See QUESTIONS.md
 
 | Item | Status | Needed for | Notes |
 |---|---|---|---|
-| Garden photography | ❌ | Home hero, section breaks | The "garden" stills are AI-generated. Cannot be used as the real garden |
+| Garden photography | ⚠️ | Home hero, section breaks | The "garden" stills are AI-generated. Cannot be used as the real garden |
 | Founder photography — Conor, Lydia | ❌ | `/story`, `/team` | `PEOPLE/` holds five AI cartoon avatars. Unusable under the brief's hard rules |
 | Team and advisor headshots | ❌ | `/team` | None exist. Shoot or supplied headshots required |
 | Process / behind-the-scenes / workspace | ❌ | `/story`, `/ethical-ai` | None exist |
@@ -91,3 +91,27 @@ file. They are deliberately visible, never subtle — the client should be able
 to scan any page and see precisely what is still outstanding. A build that
 reaches launch with placeholders still in it has failed, so this list is the
 launch checklist for content.
+
+
+---
+
+## Brand assets wired, 2026-09-20
+
+Three image slots and all three logos are live. See
+`BRAND TOOL KIT/web-exports/2026-09-20/` and `src/lib/brand.ts`.
+
+| Slot | State | Note |
+|---|---|---|
+| `home.hero` | ✅ | Show frame: bluebells in the garden at sunrise |
+| `story.garden` | ✅ | Show frame: the garden with a rope swing |
+| `home.characters` | ✅ | Show frame: two pugs and a hen |
+| `LOGOS.showBlack` / `.showWhite` | ✅ | One vectorised SVG, coloured by CSS |
+| `LOGOS.pupsPlayer` | ✅ | Vectorised SVG |
+| `story.lead` | ❌ | **Stays empty.** No photograph of Conor or Lydia exists |
+| `home.company` | ❌ | **Stays empty.** No photograph of the team exists |
+| `app.hero`, `app.screen1-3`, `home.app` | ❌ | No app screenshots exist. QUESTIONS.md #14 |
+| `LOGOS.cle` | ❌ | No vector CLÉ mark exists. QUESTIONS.md #21 |
+
+The three filled slots are **frames from the animated show**, not photographs,
+and their alt text says so. They are not a substitute for the photography this
+file still lists as outstanding.
