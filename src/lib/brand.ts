@@ -37,7 +37,12 @@ export interface BrandAsset {
   height: number;
   /** What belongs here, shown on the placeholder while base is null. */
   label: string;
-  /** Extension of the fallback file. */
+  /**
+   * Extension of the fallback file. Must match what is actually in
+   * public/brand/: a mismatch used to be served index.html by the SPA rewrite
+   * and fail to decode silently. The rewrite now excludes file extensions, so
+   * a mismatch 404s loudly instead, but it still has to be right.
+   */
   fallback?: "jpg" | "png";
 }
 
