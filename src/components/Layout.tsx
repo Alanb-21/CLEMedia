@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link, NavLink, Outlet, useLocation } from "react-router-dom";
 import { NAV, SITE } from "@/lib/site";
-import { Mark, Wordmark } from "@/components/Wordmark";
+import { Wordmark } from "@/components/Wordmark";
 import { IconExternal, IconMail } from "@/components/icons";
 
 function ShowSiteLink({ className = "" }: { className?: string }) {
@@ -101,8 +101,8 @@ function Footer() {
       <div className="mx-auto max-w-6xl px-5 py-14">
         <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-4">
           <div>
-            <Mark size={36} />
-            <p className="mt-3 font-display text-[19px] text-ink">CLÉ Family Media</p>
+            <img src="/brand/cle-logo.webp" alt="CLÉ Family Media" width="200" height="200" loading="lazy"
+              className="w-[150px] rounded-[var(--radius-md)]" />
             <p className="mt-2.5 max-w-[28ch] font-body text-[14px] text-muted">
               Calm, purposeful edutainment for young children, built on research and made by people.
             </p>

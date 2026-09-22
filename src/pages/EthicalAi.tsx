@@ -1,225 +1,319 @@
+import { useState } from "react";
 import { Seo } from "@/components/Seo";
-import { Container, Kicker, Lead, Panel, Section, SectionHeading } from "@/components/ui";
+import { Button, Container, Kicker, Lead, Panel, Section, SectionHeading } from "@/components/ui";
 import { Reveal } from "@/components/Reveal";
-import { IconArrow, IconCheck, IconHands, IconHuman, IconLock, IconNoAds, IconResearch } from "@/components/icons";
+import { IconArrow, IconCheck, IconHands, IconHuman, IconLearn, IconLock, IconResearch } from "@/components/icons";
 
-/**
- * The stages are the ones named in the client brief. What a human decides at
- * each stage is stated structurally; the specific tooling and the detail of each
- * step still need the client's confirmation before they can be asserted as fact.
- */
+/** The two platforms currently in use, named because vagueness reads worse. */
+const TOOLS = [
+  { name: "Runway", role: "Supports elements of visual production and animation." },
+  { name: "ElevenLabs", role: "Supports elements of audio and voice production." },
+];
+
+/** The real sequence, from the company's own production workflow. */
 const STAGES = [
   {
     n: "01",
-    title: "Concept",
-    human: "A person decides what the episode is about, what a child should take from it, and which early-years objective it serves.",
-    tool: "No tool involvement. Nothing generates a story idea.",
+    title: "Concept and story",
+    who: "Conor and Al",
+    body: "The episode concept, the story and the learning goal are set by people, before any production begins.",
   },
   {
     n: "02",
-    title: "Educational review",
-    human: "An early-years advisor checks the concept against the learning framework before a word of script is written.",
-    tool: "None.",
+    title: "Script and direction",
+    who: "Al",
+    body: "The script is written and production is directed. Assets are specified and selected by the team, not accepted as they arrive.",
   },
   {
     n: "03",
-    title: "Scripting",
-    human: "A person writes the script. Dialogue, pacing and the emotional shape of the episode are authored, not generated.",
-    tool: "Assistive only: drafting support and reference lookups. Every line that reaches the screen is written or rewritten by a person.",
+    title: "Educational review",
+    who: "Dr Paula Walshe",
+    body: "Learning intent and the offline activities that follow the episode are reviewed against early years practice.",
   },
   {
     n: "04",
-    title: "Creative development",
-    human: "Art direction, character performance, colour, staging and sound are directed by the creative team against an established style.",
-    tool: "Production tooling assists with rendering and iteration inside a style people defined and control.",
+    title: "Parent and early years review",
+    who: "Lydia and Kirstie",
+    body: "Script and production are read again from a parent's point of view and an early years point of view.",
   },
   {
     n: "05",
-    title: "Review and sign-off",
-    human: "Every finished asset is reviewed by a person against both the educational objective and the content standards before it ships.",
-    tool: "None. No output reaches a child without a human having approved it.",
+    title: "Quality and suitability checks",
+    who: "The production team",
+    body: "Voices and visuals are checked for quality, consistency and suitability for the children watching.",
+  },
+  {
+    n: "06",
+    title: "Final review and approval",
+    who: "The team",
+    body: "The finished episode is inspected and changes are requested where needed. A release can be delayed. Nothing is generated and published automatically.",
   },
 ];
 
-const LINES = [
+const PRINCIPLES = [
   {
     icon: IconHands,
-    title: "AI never authors the story",
-    body: "Narrative, characters and dialogue are written by people. A generative tool is never the source of what a child is being told.",
+    title: "Human creativity comes first",
+    body:
+      "Characters, stories, educational objectives, scripts and creative direction all begin with people. Tools can help bring those ideas to screen. They do not decide what a story should teach, how a character should behave, or what is appropriate for the children watching.",
   },
   {
     icon: IconCheck,
-    title: "Nothing reaches a child unreviewed",
-    body: "There is no path from a tool's output to a screen that does not pass through a person who is accountable for it.",
-  },
-  {
-    icon: IconNoAds,
-    title: "No synthetic children, no synthetic people",
-    body: "We do not generate images of children, and we do not present generated imagery of real people as photography.",
-  },
-  {
-    icon: IconResearch,
-    title: "Educational integrity comes first",
-    body: "Where a tool would make production faster but weaken the learning outcome, the learning outcome wins.",
+    title: "Human oversight at every stage",
+    body:
+      "Using AI does not remove responsibility. Our team reviews, directs and refines the work throughout production. Outputs are not automatically generated and published.",
   },
   {
     icon: IconLock,
-    title: "We will say what we use",
-    body: "If our production process changes, this page changes with it. Ambiguity about this is itself a failure.",
+    title: "Protecting original IP",
+    body:
+      "The Pawsitive Pugs & Pals®, its characters and its world are original intellectual property. We do not intentionally use AI to reproduce the identifiable style, characters or IP of other creators or children's brands. The aim is to build our own world, not imitate somebody else's.",
+  },
+  {
+    icon: IconHuman,
+    title: "Children's interests come before technology",
+    body:
+      "The fact that technology can do something does not mean we should. Decisions are guided by the child's experience first: calm, age-appropriate content that moves a child beyond passive viewing into play, conversation and offline learning.",
+  },
+  {
+    icon: IconLearn,
+    title: "Education requires human judgement",
+    body:
+      "Educational content deserves more than an automated check. Decisions about learning objectives, activities, language and child development stay with qualified people.",
+  },
+  {
+    icon: IconResearch,
+    title: "Transparency matters",
+    body:
+      "We will not pretend AI is absent from our process. Equally, calling our programmes simply AI-generated misrepresents the human development, direction and review involved. We prefer a clearer description, which is the line at the top of this page.",
   },
 ];
 
+const FAQ = [
+  {
+    q: "Which tools are used?",
+    a: "Runway, for elements of visual production and animation, and ElevenLabs, for elements of audio and voice production. Both sit inside a human-led workflow rather than operating as autonomous content creators. As the technology changes we will keep reviewing the platforms we use, their commercial terms, and how they align with our standards on intellectual property, consent and responsible production.",
+  },
+  {
+    q: "Who writes and approves the stories?",
+    a: "Conor and Al set the concept and the story. Al writes the script and directs production. The finished episode is reviewed by the team before release, and any of them can ask for changes.",
+  },
+  {
+    q: "How are educational decisions made?",
+    a: "Dr Paula Walshe reviews the learning intent of each episode and the activities that follow it. Lydia and Kirstie bring parent and early years perspectives to script and production review. Those judgements are made by people, and we do not automate them.",
+  },
+  {
+    q: "What happens when a review identifies a problem?",
+    a: "The work is revised and re-reviewed before it goes out. A release can be delayed to make that possible, and has been. Getting an episode right matters more to us than getting it out on the original date.",
+  },
+];
+
+function FaqItem({ q, a, open, onToggle }: { q: string; a: string; open: boolean; onToggle: () => void }) {
+  return (
+    <Panel className="overflow-hidden">
+      <h3>
+        <button
+          type="button"
+          onClick={onToggle}
+          aria-expanded={open}
+          className="flex w-full items-center gap-4 p-6 text-left font-body text-[16px] font-semibold text-ink"
+        >
+          {q}
+          <span
+            aria-hidden="true"
+            className="ml-auto shrink-0 text-red-deep transition-transform duration-300"
+            style={{ transform: open ? "rotate(90deg)" : "none" }}
+          >
+            <IconArrow size={18} />
+          </span>
+        </button>
+      </h3>
+      {open && (
+        <p className="border-t border-hairline/60 px-6 pb-6 pt-4 font-body text-[14.5px] leading-relaxed text-body">
+          {a}
+        </p>
+      )}
+    </Panel>
+  );
+}
+
 export default function EthicalAi() {
+  const [open, setOpen] = useState<number | null>(0);
+
   return (
     <>
       <Seo
-        title="Ethical AI"
-        description="How CLÉ Family Media uses AI in production: as a tool inside a human-led process, never as the author of children's content. The process, stage by stage, and the lines we will not cross."
+        title="Responsible AI"
+        description="Human-led children's media, produced with the responsible support of AI-enabled technology. How CLÉ Family Media uses Runway and ElevenLabs inside a human-led production workflow, and who reviews the work before release."
         path="/ethical-ai"
       />
 
       <Section className="!pb-10">
         <Container>
-          <div className="max-w-[48ch]">
-            <Kicker>Ethical AI</Kicker>
+          <div className="max-w-[50ch]">
+            <Kicker>Responsible AI</Kicker>
             <h1 className="mt-5 text-[length:var(--text-h1)]">
-              A tool in the process. Never the author.
+              Human-led. AI-enabled. Built responsibly.
             </h1>
           </div>
           <Lead className="mt-6">
-            AI is part of how modern animation gets made, and pretending otherwise would be the
-            quickest way to lose a parent's trust. So here is exactly where it sits in our process,
-            where a person decides instead, and what we will not do.
+            Technology should expand what a creative team can achieve, not replace the people,
+            judgement and responsibility behind children's content. AI-enabled production tools let
+            a small independent studio make ambitious original work. Our team stays accountable for
+            every decision and every release.
           </Lead>
         </Container>
       </Section>
 
-      {/* ── Position ────────────────────────────────────────────────────── */}
+      {/* The position, stated plainly */}
       <Section tone="cream" className="!py-14" labelledBy="position-h">
         <Container>
-          <div className="grid gap-8 lg:grid-cols-[0.8fr_1.2fr] lg:gap-14">
-            <h2 id="position-h" className="text-[length:var(--text-h2)]">
-              Our position
-            </h2>
+          <div className="grid gap-8 lg:grid-cols-[0.85fr_1.15fr] lg:gap-14">
+            <h2 id="position-h" className="text-[length:var(--text-h2)]">Our position</h2>
             <div className="max-w-[62ch] space-y-5 font-body">
-              <p className="text-[length:var(--text-lead)] leading-relaxed text-ink">
-                Generative tools are used in our production pipeline. They are used the way a studio
-                uses any production tool, to iterate faster inside a creative direction that people
-                set and control.
+              <p className="font-display text-[length:var(--text-h3)] leading-snug text-ink">
+                AI is a production tool. People remain responsible for the work.
               </p>
               <p>
-                They are not used to decide what a child should learn, to write what a child is
-                told, or to approve what a child sees. Those are judgements with consequences, and a
-                person is accountable for every one of them.
+                Our creative and educational decisions are made by people. In final production we
+                use Runway for visual production and ElevenLabs for voice production. Our team
+                directs, reviews and approves the work before publication.
               </p>
               <p className="text-ink">
-                The distinction we hold to is simple: a tool may help make the thing. It may never
-                be the thing's author.
+                We would rather describe that accurately than flatter ourselves in either direction.
+                Calling this work handmade would be untrue. Calling it AI-generated would erase the
+                people who actually make the decisions.
               </p>
             </div>
           </div>
         </Container>
       </Section>
 
-      {/* ── The process ─────────────────────────────────────────────────── */}
-      <Section labelledBy="process-h">
+      {/* Tools, named */}
+      <Section className="!py-14" labelledBy="tools-h">
         <Container>
           <SectionHeading
-            id="process-h"
-            kicker="The process"
-            title="Five stages, and who decides at each one"
-            lead="Read down the left for what a person does. Read down the right for what a tool is permitted to do."
+            id="tools-h"
+            kicker="The tools"
+            title="What we currently use, by name"
+            lead="Two platforms, both inside final production, neither operating on its own."
           />
-
-          <ol className="mt-12">
-            {STAGES.map((s, i) => (
-              <Reveal as="li" key={s.n} delay={i * 60} className="relative grid gap-5 border-t border-hairline/70 py-8 sm:grid-cols-[64px_1fr_1fr] sm:gap-8">
-                <div className="flex items-start gap-3 sm:block">
-                  <span className="font-display text-[26px] leading-none text-clay" aria-hidden="true">
-                    {s.n}
-                  </span>
-                  {i < STAGES.length - 1 && (
-                    <span aria-hidden="true" className="mt-3 hidden h-[calc(100%-2.5rem)] w-px bg-hairline sm:block sm:translate-x-3" />
-                  )}
-                  <h3 className="text-[length:var(--text-h3)] sm:hidden">{s.title}</h3>
-                </div>
-
-                <div>
-                  <h3 className="hidden text-[length:var(--text-h3)] sm:block">{s.title}</h3>
-                  <p className="mt-2 inline-flex items-center gap-1.5 font-body text-[11px] font-semibold uppercase tracking-[0.14em] text-red-deep">
-                    <IconHuman size={14} />
-                    A person decides
-                  </p>
-                  <p className="mt-2 max-w-[42ch] font-body text-[14.5px] leading-relaxed text-body">
-                    {s.human}
-                  </p>
-                </div>
-
-                <div className="border-l border-hairline pl-5 sm:mt-[2.1rem]">
-                  <p className="font-body text-[11px] font-semibold uppercase tracking-[0.14em] text-muted">
-                    A tool may assist
-                  </p>
-                  <p className="mt-2 max-w-[42ch] font-body text-[14.5px] leading-relaxed text-muted">
-                    {s.tool}
-                  </p>
-                </div>
+          <ul className="mt-8 grid gap-5 sm:grid-cols-2">
+            {TOOLS.map((t, i) => (
+              <Reveal as="li" key={t.name} delay={i * 80}>
+                <Panel className="h-full p-7">
+                  <h3 className="font-display text-[length:var(--text-h3)] text-ink">{t.name}</h3>
+                  <p className="mt-2 font-body text-[14.5px] leading-relaxed text-body">{t.role}</p>
+                </Panel>
               </Reveal>
             ))}
-          </ol>
-
-          <Panel tone="warm" className="mt-12 p-7">
-            <p className="max-w-[68ch] font-body text-[15px] leading-relaxed text-ink">
-              If that reads as a narrow role for the technology, it is meant to. The tools speed up
-              iteration inside a look and a story that people have already decided on. They do not
-              choose the objective, they do not write the words, and they never sign anything off.
-            </p>
-          </Panel>
+          </ul>
+          <p className="mt-6 max-w-[64ch] font-body text-[13.5px] text-muted">
+            Naming the platforms does not imply that either provider endorses CLÉ Family Media.
+          </p>
         </Container>
       </Section>
 
-      {/* ── The lines ───────────────────────────────────────────────────── */}
-      <Section tone="clay" labelledBy="lines-h">
+      {/* The sequence */}
+      <Section tone="cream" labelledBy="process-h">
         <Container>
           <SectionHeading
-            id="lines-h"
-            kicker="Safeguards"
-            title="The lines we will not cross"
-            className="[&_h2]:text-ink [&_p]:text-ink"
+            id="process-h"
+            kicker="The workflow"
+            title="Six stages, each with a person accountable for it"
+          />
+          <ol className="mt-12">
+            {STAGES.map((s, i) => (
+              <Reveal
+                as="li"
+                key={s.n}
+                delay={i * 60}
+                className="grid gap-4 border-t border-hairline/70 py-7 sm:grid-cols-[68px_1fr_1.25fr] sm:gap-8"
+              >
+                <span className="font-display text-[24px] leading-none text-clay" aria-hidden="true">
+                  {s.n}
+                </span>
+                <div>
+                  <h3 className="text-[length:var(--text-h3)]">{s.title}</h3>
+                  <p className="mt-1.5 font-body text-[13px] font-semibold uppercase tracking-wider text-red-deep">
+                    {s.who}
+                  </p>
+                </div>
+                <p className="max-w-[48ch] font-body text-[14.5px] leading-relaxed text-body">
+                  {s.body}
+                </p>
+              </Reveal>
+            ))}
+          </ol>
+        </Container>
+      </Section>
+
+      {/* Principles */}
+      <Section labelledBy="principles-h">
+        <Container>
+          <SectionHeading
+            id="principles-h"
+            kicker="Our principles"
+            title="The standards we hold ourselves to"
           />
           <ul className="mt-10 grid gap-5 sm:grid-cols-2">
-            {LINES.map((l, i) => (
-              <Reveal as="li" key={l.title} delay={i * 70}
-                className="rounded-[var(--radius-lg)] border border-white/45 bg-white/25 p-7 backdrop-blur-sm">
-                <h3 className="flex items-start gap-3 text-[length:var(--text-h3)]">
-                  <span className="mt-0.5 shrink-0"><l.icon size={20} /></span>
-                  {l.title}
-                </h3>
-                <p className="mt-2.5 pl-[32px] font-body text-[14.5px] leading-relaxed text-ink/90">
-                  {l.body}
-                </p>
+            {PRINCIPLES.map((p, i) => (
+              <Reveal as="li" key={p.title} delay={(i % 2) * 70}>
+                <Panel className="h-full p-7">
+                  <span className="mb-4 flex h-11 w-11 items-center justify-center rounded-[var(--radius-md)] bg-white/70 text-red-deep hairline-ring">
+                    <p.icon size={21} />
+                  </span>
+                  <h3 className="text-[length:var(--text-h3)]">{p.title}</h3>
+                  <p className="mt-2.5 font-body text-[14.5px] leading-relaxed text-body">{p.body}</p>
+                </Panel>
               </Reveal>
             ))}
           </ul>
         </Container>
       </Section>
 
-      <Section labelledBy="ask-h">
+      {/* FAQ */}
+      <Section tone="cream" labelledBy="faq-h">
         <Container>
-          <div className="max-w-[54ch]">
-            <h2 id="ask-h" className="text-[length:var(--text-h2)]">
-              Ask us about it
+          <SectionHeading id="faq-h" kicker="Questions" title="The ones we are asked most" />
+          <div className="mt-8 grid max-w-[62rem] gap-4">
+            {FAQ.map((f, i) => (
+              <FaqItem
+                key={f.q}
+                q={f.q}
+                a={f.a}
+                open={open === i}
+                onToggle={() => setOpen(open === i ? null : i)}
+              />
+            ))}
+          </div>
+        </Container>
+      </Section>
+
+      {/* Commitment */}
+      <Section labelledBy="commit-h">
+        <Container>
+          <div className="max-w-[60ch]">
+            <Kicker>Our commitment</Kicker>
+            <h2 id="commit-h" className="mt-4 text-[length:var(--text-h2)]">
+              The technology will keep changing. The responsibility will not.
             </h2>
-            <p className="mt-4 font-body text-[length:var(--text-lead)] leading-relaxed">
-              If you're an educator, a distributor or a parent and something on this page doesn't
-              satisfy you, we would genuinely rather have the conversation than have you assume.
+            <p className="mt-5 font-body text-[length:var(--text-lead)] leading-relaxed">
+              As the company grows we will keep reviewing our practice around human creative
+              authorship, intellectual property and commercial rights, performer and voice consent,
+              tool selection, transparency with audiences and partners, child safety, educational
+              integrity, and making sure technology supports rather than replaces meaningful human
+              creativity.
             </p>
-            <a
-              href="/contact"
-              className="mt-6 inline-flex items-center gap-2 font-body text-[15px] font-semibold text-red-deep underline underline-offset-4"
-            >
+            <p className="mt-5 max-w-[56ch] font-body text-[15.5px] leading-relaxed text-ink">
+              If something here does not satisfy you, whether you are a parent, an educator or a
+              distribution partner, we would genuinely rather have the conversation than have you
+              assume.
+            </p>
+            <Button to="/contact" className="mt-8">
               Get in touch
-              <IconArrow size={16} />
-            </a>
+              <IconArrow size={17} />
+            </Button>
           </div>
         </Container>
       </Section>

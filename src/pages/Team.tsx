@@ -5,50 +5,58 @@ import { Reveal } from "@/components/Reveal";
 import type { Person } from "@/lib/types";
 
 /**
- * Seeded from the credits in the brand kit. Bios are drafted from the
- * company's own positioning and are marked for confirmation: a film credit is
- * not necessarily how someone wants to be described on a company site.
+ * Roles are taken from the company's own account of how an episode is made and
+ * reviewed. Every entry stays flagged unconfirmed until each person has
+ * approved their own role description, as the client's handoff requires.
  */
 const SEED: Person[] = [
   {
     id: "1",
     name: "Conor Sexton",
-    role: "Founder and Director of Business Strategy",
+    role: "Founder",
     bio:
-      "Conor leads the company's strategy, partnerships and commercial direction. He started CLÉ after looking hard at what his own children were being handed and deciding the gap was worth building a company around. He handles the conversations with investors, broadcasters and distributors, and is usually the person on the other end of a partnership enquiry.",
+      "Conor founded the company and sets each episode's concept and story alongside Al. He leads strategy, partnerships and the commercial side of the studio, and is usually the person on the other end of a partnership enquiry. He came to this as a parent before anything else.",
     photo: null, type: "team", sort_order: 1, visible: true, unconfirmed: true,
   },
   {
     id: "2",
-    name: "Lydia Harding",
-    role: "Co-Producer",
+    name: "Al Compton",
+    role: "Creative Director",
     bio:
-      "Lydia co-produces The Pawsitive Pugs & Pals and co-founded the company. She works across production and the day to day shape of the slate, keeping the pace and tone of each episode honest to what the show is meant to do. Like Conor, she came to this as a parent first.",
+      "Al develops the script and directs production, working with Conor to set the concept. The look of the world, the performance of the characters and the pace of an episode are his call, and the pace in particular is the thing he holds the line on.",
     photo: null, type: "team", sort_order: 2, visible: true, unconfirmed: true,
   },
   {
     id: "3",
-    name: "Al Compton",
-    role: "Creative Director",
+    name: "Dr Paula Walshe",
+    role: "Education",
     bio:
-      "Al writes and directs the series and sets its creative direction: the look of the world, the performance of the characters and the rhythm of an episode. He is the reason the show moves at the pace it does rather than the pace the market expects, and he holds the line on it.",
+      "Paula reviews the learning intent of every episode and the offline activities that follow it. Her review happens before scripting rather than after, which is why the learning objective exists before the story does instead of being fitted around it.",
     photo: null, type: "team", sort_order: 3, visible: true, unconfirmed: true,
   },
   {
     id: "4",
-    name: "Paula Walshe",
-    role: "Educational Content Advisor",
+    name: "Lydia Harding",
+    role: "Co-Producer",
     bio:
-      "Paula advises on the educational substance of the work, checking each concept against early years practice before scripting begins. She is the reason the learning objective exists before the story does, rather than being fitted around it afterwards.",
-    photo: null, type: "advisor", sort_order: 1, visible: true, unconfirmed: true,
+      "Lydia co-produces the series and brings a parent's perspective to script and production review. She reads each episode the way a parent watching alongside a child would, which catches things a production read does not.",
+    photo: null, type: "team", sort_order: 4, visible: true, unconfirmed: true,
   },
   {
     id: "5",
     name: "Kirstie Harding",
-    role: "Early Learning Advisor",
+    role: "Early Years",
     bio:
-      "Kirstie advises on early learning and child development, with a particular eye on how young children actually receive what they are shown. She reviews content for pace, comprehension and the difference between holding a child's attention and earning it.",
-    photo: null, type: "advisor", sort_order: 2, visible: true, unconfirmed: true,
+      "Kirstie brings an early years perspective to script and production review, with a particular eye on how young children actually receive what they are shown: pace, comprehension, and the difference between holding a child's attention and earning it.",
+    photo: null, type: "team", sort_order: 5, visible: true, unconfirmed: true,
+  },
+  {
+    id: "6",
+    name: "Mansi",
+    role: "Production Coordination",
+    bio:
+      "Mansi supports production coordination across the schedule, keeping the review stages connected to the work in progress so that a note from one review reaches the people who need to act on it.",
+    photo: null, type: "team", sort_order: 6, visible: true, unconfirmed: true,
   },
 ];
 
@@ -86,7 +94,6 @@ function PersonCard({ p, advisor = false, delay = 0 }: { p: Person; advisor?: bo
 
 export default function Team() {
   const team = SEED.filter((p) => p.type === "team");
-  const advisors = SEED.filter((p) => p.type === "advisor");
 
   return (
     <>
@@ -103,9 +110,9 @@ export default function Team() {
             <h1 className="mt-5 text-[length:var(--text-h1)]">The people making it</h1>
           </div>
           <Lead className="mt-6">
-            A small core team, working closely with early years specialists rather than in
-            isolation. Between them they decide what gets made, how it gets made, and what it is
-            supposed to do for the child watching.
+            A small core team. Between them they decide what gets made, how it gets made, and
+            what it is supposed to do for the child watching. Each person named here appears in the
+            production and review sequence, not just on an about page.
           </Lead>
         </Container>
       </Section>
@@ -114,7 +121,7 @@ export default function Team() {
         <Container>
           <SectionHeading id="core-h" kicker="Core team" title="Who runs the company" />
           <ul className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {team.map((p, i) => <PersonCard key={p.id} p={p} delay={i * 80} />)}
+            {team.map((p, i) => <PersonCard key={p.id} p={p} delay={(i % 3) * 80} />)}
           </ul>
         </Container>
       </Section>
@@ -123,13 +130,18 @@ export default function Team() {
         <Container>
           <SectionHeading
             id="advisors-h"
-            kicker="Advisory board"
-            title="The specialists behind the educational model"
-            lead="Advisors shape the pedagogy and review the content. They are not employees, and they are shown separately for exactly that reason."
+            kicker="Strategic advisers"
+            title="Input within a defined remit"
+            lead="Advisers give input within their actual remit. They are not employees, and they are shown separately for exactly that reason."
           />
-          <ul className="mt-10 grid gap-6 lg:grid-cols-2">
-            {advisors.map((p, i) => <PersonCard key={p.id} p={p} advisor delay={i * 80} />)}
-          </ul>
+          <Panel tone="warm" className="mt-10 p-8">
+            <p className="max-w-[62ch] font-body text-[15px] leading-relaxed text-ink">
+              Our strategic advisers are shown as a separate group from the core team, with each
+              person's name, title and role described only as they have approved it. Those
+              confirmations are being collected now, so this section is deliberately empty rather
+              than provisional.
+            </p>
+          </Panel>
         </Container>
       </Section>
     </>

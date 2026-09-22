@@ -24,7 +24,7 @@ export const SITE = {
 export const NAV = [
   { to: "/story", label: "Our story" },
   { to: "/team", label: "Team" },
-  { to: "/ethical-ai", label: "Ethical AI" },
+  { to: "/ethical-ai", label: "Responsible AI" },
   { to: "/journal", label: "Journal" },
   { to: "/app", label: "App" },
   { to: "/shop", label: "Shop" },

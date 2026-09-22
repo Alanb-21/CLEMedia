@@ -1,13 +1,15 @@
 import { Seo } from "@/components/Seo";
 import { Figure } from "@/components/Figure";
 import { Button, Container, Kicker, Lead, Panel, Section } from "@/components/ui";
+import { Reveal } from "@/components/Reveal";
+import { IconArrow, IconExternal } from "@/components/icons";
 import { SITE } from "@/lib/site";
 
 const SECTIONS = [
-  { id: "becoming-parents", label: "Becoming parents" },
-  { id: "what-we-saw", label: "What we saw" },
-  { id: "what-was-missing", label: "What was missing" },
-  { id: "building-it", label: "Building it" },
+  { id: "what-i-saw", label: "What I saw" },
+  { id: "becoming-a-parent", label: "Becoming a parent" },
+  { id: "building-it", label: "Building an alternative" },
+  { id: "how-it-reaches-you", label: "How it reaches you" },
 ];
 
 export default function Story() {
@@ -15,21 +17,21 @@ export default function Story() {
     <>
       <Seo
         title="Our story"
-        description="Why Conor and Lydia founded CLÉ Family Media: becoming parents, looking closely at what young children are handed, and deciding to make something better."
+        description="Conor Sexton on why he founded CLÉ Family Media: the media young children encounter, becoming a parent, and building a practical alternative with creative and education specialists."
         path="/story"
       />
 
       <Section className="!pb-10">
         <Container>
-          <div className="max-w-[46ch]">
+          <div className="max-w-[48ch]">
             <Kicker>Our story</Kicker>
             <h1 className="mt-5 text-[length:var(--text-h1)]">
-              It started the way most of these things start, with our own children.
+              I did not set out to start a media company.
             </h1>
           </div>
           <Lead className="mt-6">
-            Conor and Lydia on what they saw, what they could not find, and why they decided to
-            build it themselves.
+            Conor Sexton on what he saw, what he could not find, and what it took to build the
+            alternative.
           </Lead>
         </Container>
       </Section>
@@ -40,7 +42,7 @@ export default function Story() {
 
       <Section className="!pt-14">
         <Container>
-          <div className="grid gap-12 lg:grid-cols-[200px_1fr] lg:gap-16">
+          <div className="grid gap-12 lg:grid-cols-[210px_1fr] lg:gap-16">
             <nav aria-label="On this page" className="lg:sticky lg:top-28 lg:self-start">
               <p className="font-body text-[11px] font-semibold uppercase tracking-[0.14em] text-muted">
                 On this page
@@ -57,89 +59,103 @@ export default function Story() {
             </nav>
 
             <article className="max-w-[65ch] space-y-14 font-body text-[16.5px] leading-[1.75]">
-              <section id="becoming-parents" className="scroll-mt-28 space-y-5">
-                <h2 className="text-[length:var(--text-h2)]">Becoming parents</h2>
+              <Reveal as="section" className="scroll-mt-28 space-y-5">
+                <div id="what-i-saw" className="scroll-mt-28" />
+                <h2 className="text-[length:var(--text-h2)]">What I saw</h2>
                 <p>
-                  Nobody warns you how quickly the screen question arrives. One week you are
-                  bargaining over vegetables, the next there is a tablet on the kitchen table and a
-                  small person who has worked out exactly how to ask for it.
+                  I started paying proper attention to children's media the way most people do, by
+                  sitting beside a small child who was watching it. What struck me was the speed.
+                  Cuts every second or so. Colours turned up past anything in the real world. A new
+                  hook arriving before the last one had finished landing.
                 </p>
                 <p>
-                  We did what every parent does. We handed it over, we felt uneasy about handing it
-                  over, and we told ourselves we would look properly at what was on it later. Then,
-                  eventually, we looked properly.
+                  None of it was malicious. You could see the logic plainly enough: attention is
+                  what gets measured, so attention is what gets designed for. But watching a child
+                  come off forty minutes of it, wired and brittle and somehow tired at the same
+                  time, I could not accept that this was simply how children's content had to work.
                 </p>
-              </section>
+              </Reveal>
 
-              <section id="what-we-saw" className="scroll-mt-28 space-y-5">
-                <h2 className="text-[length:var(--text-h2)]">What we saw</h2>
+              <Reveal as="section" className="scroll-mt-28 space-y-5">
+                <div id="becoming-a-parent" className="scroll-mt-28" />
+                <h2 className="text-[length:var(--text-h2)]">Becoming a parent</h2>
                 <p>
-                  What struck us was not that any of it was bad exactly. It was the speed. Cuts
-                  every second and a half. Colours turned up past anything in the real world. A new
-                  hook before the last one had finished landing. Content built by people who clearly
-                  understood, with some precision, how to keep a three year old from looking away.
+                  Becoming a parent changes the question from an interesting one into an urgent one.
+                  It stops being about media in general and becomes about the specific twenty
+                  minutes in front of you, and whether you are glad about them afterwards.
                 </p>
+                <Panel tone="warm" className="!my-9 border-l-[3px] !border-l-red p-7">
+                  <p className="font-display text-[length:var(--text-h3)] leading-snug text-ink">
+                    I was not looking for something to keep her quiet. I was looking for something I
+                    would be glad she had watched.
+                  </p>
+                </Panel>
                 <p>
-                  You could see the logic. Attention is what gets measured, so attention is what
-                  gets designed for. But watching a small child come off forty minutes of it, wired
-                  and brittle and somehow tired, it was hard to believe that was the only way to
-                  make something a child loves.
+                  So I went looking, and there was less of it than I expected. Plenty of shows were
+                  gentle. Plenty were educational. Very few were both, and fewer still would tell
+                  you anything about who had made them or who had checked them before they reached
+                  a child.
                 </p>
                 <figure className="!my-9">
                   <Figure asset="story.garden" tone="cream" />
                   <figcaption className="mt-2.5 font-body text-[13px] text-muted">
-                    The garden that became the world of the show.
+                    A frame from The Pawsitive Pugs &amp; Pals.
                   </figcaption>
                 </figure>
-              </section>
+              </Reveal>
 
-              <section id="what-was-missing" className="scroll-mt-28 space-y-5">
-                <h2 className="text-[length:var(--text-h2)]">What was missing</h2>
+              <Reveal as="section" className="scroll-mt-28 space-y-5">
+                <div id="building-it" className="scroll-mt-28" />
+                <h2 className="text-[length:var(--text-h2)]">Building an alternative</h2>
                 <p>
-                  So we went looking for the alternative, and there was less of it than we expected.
-                  Plenty of shows were gentle. Plenty were educational. Very few were both, and
-                  fewer still were honest with parents about what was actually in them or how any of
-                  it had been made.
+                  I could not have made this on my own, and I did not try. The company came
+                  together around people who knew far more than I did: Al on the creative side,
+                  who writes and directs and sets the pace of an episode; Paula on the educational
+                  side, who reviews the learning intent before a script exists; Lydia and Kirstie
+                  bringing the parent and early years perspectives that catch what a production read
+                  misses.
                 </p>
-                <Panel tone="warm" className="!my-9 border-l-[3px] !border-l-red p-7">
-                  <p className="font-display text-[length:var(--text-h3)] leading-snug text-ink">
-                    We were not looking for something to keep her quiet. We were looking for
-                    something we would be glad she had watched.
-                  </p>
-                </Panel>
                 <p>
-                  That turned out to be the whole brief. Not less screen time, but screen time worth
-                  having. Something calm enough to leave a child settled rather than strung out,
-                  with enough underneath it that the twenty minutes counted for something.
+                  <em>The Pawsitive Pugs &amp; Pals</em> is our first original series. Finn, the fawn
+                  pug, and Fia, the black pug, came out of that work. The learning was built in from
+                  the start rather than added once the scripts were finished, which is a slower way
+                  to make a show and, as far as we can tell, the only way to make this one.
                 </p>
-              </section>
+                <p>
+                  Being a small studio is not something we are apologising for. It means the people
+                  who set the story are the same people who check it before release, and that any
+                  of them can hold a release back. That is worth more to me than volume.
+                </p>
+              </Reveal>
 
-              <section id="building-it" className="scroll-mt-28 space-y-5">
-                <h2 className="text-[length:var(--text-h2)]">Building it</h2>
+              <Reveal as="section" className="scroll-mt-28 space-y-5">
+                <div id="how-it-reaches-you" className="scroll-mt-28" />
+                <h2 className="text-[length:var(--text-h2)]">How it reaches you</h2>
                 <p>
-                  <em>The Pawsitive Pugs &amp; Pals</em> grew out of a garden and two real pugs, which
-                  is a more ordinary beginning than most origin stories admit to. The world came
-                  first, the characters came from the animals already in it, and the learning was
-                  built in from the start rather than added once the scripts were finished.
+                  The model is Watch, Play, Learn, and it is more literal than it sounds. Watch an
+                  episode together. Pause for a movement or a breathing prompt. Then carry on with a
+                  printable or an educator-designed activity, away from the screen entirely. The
+                  episode is the beginning of the thing, not the whole of it.
                 </p>
                 <p>
-                  We brought in people who knew far more than we did. Early years specialists who
-                  could tell us where our instincts were right and where they were only comfortable.
-                  A creative director who had made this kind of work before. The company grew around
-                  that group rather than the other way around.
+                  In practice, most families find us free on YouTube, which is simply where
+                  discovery happens for a series like ours. The show's own site is where the
+                  episodes and the family activities properly live, and we are building a product
+                  experience to support ad-free viewing and the offline activities together. That
+                  is in development rather than available, and we will say so plainly until the day
+                  it is not.
                 </p>
-                <p>
-                  CLÉ Family Media is what that turned into: a small studio making calm, purposeful
-                  content, with an app to hold it, a journal to think out loud in, and a standing
-                  commitment to tell parents plainly how the work gets made. Parents helping parents
-                  is not a tagline we arrived at in a meeting. It is just an accurate description of
-                  who is doing this and why.
-                </p>
-              </section>
+              </Reveal>
 
               <div className="flex flex-wrap gap-3 border-t border-hairline pt-9">
-                <Button to="/team">Meet the team</Button>
-                <Button href={SITE.showUrl} variant="secondary">Visit the show site</Button>
+                <Button to="/ethical-ai">
+                  How we make and review the work
+                  <IconArrow size={17} />
+                </Button>
+                <Button href={SITE.showUrl} variant="secondary">
+                  Visit the show site
+                  <IconExternal size={16} />
+                </Button>
               </div>
             </article>
           </div>

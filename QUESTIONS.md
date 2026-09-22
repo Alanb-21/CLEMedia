@@ -264,3 +264,97 @@ and `/team`, and four weeks is not long.
 match the live site CSS to within JPEG drift, which is why they were treated as
 the palette source. Worth one line of confirmation that they are the intended
 brand swatches and not a set dressing texture that happens to match.
+
+---
+
+## Raised by the 22 September handoff and AI policy documents
+
+### 25. Is the company CLÉ Family Media or CLE Family Media?
+**BLOCKING for launch, trivial to change.**
+
+The 22 September handoff writes **CLE** throughout, with no accent anywhere in
+roughly fifteen occurrences. The supplied corporate logo also reads **CLE**,
+though its letters are felted animals, so an acute may simply not be
+representable in that form.
+
+The original brief to MTMN was emphatic the other way: *"the company is CLÉ
+Family Media (note the É)"* and *"get these right everywhere"*.
+
+The site currently uses **CLÉ**, because that was an explicit instruction and a
+Word document losing diacritics is common. This needs one confirmation, then it
+is a single find and replace either way. It should not reach launch unresolved:
+getting a company's own name wrong on its corporate site is the sort of detail
+that costs credibility with exactly the audience this site is for.
+
+### 26. Does the corporate site host a shop, or not?
+**BLOCKING for scope. Built and working today.**
+
+The handoff states plainly: *"The corporate site does not duplicate episode
+pages, host a shop, or manage product logins under this proposal."*
+
+The original brief specified the opposite in detail: a digital shop selling
+downloadable PDFs at €3 to €4 via Stripe Checkout, with a webhook, single-use
+download tokens and a private storage bucket.
+
+All of that is built, tested and on the branch: `/shop`, `/shop/:slug`,
+`/download/:token`, `/api/create-checkout-session`, `/api/stripe-webhook`,
+`/api/download`, the `products` and `orders` tables and the `product-files`
+bucket.
+
+**Nothing has been removed**, because deleting working commercial functionality
+on a document's say-so is not a call to make unilaterally. Three options:
+
+1. **Keep it.** The newer document is describing proposal CFM 02's scope, and
+   the shop was scoped separately. Nothing changes.
+2. **Hide it.** Pull `/shop` from navigation, leave the routes and API in place
+   behind the scenes. Reversible in minutes.
+3. **Remove it.** Strip the routes, the API handlers, the two tables and the
+   private bucket.
+
+Needs an answer before launch, and the answer also decides whether the VAT
+question (item 11) still matters at all.
+
+### 27. WCAG target moved from 2.1 AA to 2.2 AA
+The handoff specifies **WCAG 2.2 AA**; the original brief said 2.1 AA. 2.2 is a
+superset, so nothing already built becomes non-compliant, but the accessibility
+pass now needs to cover the nine additional 2.2 criteria, notably target size,
+dragging movements, focus appearance and consistent help. Treating 2.2 AA as
+the target from here.
+
+### 28. People whose role descriptions still need their own approval
+The handoff is explicit: *"Name only people who approve their role
+descriptions"* and *"confirm names, titles and permissions before publishing"*.
+
+Currently on the site, all flagged unconfirmed: Conor Sexton, Al Compton,
+Dr Paula Walshe, Lydia Harding, Kirstie Harding, Mansi. **Mansi's surname is not
+given in any document supplied.** Strategic advisers are shown as a deliberately
+empty section until names, titles and permissions are confirmed.
+
+### 29. The "Colour Quest" case example
+The handoff asks for one concrete, permission-cleared example: the team found
+issues in final review, revised the work, and released after approval. That is
+the single most persuasive thing that could go on the Responsible AI page,
+because it shows the review process actually stopping something.
+
+Needed: permission to name the episode, and enough detail to describe what was
+caught and what changed. Not written yet, because inventing the specifics of a
+real production incident would be worse than leaving it out.
+
+### 30. Evidence, and what may not be shown
+The handoff rules out displaying, without approval and supporting records:
+school names, participant images, partner logos, expert quotations, view counts,
+and the "100 plus settings" figure. The evidence section is built to separate
+observed feedback from formal research and currently asserts neither. Nothing
+goes in until dated, sourced and cleared.
+
+### 31. Materials the handoff commits CLÉ to supplying
+Week 1: full-resolution Finn and Fia artwork, permission-cleared team portraits,
+work-in-progress visuals, show screenshots, approved trailer links, the domain
+decision, and a one-hour story and process call with Conor, Al and Paula.
+Week 2: approved bios, advisers' role descriptions, cleared quotes and logo
+permissions, evidence notes and dates, and app status wording.
+Week 3: admin editor names and emails, newsletter destination and consent text,
+contact routing and autoresponse recipients.
+
+The team portraits are the critical path. `story.lead` and every team photograph
+stay as placeholders until real, cleared photography exists.

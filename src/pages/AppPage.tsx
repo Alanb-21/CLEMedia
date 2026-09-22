@@ -137,20 +137,21 @@ function PreLaunch() {
         <Container>
           <div className="grid gap-10 lg:grid-cols-[1.05fr_0.95fr] lg:gap-16">
             <div>
-              <Kicker>PupsPlayer™ · Coming October 2026</Kicker>
-              <h1 className="mt-5 text-[length:var(--text-h1)]">The app is on the way</h1>
+              <Kicker>PupsPlayer™ · In development</Kicker>
+              <h1 className="mt-5 text-[length:var(--text-h1)]">A product experience, in development</h1>
               <Lead className="mt-6">
-                PupsPlayer™ brings the whole Watch, Play, Learn model into one place: the episodes,
-                the play that follows them, and the learning running underneath. We are targeting
-                mid October 2026, launching alongside this site.
+                We are building a product experience to hold the whole Watch, Play, Learn model in
+                one place: ad-free episodes, the play that follows them, and the offline activities
+                underneath. It is in development and not yet available. The detail below is what we
+                are building towards, not a list of what exists today.
               </Lead>
               <div className="mt-8 max-w-[34rem]">
                 <p className="mb-3 font-body text-[14px] font-semibold text-ink">
-                  Want to know the day it lands?
+                  Want to know when it is ready?
                 </p>
                 <NotifyForm />
                 <p className="mt-2.5 font-body text-[12.5px] text-muted">
-                  One email, at launch. No list, no marketing, no sharing it with anyone.
+                  One email when it is available. No list, no marketing, no sharing it with anyone.
                 </p>
               </div>
             </div>
@@ -164,7 +165,7 @@ function PreLaunch() {
           <SectionHeading
             kicker="What's coming"
             title="What the app will do"
-            lead="The shape of it is settled. The detail below is what we are building towards for launch."
+            lead="Planned features. Each one is what we are building towards rather than something you can use today."
           />
           <FeatureGrid />
         </Container>
@@ -217,8 +218,8 @@ export default function AppPage() {
   return (
     <>
       <Seo
-        title={APP_LAUNCHED ? "PupsPlayer app" : "PupsPlayer app, coming soon"}
-        description="PupsPlayer™ from CLÉ Family Media: episodes, interactive play and early years learning in one app built for young children."
+        title={APP_LAUNCHED ? "PupsPlayer app" : "PupsPlayer app, in development"}
+        description="PupsPlayer™ from CLÉ Family Media: a product experience in development, bringing ad-free episodes, interactive play and offline early years activities together."
         path="/app"
       />
       {APP_LAUNCHED ? <Launched /> : <PreLaunch />}
