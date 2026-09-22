@@ -1,6 +1,7 @@
 import { Seo } from "@/components/Seo";
 import { Container, Kicker, Lead, Panel, Section } from "@/components/ui";
 import { Reveal } from "@/components/Reveal";
+import { Bluebell } from "@/components/graphics";
 import { IconCard, IconDownload, IconPrint } from "@/components/icons";
 
 const STEPS = [
@@ -17,8 +18,9 @@ export default function Shop() {
         description="Printable activity books, puzzles and quizzes from The Pawsitive Pugs and Pals. Instant download, no account needed."
         path="/shop"
       />
-      <Section className="!pb-10">
-        <Container>
+      <Section className="relative overflow-hidden !pb-10">
+        <Bluebell size={52} className="pointer-events-none absolute right-8 top-6 text-clay/35 drift" />
+        <Container className="relative">
           <div className="max-w-[44ch]">
             <Kicker>Shop</Kicker>
             <h1 className="mt-5 text-[length:var(--text-h1)]">Printables and activities</h1>

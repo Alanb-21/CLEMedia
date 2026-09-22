@@ -1,6 +1,6 @@
 import { adminClient, json } from "./_lib/admin";
 
-const ROUTES = ["general", "partnership", "press", "notify"] as const;
+const ROUTES = ["general", "partnership", "educator", "press", "notify"] as const;
 type Route = (typeof ROUTES)[number];
 
 /**

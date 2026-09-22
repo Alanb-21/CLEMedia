@@ -2,6 +2,7 @@ import { Seo } from "@/components/Seo";
 import { AssetPlaceholder } from "@/components/AssetPlaceholder";
 import { Container, Kicker, Lead, Panel, Section, SectionHeading } from "@/components/ui";
 import { Reveal } from "@/components/Reveal";
+import { WaveDivider } from "@/components/graphics";
 import type { Person } from "@/lib/types";
 
 /**
@@ -126,7 +127,9 @@ export default function Team() {
         </Container>
       </Section>
 
-      <Section tone="cream" labelledBy="advisors-h">
+      <div className="text-[#F3E7D6]"><WaveDivider /></div>
+
+      <Section tone="cream" labelledBy="advisors-h" className="!pt-10">
         <Container>
           <SectionHeading
             id="advisors-h"

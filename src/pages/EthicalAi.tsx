@@ -3,51 +3,12 @@ import { Seo } from "@/components/Seo";
 import { Button, Container, Kicker, Lead, Panel, Section, SectionHeading } from "@/components/ui";
 import { Reveal } from "@/components/Reveal";
 import { IconArrow, IconCheck, IconHands, IconHuman, IconLearn, IconLock, IconResearch } from "@/components/icons";
+import { EthicsOrbit, HumanLedDiagram, PawTrail, WaveDivider } from "@/components/graphics";
 
 /** The two platforms currently in use, named because vagueness reads worse. */
 const TOOLS = [
   { name: "Runway", role: "Supports elements of visual production and animation." },
   { name: "ElevenLabs", role: "Supports elements of audio and voice production." },
-];
-
-/** The real sequence, from the company's own production workflow. */
-const STAGES = [
-  {
-    n: "01",
-    title: "Concept and story",
-    who: "Conor and Al",
-    body: "The episode concept, the story and the learning goal are set by people, before any production begins.",
-  },
-  {
-    n: "02",
-    title: "Script and direction",
-    who: "Al",
-    body: "The script is written and production is directed. Assets are specified and selected by the team, not accepted as they arrive.",
-  },
-  {
-    n: "03",
-    title: "Educational review",
-    who: "Dr Paula Walshe",
-    body: "Learning intent and the offline activities that follow the episode are reviewed against early years practice.",
-  },
-  {
-    n: "04",
-    title: "Parent and early years review",
-    who: "Lydia and Kirstie",
-    body: "Script and production are read again from a parent's point of view and an early years point of view.",
-  },
-  {
-    n: "05",
-    title: "Quality and suitability checks",
-    who: "The production team",
-    body: "Voices and visuals are checked for quality, consistency and suitability for the children watching.",
-  },
-  {
-    n: "06",
-    title: "Final review and approval",
-    who: "The team",
-    body: "The finished episode is inspected and changes are requested where needed. A release can be delayed. Nothing is generated and published automatically.",
-  },
 ];
 
 const PRINCIPLES = [
@@ -150,18 +111,23 @@ export default function EthicalAi() {
 
       <Section className="!pb-10">
         <Container>
-          <div className="max-w-[50ch]">
-            <Kicker>Responsible AI</Kicker>
-            <h1 className="mt-5 text-[length:var(--text-h1)]">
-              Human-led. AI-enabled. Built responsibly.
-            </h1>
+          <div className="grid items-center gap-10 lg:grid-cols-[1.05fr_0.95fr] lg:gap-14">
+            <div>
+              <Kicker>Responsible AI</Kicker>
+              <h1 className="mt-5 text-[length:var(--text-h1)]">
+                Human-led. AI-enabled. Built responsibly.
+              </h1>
+              <Lead className="mt-6">
+                Technology should expand what a creative team can achieve, not replace the people,
+                judgement and responsibility behind children's content. AI-enabled production tools
+                let a small independent studio make ambitious original work. Our team stays
+                accountable for every decision and every release.
+              </Lead>
+            </div>
+            <Reveal delay={140} from="right">
+              <EthicsOrbit className="mx-auto w-full max-w-[380px] drift-slow" />
+            </Reveal>
           </div>
-          <Lead className="mt-6">
-            Technology should expand what a creative team can achieve, not replace the people,
-            judgement and responsibility behind children's content. AI-enabled production tools let
-            a small independent studio make ambitious original work. Our team stays accountable for
-            every decision and every release.
-          </Lead>
         </Container>
       </Section>
 
@@ -222,35 +188,20 @@ export default function EthicalAi() {
             kicker="The workflow"
             title="Six stages, each with a person accountable for it"
           />
-          <ol className="mt-12">
-            {STAGES.map((s, i) => (
-              <Reveal
-                as="li"
-                key={s.n}
-                delay={i * 60}
-                className="grid gap-4 border-t border-hairline/70 py-7 sm:grid-cols-[68px_1fr_1.25fr] sm:gap-8"
-              >
-                <span className="font-display text-[24px] leading-none text-clay" aria-hidden="true">
-                  {s.n}
-                </span>
-                <div>
-                  <h3 className="text-[length:var(--text-h3)]">{s.title}</h3>
-                  <p className="mt-1.5 font-body text-[13px] font-semibold uppercase tracking-wider text-red-deep">
-                    {s.who}
-                  </p>
-                </div>
-                <p className="max-w-[48ch] font-body text-[14.5px] leading-relaxed text-body">
-                  {s.body}
-                </p>
-              </Reveal>
-            ))}
-          </ol>
+          <div className="mt-12">
+            <HumanLedDiagram />
+          </div>
+          <p className="mt-7 max-w-[62ch] font-body text-[14px] text-muted">
+            People sit at both ends of this sequence. The tools sit in the middle, and only in the
+            middle.
+          </p>
         </Container>
       </Section>
 
       {/* Principles */}
-      <Section labelledBy="principles-h">
-        <Container>
+      <Section labelledBy="principles-h" className="relative overflow-hidden">
+        <PawTrail className="pointer-events-none absolute -right-10 top-8 h-[240px] w-[320px] text-clay/20" />
+        <Container className="relative">
           <SectionHeading
             id="principles-h"
             kicker="Our principles"
@@ -272,8 +223,10 @@ export default function EthicalAi() {
         </Container>
       </Section>
 
+      <div className="text-[#F3E7D6]"><WaveDivider /></div>
+
       {/* FAQ */}
-      <Section tone="cream" labelledBy="faq-h">
+      <Section tone="cream" labelledBy="faq-h" className="!pt-10">
         <Container>
           <SectionHeading id="faq-h" kicker="Questions" title="The ones we are asked most" />
           <div className="mt-8 grid max-w-[62rem] gap-4">

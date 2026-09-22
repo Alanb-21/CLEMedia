@@ -2,13 +2,37 @@ import { useState } from "react";
 import { Seo } from "@/components/Seo";
 import { Button, Container, Kicker, Lead, Section } from "@/components/ui";
 import { IconMail } from "@/components/icons";
+import { Panel } from "@/components/ui";
+import { Reveal } from "@/components/Reveal";
+import { Bluebell, PawTrail, RouteEducator, RouteGeneral, RoutePartnership, RoutePress } from "@/components/graphics";
 
-type Route = "partnership" | "general" | "press";
+type Route = "partnership" | "educator" | "press" | "general";
 
-const ROUTES: { id: Route; label: string; blurb: string }[] = [
-  { id: "partnership", label: "Partnership and distribution", blurb: "Investment, distribution, broadcast, licensing and educational partnerships. This is the route we watch most closely." },
-  { id: "general", label: "General enquiry", blurb: "Questions about the company, the show or the app." },
-  { id: "press", label: "Press", blurb: "Interviews, podcast bookings and media requests." },
+const ROUTES: { id: Route; label: string; blurb: string; Art: () => JSX.Element }[] = [
+  {
+    id: "partnership",
+    label: "Partnerships and distribution",
+    blurb: "Studios, distribution, broadcast and licensing. The route we watch most closely.",
+    Art: RoutePartnership,
+  },
+  {
+    id: "educator",
+    label: "Educators and case studies",
+    blurb: "Early years settings, schools and anyone interested in taking part in a case study.",
+    Art: RouteEducator,
+  },
+  {
+    id: "press",
+    label: "Press",
+    blurb: "Interviews, podcast bookings, media requests and the press pack.",
+    Art: RoutePress,
+  },
+  {
+    id: "general",
+    label: "General enquiry",
+    blurb: "Anything else about the company, the series or the work.",
+    Art: RouteGeneral,
+  },
 ];
 
 export default function Contact() {
@@ -26,8 +50,10 @@ export default function Contact() {
         path="/contact"
       />
 
-      <Section className="!pb-10">
-        <Container>
+      <Section className="relative overflow-hidden !pb-10">
+        <Bluebell size={58} className="pointer-events-none absolute right-6 top-4 text-clay/40 drift sm:right-16" />
+        <PawTrail className="pointer-events-none absolute -left-8 bottom-0 h-[150px] w-[260px] text-clay/15" />
+        <Container className="relative">
           <div className="max-w-[44ch]">
             <Kicker>Contact</Kicker>
             <h1 className="mt-5 text-[length:var(--text-h1)]">Let's talk</h1>
@@ -44,36 +70,49 @@ export default function Contact() {
             <div>
               <fieldset>
                 <legend className="font-body text-[11px] font-semibold uppercase tracking-[0.14em] text-muted">
-                  What's this about?
+                  What is this about?
                 </legend>
-                <div className="mt-4 space-y-3">
-                  {ROUTES.map((r) => (
-                    <label
-                      key={r.id}
-                      className={`flex cursor-pointer gap-3 p-4 transition-all rounded-[var(--radius-md)] ${
-                        route === r.id ? "glass-warm" : "glass hover:bg-white/90"
-                      }`}
-                    >
-                      <input
-                        type="radio"
-                        name="route"
-                        value={r.id}
-                        checked={route === r.id}
-                        onChange={() => setRoute(r.id)}
-                        className="mt-1 accent-[#A32E32]"
-                      />
-                      <span>
-                        <span className="block font-body text-[15px] font-semibold text-ink">{r.label}</span>
-                        <span className="mt-1 block font-body text-[13.5px] leading-relaxed text-muted">{r.blurb}</span>
-                      </span>
-                    </label>
+                <div className="mt-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-1">
+                  {ROUTES.map((r, i) => (
+                    <Reveal key={r.id} delay={i * 70}>
+                      <label
+                        className={`flex cursor-pointer items-center gap-4 rounded-[var(--radius-lg)] p-3.5 transition-all ${
+                          route === r.id ? "glass-warm ring-1 ring-red/30" : "glass hover:bg-white/90"
+                        }`}
+                      >
+                        <input
+                          type="radio" name="route" value={r.id}
+                          checked={route === r.id}
+                          onChange={() => setRoute(r.id)}
+                          className="sr-only"
+                        />
+                        <span className="h-[62px] w-[84px] shrink-0 overflow-hidden rounded-[var(--radius-md)]">
+                          <r.Art />
+                        </span>
+                        <span className="min-w-0">
+                          <span className="block font-body text-[15px] font-semibold text-ink">{r.label}</span>
+                          <span className="mt-0.5 block font-body text-[13px] leading-relaxed text-muted">
+                            {r.blurb}
+                          </span>
+                        </span>
+                        <span
+                          aria-hidden="true"
+                          className={`ml-auto mr-1 h-4 w-4 shrink-0 rounded-full border-2 transition-colors ${
+                            route === r.id ? "border-red bg-red" : "border-hairline"
+                          }`}
+                        />
+                      </label>
+                    </Reveal>
                   ))}
                 </div>
               </fieldset>
 
-              <p className="mt-6 font-body text-[13px] text-muted">
-                Partnership enquiries are read first and answered first.
-              </p>
+              <Panel tone="warm" className="mt-6 p-5">
+                <p className="font-body text-[13.5px] leading-relaxed text-ink">
+                  Partnership enquiries are read first and answered first. Everything reaches a
+                  person, not a queue.
+                </p>
+              </Panel>
             </div>
 
             <div>

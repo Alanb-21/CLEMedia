@@ -1,6 +1,7 @@
 import { Seo } from "@/components/Seo";
 import { Container, Kicker, Lead, Panel, Section, SectionHeading } from "@/components/ui";
 import { Reveal } from "@/components/Reveal";
+import { PawTrail } from "@/components/graphics";
 import { IconInterview, IconMic, IconPress } from "@/components/icons";
 
 const ROUTES = [
@@ -18,8 +19,9 @@ export default function Media() {
         path="/media"
       />
 
-      <Section className="!pb-10">
-        <Container>
+      <Section className="relative overflow-hidden !pb-10">
+        <PawTrail className="pointer-events-none absolute -right-8 top-0 h-[180px] w-[300px] text-clay/16" />
+        <Container className="relative">
           <div className="max-w-[44ch]">
             <Kicker>Media</Kicker>
             <h1 className="mt-5 text-[length:var(--text-h1)]">Press and appearances</h1>
