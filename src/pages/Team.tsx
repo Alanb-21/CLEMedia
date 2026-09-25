@@ -2,6 +2,7 @@ import { Seo } from "@/components/Seo";
 import { AssetPlaceholder } from "@/components/AssetPlaceholder";
 import { Container, Kicker, Lead, Panel, Section, SectionHeading } from "@/components/ui";
 import { Settle } from "@/components/Settle";
+import { WaveDivider } from "@/components/graphics";
 import type { Person } from "@/lib/types";
 
 /**
@@ -68,19 +69,19 @@ function PersonCard({ p, advisor = false }: { p: Person; advisor?: boolean }) {
           <div className={advisor ? "w-[88px] shrink-0" : ""}>
             {p.photo ? (
               <img src={p.photo} alt={p.name} width={600} height={750} loading="lazy"
-                className={advisor ? "rounded-[var(--radius-card)]" : "w-full object-cover"} />
+                className={advisor ? "rounded-[var(--radius-md)]" : "w-full object-cover"} />
             ) : (
               <AssetPlaceholder
                 label={advisor ? "Headshot" : `Photograph of ${p.name}`}
                 ratio={advisor ? "1/1" : "4/3"}
                 tone={advisor ? "cream" : "clay"}
-                rounded={advisor ? "rounded-[var(--radius-card)]" : "rounded-none"}
+                rounded={advisor ? "rounded-[var(--radius-md)]" : "rounded-none"}
                 className={advisor ? "" : "!shadow-none"}
               />
             )}
           </div>
           <div className={advisor ? "min-w-0" : "p-6"}>
-            <h3 className="text-[18px] font-semibold">{p.name}</h3>
+            <h3 className="t-h3">{p.name}</h3>
             <p className="mt-1 text-[12.5px] font-semibold uppercase tracking-wider text-red-deep">
               {p.role}
             </p>
@@ -107,7 +108,7 @@ export default function Team() {
         <Container>
           <div className="max-w-[44ch]">
             <Kicker>Team and advisors</Kicker>
-            <h1 className="mt-5 display-page font-display">The people making it</h1>
+            <h1 className="mt-5 t-h1 font-display">The people making it</h1>
           </div>
           <Lead className="mt-6">
             A small core team. Between them they decide what gets made, how it gets made, and
@@ -126,7 +127,9 @@ export default function Team() {
         </Container>
       </Section>
 
-      <Section tone="cream" labelledBy="advisors-h">
+      <div className="text-[#F3E7D6]"><WaveDivider /></div>
+
+      <Section tone="cream" labelledBy="advisors-h" className="!pt-10">
         <Container>
           <SectionHeading
             id="advisors-h"

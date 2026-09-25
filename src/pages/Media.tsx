@@ -1,6 +1,7 @@
 import { Seo } from "@/components/Seo";
 import { Container, Kicker, Lead, Panel, Section, SectionHeading } from "@/components/ui";
 import { Settle } from "@/components/Settle";
+import { PawTrail } from "@/components/graphics";
 import { IconInterview, IconMic, IconPress } from "@/components/icons";
 
 const ROUTES = [
@@ -18,11 +19,12 @@ export default function Media() {
         path="/media"
       />
 
-      <Section className="!pb-10">
-        <Container>
+      <Section className="relative overflow-hidden !pb-10">
+        <PawTrail className="pointer-events-none absolute -right-8 top-0 h-[180px] w-[300px] text-clay/16" />
+        <Container className="relative">
           <div className="max-w-[44ch]">
             <Kicker>Media</Kicker>
-            <h1 className="mt-5 display-page font-display">Press and appearances</h1>
+            <h1 className="mt-5 t-h1 font-display">Press and appearances</h1>
           </div>
           <Lead className="mt-6">
             Interviews, podcast appearances and coverage of the company and the show. Everything
@@ -37,10 +39,10 @@ export default function Media() {
             {ROUTES.map((r) => (
               <Settle as="li" key={r.title}>
                 <Panel className="h-full p-7 transition-transform duration-300 hover:-translate-y-1">
-                  <span className="mb-4 flex h-11 w-11 items-center justify-center rounded-[var(--radius-card)] bg-white/70 text-red-deep hairline-ring">
+                  <span className="mb-4 flex h-11 w-11 items-center justify-center rounded-[var(--radius-md)] bg-white/70 text-red-deep ">
                     <r.icon size={21} />
                   </span>
-                  <h2 className="text-[18px] font-semibold">{r.title}</h2>
+                  <h2 className="t-h3">{r.title}</h2>
                   <p className="mt-2.5 text-[14.5px] leading-relaxed text-slate">{r.body}</p>
                 </Panel>
               </Settle>

@@ -2,29 +2,35 @@ import { useState } from "react";
 import { Seo } from "@/components/Seo";
 import { Container, Kicker, Lead, Panel, Section } from "@/components/ui";
 import { Settle } from "@/components/Settle";
+import { PawTrail } from "@/components/graphics";
+import { IconHuman, IconParents, IconPlay, IconResearch } from "@/components/icons";
 
 /**
  * Four rotating strands, one published per week. Names drafted from the
  * company's own themes and open for the client to rename in the admin panel.
  */
 const CATEGORIES = [
-  { slug: "all", name: "All", blurb: "" },
+  { Icon: IconResearch, slug: "all", name: "All", blurb: "" },
   {
+    Icon: IconResearch,
     slug: "research",
     name: "The Research",
     blurb: "Early years practice, child development and the thinking behind Watch, Play, Learn.",
   },
   {
+    Icon: IconPlay,
     slug: "process",
     name: "How It's Made",
     blurb: "Inside production: writing, animation, sound, and where the technology does and does not sit.",
   },
   {
+    Icon: IconParents,
     slug: "parents",
     name: "Parents Helping Parents",
     blurb: "Practical, judgement free writing for the people doing the watching alongside.",
   },
   {
+    Icon: IconHuman,
     slug: "company",
     name: "Building CLÉ",
     blurb: "The business of making children's media in Ireland, told honestly as it happens.",
@@ -43,11 +49,12 @@ export default function Journal() {
         path="/journal"
       />
 
-      <Section className="!pb-10">
-        <Container>
+      <Section className="relative overflow-hidden !pb-10">
+        <PawTrail className="pointer-events-none absolute -right-6 top-2 h-[170px] w-[280px] text-clay/18" />
+        <Container className="relative">
           <div className="max-w-[44ch]">
             <Kicker>Journal</Kicker>
-            <h1 className="mt-5 display-page font-display">Notes from the studio</h1>
+            <h1 className="mt-5 t-h1 font-display">Notes from the studio</h1>
           </div>
           <Lead className="mt-6">
             Four strands, one post a week. We write about the research, the process, the parenting
@@ -70,7 +77,7 @@ export default function Journal() {
                     className={`rounded-full px-4 py-2 text-[13.5px] transition-all ${
                       active === c.slug
                         ? "bg-red text-paper shadow-[0_8px_20px_-12px_rgba(163,46,50,0.8)]"
-                        : "glass text-slate hover:bg-white/95"
+                        : "card text-slate hover:bg-white/95"
                     }`}
                   >
                     {c.name}
@@ -84,9 +91,14 @@ export default function Journal() {
             {shown.map((c) => (
               <Settle as="li" key={c.slug}>
                 <Panel className="h-full p-7 transition-transform duration-300 hover:-translate-y-1">
-                  <p className="text-[11px] font-semibold uppercase tracking-[0.14em] text-red-deep">
-                    {c.name}
-                  </p>
+                  <div className="mb-4 flex items-center gap-3">
+                    <span className="  flex h-10 w-10 items-center justify-center rounded-[var(--radius-md)] text-red-deep">
+                      <c.Icon size={20} />
+                    </span>
+                    <p className="text-[11px] font-semibold uppercase tracking-[0.14em] text-red-deep">
+                      {c.name}
+                    </p>
+                  </div>
                   <p className="mt-3 text-[15px] leading-relaxed text-slate">{c.blurb}</p>
                   <p className="mt-5 text-[13px] text-deep">
                     First post arriving shortly.

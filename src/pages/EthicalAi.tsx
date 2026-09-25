@@ -3,51 +3,12 @@ import { Seo } from "@/components/Seo";
 import { Button, Container, Kicker, Lead, Panel, Section, SectionHeading } from "@/components/ui";
 import { Settle } from "@/components/Settle";
 import { IconArrow, IconCheck, IconHands, IconHuman, IconLearn, IconLock, IconResearch } from "@/components/icons";
+import { EthicsOrbit, HumanLedDiagram, PawTrail, WaveDivider } from "@/components/graphics";
 
 /** The two platforms currently in use, named because vagueness reads worse. */
 const TOOLS = [
   { name: "Runway", role: "Supports elements of visual production and animation." },
   { name: "ElevenLabs", role: "Supports elements of audio and voice production." },
-];
-
-/** The real sequence, from the company's own production workflow. */
-const STAGES = [
-  {
-    n: "01",
-    title: "Concept and story",
-    who: "Conor and Al",
-    body: "The episode concept, the story and the learning goal are set by people, before any production begins.",
-  },
-  {
-    n: "02",
-    title: "Script and direction",
-    who: "Al",
-    body: "The script is written and production is directed. Assets are specified and selected by the team, not accepted as they arrive.",
-  },
-  {
-    n: "03",
-    title: "Educational review",
-    who: "Dr Paula Walshe",
-    body: "Learning intent and the offline activities that follow the episode are reviewed against early years practice.",
-  },
-  {
-    n: "04",
-    title: "Parent and early years review",
-    who: "Lydia and Kirstie",
-    body: "Script and production are read again from a parent's point of view and an early years point of view.",
-  },
-  {
-    n: "05",
-    title: "Quality and suitability checks",
-    who: "The production team",
-    body: "Voices and visuals are checked for quality, consistency and suitability for the children watching.",
-  },
-  {
-    n: "06",
-    title: "Final review and approval",
-    who: "The team",
-    body: "The finished episode is inspected and changes are requested where needed. A release can be delayed. Nothing is generated and published automatically.",
-  },
 ];
 
 const PRINCIPLES = [
@@ -150,18 +111,23 @@ export default function EthicalAi() {
 
       <Section className="!pb-10">
         <Container>
-          <div className="max-w-[50ch]">
-            <Kicker>Responsible AI</Kicker>
-            <h1 className="mt-5 display-page font-display">
-              Human-led. AI-enabled. Built responsibly.
-            </h1>
+          <div className="grid items-center gap-10 lg:grid-cols-[1.05fr_0.95fr] lg:gap-14">
+            <div>
+              <Kicker>Responsible AI</Kicker>
+              <h1 className="mt-5 t-h1 font-display">
+                Human-led. AI-enabled. Built responsibly.
+              </h1>
+              <Lead className="mt-6">
+                Technology should expand what a creative team can achieve, not replace the people,
+                judgement and responsibility behind children's content. AI-enabled production tools
+                let a small independent studio make ambitious original work. Our team stays
+                accountable for every decision and every release.
+              </Lead>
+            </div>
+            <Settle>
+              <EthicsOrbit className="mx-auto w-full max-w-[380px] drift-slow" />
+            </Settle>
           </div>
-          <Lead className="mt-6">
-            Technology should expand what a creative team can achieve, not replace the people,
-            judgement and responsibility behind children's content. AI-enabled production tools let
-            a small independent studio make ambitious original work. Our team stays accountable for
-            every decision and every release.
-          </Lead>
         </Container>
       </Section>
 
@@ -169,9 +135,9 @@ export default function EthicalAi() {
       <Section tone="cream" className="!py-14" labelledBy="position-h">
         <Container>
           <div className="grid gap-8 lg:grid-cols-[0.85fr_1.15fr] lg:gap-14">
-            <h2 id="position-h" className="display-section font-display">Our position</h2>
+            <h2 id="position-h" className="t-h2 font-display">Our position</h2>
             <div className="max-w-[62ch] space-y-5 font-body">
-              <p className="font-display text-[18px] font-semibold leading-snug text-ink">
+              <p className="font-display t-h3 leading-snug text-ink">
                 AI is a production tool. People remain responsible for the work.
               </p>
               <p>
@@ -202,7 +168,7 @@ export default function EthicalAi() {
             {TOOLS.map((t) => (
               <Settle as="li" key={t.name}>
                 <Panel className="h-full p-7">
-                  <h3 className="font-display text-[18px] font-semibold text-ink">{t.name}</h3>
+                  <h3 className="font-display t-h3 text-ink">{t.name}</h3>
                   <p className="mt-2 text-[14.5px] leading-relaxed text-slate">{t.role}</p>
                 </Panel>
               </Settle>
@@ -222,34 +188,20 @@ export default function EthicalAi() {
             kicker="The workflow"
             title="Six stages, each with a person accountable for it"
           />
-          <ol className="mt-12">
-            {STAGES.map((s) => (
-              <Settle
-                as="li"
-                key={s.n}
-                className="grid gap-4 border-t border-hairline/70 py-7 sm:grid-cols-[68px_1fr_1.25fr] sm:gap-8"
-              >
-                <span className="font-display text-[24px] leading-none text-clay" aria-hidden="true">
-                  {s.n}
-                </span>
-                <div>
-                  <h3 className="text-[18px] font-semibold">{s.title}</h3>
-                  <p className="mt-1.5 text-[13px] font-semibold uppercase tracking-wider text-red-deep">
-                    {s.who}
-                  </p>
-                </div>
-                <p className="max-w-[48ch] text-[14.5px] leading-relaxed text-slate">
-                  {s.body}
-                </p>
-              </Settle>
-            ))}
-          </ol>
+          <div className="mt-12">
+            <HumanLedDiagram />
+          </div>
+          <p className="mt-7 max-w-[62ch] text-[14px] text-deep">
+            People sit at both ends of this sequence. The tools sit in the middle, and only in the
+            middle.
+          </p>
         </Container>
       </Section>
 
       {/* Principles */}
-      <Section labelledBy="principles-h">
-        <Container>
+      <Section labelledBy="principles-h" className="relative overflow-hidden">
+        <PawTrail className="pointer-events-none absolute -right-10 top-8 h-[240px] w-[320px] text-clay/20" />
+        <Container className="relative">
           <SectionHeading
             id="principles-h"
             kicker="Our principles"
@@ -259,10 +211,10 @@ export default function EthicalAi() {
             {PRINCIPLES.map((p) => (
               <Settle as="li" key={p.title}>
                 <Panel className="h-full p-7">
-                  <span className="mb-4 flex h-11 w-11 items-center justify-center rounded-[var(--radius-card)] bg-white/70 text-red-deep hairline-ring">
+                  <span className="mb-4 flex h-11 w-11 items-center justify-center rounded-[var(--radius-md)] bg-white/70 text-red-deep ">
                     <p.icon size={21} />
                   </span>
-                  <h3 className="text-[18px] font-semibold">{p.title}</h3>
+                  <h3 className="t-h3">{p.title}</h3>
                   <p className="mt-2.5 text-[14.5px] leading-relaxed text-slate">{p.body}</p>
                 </Panel>
               </Settle>
@@ -271,8 +223,10 @@ export default function EthicalAi() {
         </Container>
       </Section>
 
+      <div className="text-[#F3E7D6]"><WaveDivider /></div>
+
       {/* FAQ */}
-      <Section tone="cream" labelledBy="faq-h">
+      <Section tone="cream" labelledBy="faq-h" className="!pt-10">
         <Container>
           <SectionHeading id="faq-h" kicker="Questions" title="The ones we are asked most" />
           <div className="mt-8 grid max-w-[62rem] gap-4">
@@ -294,10 +248,10 @@ export default function EthicalAi() {
         <Container>
           <div className="max-w-[60ch]">
             <Kicker>Our commitment</Kicker>
-            <h2 id="commit-h" className="mt-4 display-section font-display">
+            <h2 id="commit-h" className="mt-4 t-h2 font-display">
               The technology will keep changing. The responsibility will not.
             </h2>
-            <p className="mt-5 text-[length:clamp(1.0625rem,1rem+0.4vw,1.25rem)] leading-relaxed">
+            <p className="mt-5 t-lead leading-relaxed">
               As the company grows we will keep reviewing our practice around human creative
               authorship, intellectual property and commercial rights, performer and voice consent,
               tool selection, transparency with audiences and partners, child safety, educational

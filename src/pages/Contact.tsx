@@ -2,13 +2,37 @@ import { useState } from "react";
 import { Seo } from "@/components/Seo";
 import { Button, Container, Kicker, Lead, Section } from "@/components/ui";
 import { IconMail } from "@/components/icons";
+import { Panel } from "@/components/ui";
+import { Settle } from "@/components/Settle";
+import { Bluebell, PawTrail, RouteEducator, RouteGeneral, RoutePartnership, RoutePress } from "@/components/graphics";
 
-type Route = "partnership" | "general" | "press";
+type Route = "partnership" | "educator" | "press" | "general";
 
-const ROUTES: { id: Route; label: string; blurb: string }[] = [
-  { id: "partnership", label: "Partnership and distribution", blurb: "Investment, distribution, broadcast, licensing and educational partnerships. This is the route we watch most closely." },
-  { id: "general", label: "General enquiry", blurb: "Questions about the company, the show or the app." },
-  { id: "press", label: "Press", blurb: "Interviews, podcast bookings and media requests." },
+const ROUTES: { id: Route; label: string; blurb: string; Art: () => JSX.Element }[] = [
+  {
+    id: "partnership",
+    label: "Partnerships and distribution",
+    blurb: "Studios, distribution, broadcast and licensing. The route we watch most closely.",
+    Art: RoutePartnership,
+  },
+  {
+    id: "educator",
+    label: "Educators and case studies",
+    blurb: "Early years settings, schools and anyone interested in taking part in a case study.",
+    Art: RouteEducator,
+  },
+  {
+    id: "press",
+    label: "Press",
+    blurb: "Interviews, podcast bookings, media requests and the press pack.",
+    Art: RoutePress,
+  },
+  {
+    id: "general",
+    label: "General enquiry",
+    blurb: "Anything else about the company, the series or the work.",
+    Art: RouteGeneral,
+  },
 ];
 
 export default function Contact() {
@@ -26,11 +50,13 @@ export default function Contact() {
         path="/contact"
       />
 
-      <Section className="!pb-10">
-        <Container>
+      <Section className="relative overflow-hidden !pb-10">
+        <Bluebell size={58} className="pointer-events-none absolute right-6 top-4 text-clay/40 drift sm:right-16" />
+        <PawTrail className="pointer-events-none absolute -left-8 bottom-0 h-[150px] w-[260px] text-clay/15" />
+        <Container className="relative">
           <div className="max-w-[44ch]">
             <Kicker>Contact</Kicker>
-            <h1 className="mt-5 display-page font-display">Let's talk</h1>
+            <h1 className="mt-5 t-h1 font-display">Let's talk</h1>
           </div>
           <Lead className="mt-6">
             Tell us which of these you are and the message reaches the right person directly.
@@ -44,42 +70,55 @@ export default function Contact() {
             <div>
               <fieldset>
                 <legend className="text-[11px] font-semibold uppercase tracking-[0.14em] text-deep">
-                  What's this about?
+                  What is this about?
                 </legend>
-                <div className="mt-4 space-y-3">
+                <div className="mt-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-1">
                   {ROUTES.map((r) => (
-                    <label
-                      key={r.id}
-                      className={`flex cursor-pointer gap-3 p-4 transition-all rounded-[var(--radius-card)] ${
-                        route === r.id ? "glass-warm" : "glass hover:bg-white/90"
-                      }`}
-                    >
-                      <input
-                        type="radio"
-                        name="route"
-                        value={r.id}
-                        checked={route === r.id}
-                        onChange={() => setRoute(r.id)}
-                        className="mt-1 accent-[#A32E32]"
-                      />
-                      <span>
-                        <span className="block text-[15px] font-semibold text-ink">{r.label}</span>
-                        <span className="mt-1 block text-[13.5px] leading-relaxed text-deep">{r.blurb}</span>
-                      </span>
-                    </label>
+                    <Settle key={r.id}>
+                      <label
+                        className={`flex cursor-pointer items-center gap-4 rounded-[var(--radius-lg)] p-3.5 transition-all ${
+                          route === r.id ? "glass-warm ring-1 ring-red/30" : "card hover:bg-white/90"
+                        }`}
+                      >
+                        <input
+                          type="radio" name="route" value={r.id}
+                          checked={route === r.id}
+                          onChange={() => setRoute(r.id)}
+                          className="sr-only"
+                        />
+                        <span className="h-[62px] w-[84px] shrink-0 overflow-hidden rounded-[var(--radius-md)]">
+                          <r.Art />
+                        </span>
+                        <span className="min-w-0">
+                          <span className="block text-[15px] font-semibold text-ink">{r.label}</span>
+                          <span className="mt-0.5 block text-[13px] leading-relaxed text-deep">
+                            {r.blurb}
+                          </span>
+                        </span>
+                        <span
+                          aria-hidden="true"
+                          className={`ml-auto mr-1 h-4 w-4 shrink-0 rounded-full border-2 transition-colors ${
+                            route === r.id ? "border-red bg-red" : "border-hairline"
+                          }`}
+                        />
+                      </label>
+                    </Settle>
                   ))}
                 </div>
               </fieldset>
 
-              <p className="mt-6 text-[13px] text-deep">
-                Partnership enquiries are read first and answered first.
-              </p>
+              <Panel tone="warm" className="mt-6 p-5">
+                <p className="text-[13.5px] leading-relaxed text-ink">
+                  Partnership enquiries are read first and answered first. Everything reaches a
+                  person, not a queue.
+                </p>
+              </Panel>
             </div>
 
             <div>
               {sent ? (
-                <div role="status" className="glass-warm rounded-[var(--radius-panel)] p-8">
-                  <h2 className="text-[18px] font-semibold">Message sent</h2>
+                <div role="status" className="glass-warm rounded-[var(--radius-lg)] p-8">
+                  <h2 className="t-h3">Message sent</h2>
                   <p className="mt-3 text-[15px]">
                     Thanks, we will come back to you. Partnership enquiries are answered first.
                   </p>
@@ -124,11 +163,11 @@ export default function Contact() {
                   <div className="grid gap-5 sm:grid-cols-2">
                     <div>
                       <label htmlFor="name" className="block text-[13.5px] font-medium text-ink">Name</label>
-                      <input id="name" name="name" required className="glass mt-1.5 w-full rounded-[var(--radius-sm)] px-4 py-3 text-[15px] text-ink" />
+                      <input id="name" name="name" required className="card mt-1.5 w-full rounded-[var(--radius-sm)] px-4 py-3 text-[15px] text-ink" />
                     </div>
                     <div>
                       <label htmlFor="email" className="block text-[13.5px] font-medium text-ink">Email</label>
-                      <input id="email" name="email" type="email" required className="glass mt-1.5 w-full rounded-[var(--radius-sm)] px-4 py-3 text-[15px] text-ink" />
+                      <input id="email" name="email" type="email" required className="card mt-1.5 w-full rounded-[var(--radius-sm)] px-4 py-3 text-[15px] text-ink" />
                     </div>
                   </div>
 
@@ -136,12 +175,12 @@ export default function Contact() {
                     <label htmlFor="organisation" className="block text-[13.5px] font-medium text-ink">
                       Organisation <span className="font-normal text-deep">(optional)</span>
                     </label>
-                    <input id="organisation" name="organisation" className="glass mt-1.5 w-full rounded-[var(--radius-sm)] px-4 py-3 text-[15px] text-ink" />
+                    <input id="organisation" name="organisation" className="card mt-1.5 w-full rounded-[var(--radius-sm)] px-4 py-3 text-[15px] text-ink" />
                   </div>
 
                   <div>
                     <label htmlFor="message" className="block text-[13.5px] font-medium text-ink">Message</label>
-                    <textarea id="message" name="message" rows={6} required className="glass mt-1.5 w-full rounded-[var(--radius-sm)] px-4 py-3 text-[15px] text-ink" />
+                    <textarea id="message" name="message" rows={6} required className="card mt-1.5 w-full rounded-[var(--radius-sm)] px-4 py-3 text-[15px] text-ink" />
                   </div>
 
                   {error && (
