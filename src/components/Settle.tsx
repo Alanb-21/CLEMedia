@@ -7,6 +7,10 @@ import { useEffect, useLayoutEffect, useRef, useState, type ElementType, type Re
  * direct children. Nothing else moves. No parallax, no pinning, no ambient
  * loops, nothing that runs on its own.
  *
+ * The stagger runs on the children, so it only engages when there is more than
+ * one of them. With a single child, or with raw text, the whole group settles
+ * as one unit instead: staggering a group of one is just a delay.
+ *
  * That restraint is the brief, not a preference. This company's argument is
  * that children's media is too fast, too bright and designed to hold
  * attention. A site for them that drifts and pins and shimmers would be
@@ -28,6 +32,7 @@ export function Settle({
   const ref = useRef<HTMLElement>(null);
   const [armed, setArmed] = useState(false);
   const [shown, setShown] = useState(false);
+  const [stagger, setStagger] = useState(false);
 
   useLayoutEffect(() => {
     const reduced =
@@ -40,10 +45,12 @@ export function Settle({
     if (!armed) return;
     const el = ref.current;
     if (!el) return;
-    Array.from(el.children).forEach((c, i) => {
+    const kids = Array.from(el.children);
+    kids.forEach((c, i) => {
       const h = c as HTMLElement;
       if (!h.style.getPropertyValue("--i")) h.style.setProperty("--i", String(i));
     });
+    setStagger(kids.length > 1);
     const io = new IntersectionObserver(
       ([e]) => {
         if (!e.isIntersecting) return;
@@ -57,7 +64,12 @@ export function Settle({
   }, [armed]);
 
   return (
-    <Tag ref={ref} className={`settle ${armed ? "is-armed" : ""} ${shown ? "is-in" : ""} ${className}`}>
+    <Tag
+      ref={ref}
+      className={`settle ${armed ? "is-armed" : ""} ${shown ? "is-in" : ""} ${
+        stagger ? "has-stagger" : ""
+      } ${className}`}
+    >
       {children}
     </Tag>
   );

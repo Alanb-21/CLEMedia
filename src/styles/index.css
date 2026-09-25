@@ -202,7 +202,36 @@ body > * { position: relative; z-index: 1; }
       0 1px 0 rgba(255, 255, 255, 0.85) inset,
       0 18px 36px -26px rgba(60, 50, 28, 0.32),
       0 2px 6px -2px rgba(60, 50, 28, 0.05);
+    transition:
+      transform 0.32s var(--ease-out),
+      box-shadow 0.32s var(--ease-out),
+      border-color 0.32s var(--ease-out);
   }
+
+  /* Depth on approach. 3px and a deeper shadow reads as a surface lifting;
+     anything larger reads as the page twitching, which is the opposite of
+     what this brand is arguing for. focus-within matches it so a keyboard
+     gets the same signal as a cursor. `.card-still` opts a block out, for
+     pull quotes and notices that are not going anywhere. */
+  .card:not(.card-still):hover,
+  .card:not(.card-still):focus-within {
+    transform: translateY(-3px);
+    border-color: var(--color-rule-soft, var(--color-rule));
+    box-shadow:
+      0 1px 0 rgba(255, 255, 255, 0.95) inset,
+      0 26px 48px -26px rgba(60, 50, 28, 0.42),
+      0 3px 10px -3px rgba(60, 50, 28, 0.08);
+  }
+
+  /* Images inside a card push in very slightly, inside their own radius. */
+  .card picture,
+  .card .zoom-wrap { overflow: hidden; }
+  .card picture img,
+  .card .zoom-wrap img {
+    transition: transform 0.7s var(--ease-out);
+  }
+  .card:hover picture img,
+  .card:hover .zoom-wrap img { transform: scale(1.035); }
   /* A tile sits INSIDE a card, so it goes a step warmer and darker rather than
      being another sheet of the same white. */
   .tile {
@@ -260,8 +289,21 @@ body > * { position: relative; z-index: 1; }
 
      `.settle` is released by `.is-in`, which only JS adds, so no JS, no
      observer, reduced motion and crawlers all get finished content. */
-  .settle.is-armed { opacity: 0; transform: translateY(8px); }
-  .settle.is-armed.is-in {
+  /* A group of one settles as a unit. */
+  .settle.is-armed:not(.has-stagger) { opacity: 0; transform: translateY(8px); }
+  .settle.is-armed.is-in:not(.has-stagger) {
+    opacity: 1;
+    transform: none;
+    transition:
+      opacity 0.7s var(--ease-out),
+      transform 0.7s var(--ease-out);
+  }
+
+  /* A group of several settles child by child, which is what --i was for.
+     Previously --i was written onto the children but only ever read on the
+     container, so the stagger never ran. */
+  .settle.is-armed.has-stagger > * { opacity: 0; transform: translateY(8px); }
+  .settle.is-armed.is-in.has-stagger > * {
     opacity: 1;
     transform: none;
     transition:
@@ -272,7 +314,15 @@ body > * { position: relative; z-index: 1; }
 
 @media (prefers-reduced-motion: reduce) {
   .grain { display: none; }
-  .settle.is-armed { opacity: 1; transform: none; }
+  /* Must out-specify `.settle.is-armed.has-stagger > *`, or the release loses
+     the cascade and reduced-motion readers are left with invisible content. */
+  .settle.is-armed:not(.has-stagger),
+  .settle.is-armed.has-stagger,
+  .settle.is-armed.has-stagger > *,
+  .settle.is-armed > * {
+    opacity: 1 !important;
+    transform: none !important;
+  }
   *, *::before, *::after {
     animation-duration: 0.01ms !important;
     transition-duration: 0.01ms !important;
