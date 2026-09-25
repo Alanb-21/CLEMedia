@@ -10,8 +10,8 @@ export default function NotFound() {
         <Container>
           <div className="max-w-[50ch]">
             <p className="font-display text-[clamp(3.5rem,12vw,6rem)] leading-none text-clay">404</p>
-            <h1 className="mt-5 text-[length:var(--text-h1)]">That page has wandered off</h1>
-            <p className="mt-4 font-body text-[length:var(--text-lead)] leading-relaxed">
+            <h1 className="mt-5 display-page font-display">That page has wandered off</h1>
+            <p className="mt-4 text-[length:clamp(1.0625rem,1rem+0.4vw,1.25rem)] leading-relaxed">
               The link may be old, or we may have moved something. If you were looking for episodes,
               characters or colouring pages, those all live on the show site.
             </p>

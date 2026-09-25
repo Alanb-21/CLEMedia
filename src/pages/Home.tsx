@@ -1,42 +1,58 @@
 import { useState, type FormEvent } from "react";
-import { Link } from "react-router-dom";
 import { Seo, organizationJsonLd } from "@/components/Seo";
 import { Figure } from "@/components/Figure";
-import { Button, Container, Kicker, Lead, Panel, Section, SectionHeading } from "@/components/ui";
-import { Reveal } from "@/components/Reveal";
-import { IconArrow, IconExternal, IconLearn, IconMail, IconPlay, IconWatch } from "@/components/icons";
+import { Settle } from "@/components/Settle";
+import { ReviewGateScene } from "@/components/home/ReviewGateScene";
+import {
+  Button, Card, Container, Kicker, Lead, Rail, Section,
+  SectionHeading, TextLink, Tile, type RailItem,
+} from "@/components/ui";
+import { IconArrow, IconExternal, IconMail } from "@/components/icons";
 import { SITE } from "@/lib/site";
 
-/* Watch · Play · Learn, with the worked example the client supplied. */
-const MODEL = [
-  {
-    icon: IconWatch,
-    step: "Watch",
-    body: "Watch an episode together. Calm stories, paced for how young children actually take things in.",
-  },
-  {
-    icon: IconPlay,
-    step: "Play",
-    body: "Pause for a movement or breathing prompt, so the episode becomes something a child does rather than only sees.",
-  },
-  {
-    icon: IconLearn,
-    step: "Learn",
-    body: "Carry on with a printable or an educator-designed activity, moving the learning off the screen entirely.",
-  },
+/* ============================================================================
+   THE RULE THIS PAGE WAS REBUILT ON.
+
+   Five real images exist in public/brand/: the felted CLÉ mark, the felted
+   Pawsitive Pugs wordmark, the hen and pugs, the tree swing, the bluebells.
+   An earlier version of this page used NONE of them, and rendered nine empty
+   placeholder frames instead, including a placeholder for the felted wordmark
+   that is already in the repo. That is why the page read as a blank sheet.
+
+   So: the artwork is the content. It is used large and full bleed, because
+   that is how pawsitivepugs.com carries its own pages. And an empty frame is
+   never rendered on this page. Where an asset is missing, the section is built
+   from what exists instead, and the gap is listed in CONTENT-NEEDED.md.
+   ========================================================================== */
+
+const MODEL: RailItem[] = [
+  { index: "01", title: "Watch", body: "An episode, together. Calm stories paced for how young children actually take things in, with nothing autoplaying into something nobody chose." },
+  { index: "02", title: "Play", body: "A pause for a movement or breathing prompt, so the episode becomes something a child does rather than only sees." },
+  { index: "03", title: "Learn", body: "A printable or an educator-designed activity afterwards, moving the learning off the screen entirely." },
 ];
 
-/* The real production and review sequence, from the client's handoff. */
-const PROCESS = [
-  { n: "01", who: "Conor and Al", what: "Set the episode concept and the story it is built to tell." },
-  { n: "02", who: "Al", what: "Develops the script and directs production." },
-  { n: "03", who: "Dr Paula Walshe", what: "Reviews the learning intent and the offline activities that follow." },
-  { n: "04", who: "Lydia and Kirstie", what: "Bring parent and early years perspectives to script and production review." },
-  { n: "05", who: "Mansi", what: "Supports production coordination across the schedule." },
-  { n: "06", who: "The team", what: "Reviews the finished episode, and can delay a release to make changes." },
+/* Titles and synopses are the show's own, from its site. Runtime, age range and
+   theme are not known and are not invented. */
+const EPISODES = [
+  { n: "001", title: "The Feather", line: "A drifting feather leads Finn and Fia on a garden adventure where slowing down helps them discover the hidden beauty of the tiny world around them." },
+  { n: "002", title: "Chicken Vision", line: "Finn and Fia meet a hen who sees the garden differently, and discover the world can look magical in many different ways." },
+  { n: "003", title: "The Strawberry", line: "After a rainy night in the garden, Finn and Fia help a tiny field mouse reach a strawberry just out of reach." },
+  { n: "004", title: "Cuckoo", line: "Finn and Fia go on a new adventure and meet a cuckoo who has travelled a very long way to get back to the garden." },
 ];
 
-function NewsletterForm() {
+/* No portraits. Four empty portrait frames were four more blank rectangles on a
+   page that had too many already. Names, roles and what each person actually
+   checks carry the section until real photography exists. */
+const PEOPLE = [
+  { name: "Conor Sexton", role: "Founder", line: "Sets each episode's concept and story alongside Al, and leads strategy and partnerships." },
+  { name: "Dr Paula Walshe", role: "Education Director", line: "Lecturer at SETU and author of Síolta in Practice. Reviews learning intent against early years practice." },
+  { name: "Al Compton", role: "Creative Director", line: "Develops the script and directs production. The look, the performances and the pace are his call." },
+  { name: "Lydia Sexton", role: "Executive Producer", line: "Reads script and production from a parent's point of view before anything is released." },
+  { name: "Kirstie Harding", role: "Early Learning Advisor", line: "An experienced Special Needs Assistant. Reads every script from the point of view of the children who will watch it." },
+  { name: "Mansi", role: "Production Coordination", line: "Holds the schedule together so a note from one review reaches the people who act on it." },
+];
+
+function NotifyForm() {
   const [email, setEmail] = useState("");
   const [sent, setSent] = useState(false);
   const [busy, setBusy] = useState(false);
@@ -44,48 +60,34 @@ function NewsletterForm() {
 
   async function submit(e: FormEvent) {
     e.preventDefault();
-    setBusy(true);
-    setError(null);
+    setBusy(true); setError(null);
     try {
       const r = await fetch("/api/contact", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
+        method: "POST", headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ route: "notify", email }),
       });
       if (!r.ok) {
         const d = await r.json().catch(() => ({}));
         setError(d.error ?? "Could not sign you up. Please try again.");
       } else setSent(true);
-    } catch {
-      setError("Could not sign you up. Please check your connection.");
-    } finally {
-      setBusy(false);
-    }
+    } catch { setError("Could not sign you up. Please check your connection."); }
+    finally { setBusy(false); }
   }
 
-  if (sent) {
-    return (
-      <p role="status" className="font-body text-[14.5px] text-ink">
-        Thank you. We will be in touch when there is something worth sending.
-      </p>
-    );
-  }
+  if (sent) return <p role="status" className="t-sm mt-6">Thank you. We will be in touch when there is something worth sending.</p>;
 
   return (
-    <form className="flex flex-col gap-3 sm:flex-row" onSubmit={submit}>
+    <form className="mt-6 flex flex-col gap-3 sm:flex-row" onSubmit={submit}>
       <div className="flex-1">
-        <label htmlFor="news-email" className="sr-only">Email address</label>
+        <label htmlFor="notify-email" className="sr-only">Email address</label>
         <input
-          id="news-email" name="email" type="email" required value={email}
+          id="notify-email" name="email" type="email" required value={email}
           onChange={(e) => setEmail(e.target.value)} placeholder="you@example.com"
-          className="glass w-full rounded-[var(--radius-pill)] px-5 py-3 font-body text-[15px] text-ink placeholder:text-muted/70"
+          className="w-full rounded-full border border-white/25 bg-white/10 px-5 py-3 text-[16px] text-white placeholder:text-white/50"
         />
       </div>
-      <Button type="submit" disabled={busy}>
-        {busy ? "Signing up" : "Sign up"}
-        <IconMail size={16} />
-      </Button>
-      {error && <p role="alert" className="font-body text-[13.5px] text-red-deep sm:basis-full">{error}</p>}
+      <Button type="submit" disabled={busy}>{busy ? "Signing up" : "Sign up"}<IconMail size={16} /></Button>
+      {error && <p role="alert" className="t-sm sm:basis-full">{error}</p>}
     </form>
   );
 }
@@ -95,282 +97,229 @@ export default function Home() {
     <>
       <Seo
         title="Home"
-        description="CLÉ Family Media creates calm stories and learning experiences that help families move from watching to playing and learning together. Human-led children's media, produced with the responsible support of AI-enabled technology."
+        description="CLÉ Family Media makes calm, purposeful children's media. Watch, Play, Learn: stories built to move a child off the screen and into play, made by a named team who each review every episode before it is released."
         path="/"
         jsonLd={organizationJsonLd}
       />
 
-      {/* Hero */}
-      <Section className="!pb-12 !pt-14 sm:!pt-20">
-        <Container>
-          <div className="grid items-center gap-10 lg:grid-cols-[1.05fr_0.95fr] lg:gap-16">
-            <div>
-              <Kicker>Watch · Play · Learn</Kicker>
-              <h1 className="mt-5 text-[length:var(--text-display)]">
-                Children's media made with care, creativity and human judgment.
-              </h1>
-              <Lead className="mt-6">
-                CLÉ Family Media creates calm stories and learning experiences that help families
-                move from watching to playing and learning together.
-              </Lead>
-              <div className="mt-8 flex flex-wrap gap-3">
-                <Button to="/ethical-ai">
-                  Explore our approach
-                  <IconArrow size={17} />
-                </Button>
-                <Button href={SITE.showUrl} variant="secondary">
-                  Meet The Pawsitive Pugs &amp; Pals
-                  <IconExternal size={16} />
-                </Button>
-              </div>
+      {/* ═══ 1. HERO. The company's own felted mark, large, the way the show
+          site opens on its felted wordmark. Then the line, then the art. ═══ */}
+      <Section className="!pb-0 !pt-14 sm:!pt-16">
+        <Container width="wide">
+          <Settle className="text-center">
+            <Figure
+              asset="brand.cle"
+              priority
+              rounded="rounded-[var(--radius-xl)]"
+              className="mx-auto w-full max-w-[420px]"
+              sizes="420px"
+            />
+            <h1 className="t-display mx-auto mt-10 max-w-[16ch]">
+              Children's media made by people
+            </h1>
+            <Lead className="mx-auto mt-6">
+              Calm stories for young children, and the activities that take them off the screen
+              afterwards. Every episode is reviewed by a named person before it is released.
+            </Lead>
+            <div className="mt-9 flex flex-wrap items-center justify-center gap-4">
+              <Button to="/ethical-ai">How we make it<IconArrow size={16} /></Button>
+              <Button href={SITE.showUrl} variant="quiet">Visit the show<IconExternal size={15} /></Button>
             </div>
-
-            <Reveal delay={120} from="right">
-              <Figure asset="home.hero" priority />
-            </Reveal>
-          </div>
+          </Settle>
         </Container>
+
+        {/* The garden the show is set in, full bleed. */}
+        <Settle className="mt-16">
+          <Figure
+            asset="home.hero" fill position="50% 62%"
+            rounded="rounded-none"
+            className="h-[42vh] min-h-[280px] w-full sm:h-[52vh]"
+            sizes="100vw"
+          />
+        </Settle>
       </Section>
 
-      {/* The problem families describe */}
-      <Section tone="cream" labelledBy="problem-h">
-        <Container>
-          <div className="grid gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:gap-16">
-            <SectionHeading
-              id="problem-h"
-              kicker="What families tell us"
-              title="Plenty to watch. Very little help deciding what is worth watching."
-            />
-            <Reveal delay={90} className="max-w-[60ch] space-y-5 font-body">
+      {/* ═══ 2. THESIS ═══ */}
+      <Section labelledBy="thesis-h">
+        <Container width="text">
+          <Settle>
+            <Kicker>What we believe</Kicker>
+            <h2 id="thesis-h" className="t-h1 mt-6">
+              We are not going to tell anyone their child watches too much television.
+            </h2>
+            <div className="t-lead mt-8 space-y-6 text-body">
               <p>
-                Parents of young children are handed an enormous amount of content and almost no
-                help judging any of it. Much of what fills the market is fast and loud, built around
-                how long a child keeps watching rather than what they take away from it.
+                The gap we saw is narrower than that. Not enough content made at a child's pace,
+                with genuine educational intent, and with a clear account of who made it and who
+                checked it.
               </p>
               <p>
-                We are not going to tell anyone their child watches too much television. The gap we
-                saw is narrower than that: not enough content made at a child's pace, with genuine
-                educational intent, and with a clear account of who made it and who checked it.
+                Much of what fills the market is fast and loud, built around how long a child keeps
+                watching rather than what they take away from it. Attention is what gets measured,
+                so attention is what gets designed for.
               </p>
               <p className="text-ink">
-                So that account is the point of this site. Who makes our work, how we make it, and
-                who reviews it before it reaches a child.
+                We would rather make the episode the beginning of the thing than the whole of it.
               </p>
-            </Reveal>
-          </div>
-        </Container>
-      </Section>
-
-      {/* Watch · Play · Learn */}
-      <Section labelledBy="model-h">
-        <Container>
-          <SectionHeading
-            id="model-h"
-            kicker="The model"
-            title="Watch · Play · Learn"
-            lead="One episode, three stages, designed to move a child from the screen into play and conversation."
-          />
-          <ol className="mt-12 grid gap-5 sm:grid-cols-3">
-            {MODEL.map((m, i) => (
-              <Reveal as="li" key={m.step} delay={i * 80}>
-                <Panel className="h-full p-7 transition-transform duration-300 hover:-translate-y-1">
-                  <div className="flex items-center gap-3">
-                    <span className="wash-cream hairline-ring flex h-11 w-11 items-center justify-center rounded-[var(--radius-md)] text-red-deep">
-                      <m.icon size={21} />
-                    </span>
-                    <span className="font-display text-[14px] text-clay" aria-hidden="true">
-                      {String(i + 1).padStart(2, "0")}
-                    </span>
-                  </div>
-                  <h3 className="mt-4 text-[length:var(--text-h3)]">{m.step}</h3>
-                  <p className="mt-2.5 font-body text-[14.5px] leading-relaxed text-body">{m.body}</p>
-                </Panel>
-              </Reveal>
-            ))}
-          </ol>
-        </Container>
-      </Section>
-
-      {/* How we make and review our work */}
-      <Section tone="cream" labelledBy="process-h">
-        <Container>
-          <SectionHeading
-            id="process-h"
-            kicker="How the work gets made"
-            title="A named person at every stage"
-            lead="This is the actual sequence an episode goes through, and who is accountable at each point."
-          />
-          <ol className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-            {PROCESS.map((p, i) => (
-              <Reveal as="li" key={p.n} delay={(i % 3) * 70}>
-                <Panel className="h-full p-6">
-                  <span className="font-display text-[14px] text-clay" aria-hidden="true">{p.n}</span>
-                  <h3 className="mt-2 font-body text-[15.5px] font-semibold text-ink">{p.who}</h3>
-                  <p className="mt-1.5 font-body text-[14px] leading-relaxed text-body">{p.what}</p>
-                </Panel>
-              </Reveal>
-            ))}
-          </ol>
-          <div className="mt-8 flex flex-wrap gap-3">
-            <Button to="/ethical-ai">
-              How we use AI, in detail
-              <IconArrow size={17} />
-            </Button>
-            <Button to="/team" variant="secondary">Meet the team</Button>
-          </div>
-        </Container>
-      </Section>
-
-      {/* The flagship series */}
-      <Section className="!py-10">
-        <Container>
-          <Panel className="overflow-hidden">
-            <div className="grid items-stretch lg:grid-cols-2">
-              <div className="wash-pups px-7 py-12 sm:px-10 lg:py-16">
-                <Kicker className="!text-ink">Our first original series</Kicker>
-                <h2 className="mt-4 text-[length:var(--text-h2)]">
-                  The Pawsitive Pugs &amp; Pals<span className="align-super text-[0.4em]">®</span>
-                </h2>
-                <p className="mt-4 max-w-[44ch] font-body text-[15px] text-ink">
-                  Meet Finn, the fawn pug, and Fia, the black pug. Their world, the episodes and the
-                  family activities that go with them all live on the show's own site.
-                </p>
-                <Button href={SITE.showUrl} className="mt-7">
-                  Watch episodes
-                  <IconExternal size={16} />
-                </Button>
-              </div>
-              <div className="flex items-center justify-center bg-cream/60 p-8">
-                <Figure
-                  asset="brand.show"
-                  rounded="rounded-[var(--radius-md)]"
-                  sizes="(min-width: 1024px) 45vw, 90vw"
-                />
-              </div>
             </div>
-          </Panel>
+          </Settle>
         </Container>
       </Section>
 
-      {/* Company at a glance, with the corporate mark */}
-      <Section tone="cream" labelledBy="company-h">
-        <Container>
-          <div className="grid items-center gap-10 lg:grid-cols-2 lg:gap-16">
-            <Reveal from="left">
-              <Figure asset="brand.cle" sizes="(min-width: 1024px) 45vw, 90vw" />
-            </Reveal>
-            <div>
+      {/* ═══ 3. THE MODEL, against the swing. The art is the left column. ═══ */}
+      <Section labelledBy="model-h" className="!py-0">
+        <div className="grid items-stretch lg:grid-cols-[0.9fr_1.1fr]">
+          <Figure
+            asset="story.garden" fill
+            rounded="rounded-none"
+            className="h-[46vh] min-h-[320px] w-full lg:h-full"
+            sizes="(min-width: 1024px) 45vw, 100vw"
+          />
+          <div className="px-5 py-20 sm:px-10 lg:px-16 lg:py-28">
+            <Settle>
               <SectionHeading
-                id="company-h"
-                kicker="The company"
-                title="A small independent studio, built around the review"
+                id="model-h"
+                kicker="The model"
+                title="One episode, three stages"
+                lead="Designed to move a child from the screen into play and conversation, rather than to hold them in front of it."
               />
-              <div className="mt-6 max-w-[56ch] space-y-5 font-body">
+            </Settle>
+            <Settle className="mt-10">
+              <Rail items={MODEL} />
+            </Settle>
+          </div>
+        </div>
+      </Section>
+
+      {/* ═══ 4. THE SERIES. The felted wordmark leads it, the characters
+          carry it, the four episodes sit underneath as text. ═══ */}
+      <Section labelledBy="series-h">
+        <Container width="wide">
+          <Settle className="text-center">
+            <Figure
+              asset="brand.show"
+              rounded="rounded-[var(--radius-lg)]"
+              className="mx-auto w-full max-w-[460px]"
+              sizes="460px"
+            />
+            <h2 id="series-h" className="t-h2 mx-auto mt-8 max-w-[20ch]">Our first original series</h2>
+            <Lead className="mx-auto mt-5">
+              Finn, the fawn pug, and Fia, the black pug, in a garden that rewards slowing down.
+              Four episodes released so far.
+            </Lead>
+          </Settle>
+
+          <Settle className="mt-12">
+            <Card className="overflow-hidden p-3">
+              <Figure
+                asset="home.characters" fill
+                rounded="rounded-[var(--radius-md)]"
+                className="h-[38vh] min-h-[260px] w-full"
+                sizes="(min-width: 1280px) 1100px, 92vw"
+              />
+            </Card>
+          </Settle>
+
+          <Settle className="mt-8 grid gap-4 sm:grid-cols-2">
+            {EPISODES.map((ep) => (
+              <Tile key={ep.n} className="p-6">
+                <p className="eyebrow">Episode {ep.n}</p>
+                <h3 className="t-h3 mt-3">{ep.title}</h3>
+                <p className="t-body mt-2 text-body">{ep.line}</p>
+              </Tile>
+            ))}
+          </Settle>
+
+          <Settle className="mt-9 text-center">
+            <Button href={SITE.showUrl}>Watch the episodes<IconExternal size={15} /></Button>
+          </Settle>
+        </Container>
+      </Section>
+
+      {/* ═══ 5. WHO CHECKS IT ═══ */}
+      <Section labelledBy="gates-h">
+        <Container width="wide"><ReviewGateScene /></Container>
+      </Section>
+
+      {/* ═══ 6. THE PEOPLE. Names and what each one checks. No empty portrait
+          frames: Paula is listed second because she is the credential that
+          survives a search. ═══ */}
+      <Section labelledBy="people-h">
+        <Container width="wide">
+          <Settle>
+            <SectionHeading
+              id="people-h"
+              kicker="The people behind it"
+              title="Named, and answerable"
+              lead="Every person here appears in the production and review sequence, not only on an about page."
+            />
+          </Settle>
+          <Settle className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            {PEOPLE.map((p) => (
+              <Card key={p.name} className="p-6">
+                <h3 className="t-h3">{p.name}</h3>
+                <p className="eyebrow mt-2 !text-[11px]">{p.role}</p>
+                <p className="t-body mt-3 text-body">{p.line}</p>
+              </Card>
+            ))}
+          </Settle>
+          <Settle className="mt-9">
+            <TextLink to="/team">The full team and advisory board<IconArrow size={15} /></TextLink>
+          </Settle>
+        </Container>
+      </Section>
+
+      {/* ═══ 7. THE AI POSITION ═══ */}
+      <Section labelledBy="ai-h">
+        <Container width="wide">
+          <Settle className="grid gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:gap-16">
+            <SectionHeading
+              id="ai-h"
+              kicker="Responsible AI"
+              title="AI is a production tool. People remain responsible for the work."
+            />
+            <Card className="p-8 sm:p-10">
+              <div className="t-body space-y-5 text-body">
                 <p>
-                  CLÉ Family Media develops original children's media and the learning experiences
-                  that go with it. We are small on purpose. It means the people who set the story
-                  are the same people who check it before release.
+                  Our creative and educational decisions are made by people. In final production we
+                  use Runway for visual production and ElevenLabs for voice production. Our team
+                  directs, reviews and approves the work before publication.
                 </p>
-                <p>
-                  Technology should expand what a small creative team can achieve, not replace the
-                  people and the responsibility behind children's content. That belief shapes how
-                  the studio is organised.
+                <p className="text-ink">
+                  Calling this work handmade would be untrue. Calling it AI-generated would erase
+                  the people who actually make the decisions.
                 </p>
+                <p>Nothing is generated and published automatically.</p>
               </div>
-              <Link
-                to="/story"
-                className="mt-6 inline-flex items-center gap-2 font-body text-[14.5px] font-semibold text-red-deep underline underline-offset-4"
-              >
-                Read our story
-                <IconArrow size={16} />
-              </Link>
-            </div>
-          </div>
+              <div className="mt-7">
+                <TextLink to="/ethical-ai">Read the full position<IconArrow size={15} /></TextLink>
+              </div>
+            </Card>
+          </Settle>
         </Container>
       </Section>
 
-      {/* Evidence */}
-      <Section labelledBy="evidence-h">
-        <Container>
-          <SectionHeading
-            id="evidence-h"
-            kicker="Evidence"
-            title="What we have seen, and what we have not yet measured"
-            lead="We keep these two apart on purpose, because a lot of children's media does not."
-          />
-          <div className="mt-10 grid gap-5 lg:grid-cols-2">
-            <Reveal>
-              <Panel className="h-full p-7">
-                <p className="font-body text-[11px] font-semibold uppercase tracking-[0.14em] text-red-deep">
-                  Observed feedback
-                </p>
-                <h3 className="mt-3 text-[length:var(--text-h3)]">From families and settings</h3>
-                <p className="mt-3 font-body text-[14.5px] leading-relaxed text-body">
-                  Responses from parents, educators and early years settings who have used the work.
-                  Each entry will carry a date, a source and wording cleared by the person who said
-                  it. Until those permissions are confirmed, nothing appears here.
-                </p>
-              </Panel>
-            </Reveal>
-            <Reveal delay={80}>
-              <Panel className="h-full p-7">
-                <p className="font-body text-[11px] font-semibold uppercase tracking-[0.14em] text-muted">
-                  Formal research
-                </p>
-                <h3 className="mt-3 text-[length:var(--text-h3)]">Not claimed</h3>
-                <p className="mt-3 font-body text-[14.5px] leading-relaxed text-body">
-                  We have not run formal studies, so we do not claim developmental outcomes. No
-                  activity, expert or tool guarantees a result for a child, and we would rather say
-                  that plainly than imply otherwise.
-                </p>
-              </Panel>
-            </Reveal>
-          </div>
-        </Container>
-      </Section>
-
-      {/* News */}
-      <Section tone="cream" labelledBy="news-h">
-        <Container>
-          <div className="flex flex-wrap items-end justify-between gap-4">
-            <SectionHeading id="news-h" kicker="News" title="What we are working on" />
-            <Link to="/journal" className="font-body text-[14.5px] font-semibold text-red-deep underline underline-offset-4">
-              All updates
-            </Link>
-          </div>
-          <p className="mt-6 max-w-[58ch] font-body text-[15px] leading-relaxed">
-            Production decisions, product progress, case study milestones and published appearances,
-            each with a visible date. The first entries are being prepared now.
-          </p>
-        </Container>
-      </Section>
-
-      {/* Partnership and newsletter */}
-      <Section tone="clay" labelledBy="cta-h">
-        <Container>
-          <div className="grid gap-10 lg:grid-cols-2 lg:gap-16">
+      {/* ═══ 8. CONTACT, the one deep band ═══ */}
+      <Section deep labelledBy="cta-h">
+        <Container width="wide">
+          <Settle className="grid gap-12 lg:grid-cols-[1.1fr_0.9fr] lg:gap-20">
             <div>
-              <h2 id="cta-h" className="text-[length:var(--text-h2)]">Working with CLÉ Family Media</h2>
-              <p className="mt-4 max-w-[46ch] font-body text-[length:var(--text-lead)] leading-relaxed text-ink">
+              <h2 id="cta-h" className="t-h2 max-w-[16ch]">Working with CLÉ Family Media</h2>
+              <p className="t-lead mt-6 max-w-[46ch] opacity-85">
                 We are open to conversations with studios, distribution partners, educators and
                 press. If you are assessing the company, we would rather answer your questions
                 directly.
               </p>
-              <div className="mt-8 flex flex-wrap gap-3">
-                <Button to="/contact">
-                  Send a partnership enquiry
-                  <IconArrow size={17} />
-                </Button>
-              </div>
+              <div className="mt-9"><Button to="/contact">Send an enquiry<IconArrow size={16} /></Button></div>
             </div>
-            <div className="rounded-[var(--radius-lg)] border border-white/45 bg-white/25 p-7 backdrop-blur-sm">
-              <h3 className="text-[length:var(--text-h3)]">Occasional updates</h3>
-              <p className="mt-2.5 max-w-[40ch] font-body text-[14.5px] leading-relaxed text-ink">
+            <div>
+              <h3 className="t-h3">Occasional updates</h3>
+              <p className="t-body mt-3 max-w-[40ch] opacity-80">
                 Production notes and company news, for adults. Infrequent, and easy to leave.
               </p>
-              <div className="mt-5"><NewsletterForm /></div>
+              <NotifyForm />
             </div>
-          </div>
+          </Settle>
         </Container>
       </Section>
     </>

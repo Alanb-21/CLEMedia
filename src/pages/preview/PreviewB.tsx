@@ -33,13 +33,13 @@ export default function PreviewB() {
       <div style={paper}>
         <Container className="py-24 sm:py-32">
           <div className="mx-auto max-w-[34ch] text-center">
-            <p className="font-body text-[11px] font-semibold uppercase tracking-[0.18em] text-red-deep">
+            <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-red-deep">
               Watch · Play · Learn
             </p>
             <h1 className="mt-6 font-display text-[clamp(2.2rem,6vw,4rem)] leading-[1.06] text-ink">
               Made by hand, made by people
             </h1>
-            <p className="mx-auto mt-6 max-w-[42ch] font-body text-[17px] leading-relaxed text-body">
+            <p className="mx-auto mt-6 max-w-[42ch] text-[17px] leading-relaxed text-slate">
               CLÉ Family Media is a small Irish studio making calm, purposeful content for young
               children, and being honest about how it is made.
             </p>
@@ -63,7 +63,7 @@ export default function PreviewB() {
             <h2 className="font-display text-[clamp(1.6rem,3.4vw,2.3rem)] text-ink">
               Most children's media is built to hold attention, not to earn it
             </h2>
-            <p className="mt-5 font-body leading-relaxed text-body">
+            <p className="mt-5 leading-relaxed text-slate">
               Parents are handed an enormous amount of content and very little help judging any of
               it. We make the slower kind, with an educational spine and a process we'll show you.
             </p>
@@ -85,9 +85,9 @@ export default function PreviewB() {
                 <div className="mx-auto mb-5 max-w-[120px]">
                   <AssetPlaceholder label={`${step} icon`} ratio="1/1" tone="cream" className="!border-0 rounded-full" />
                 </div>
-                <p className="font-display text-[13px] text-muted">0{i + 1}</p>
+                <p className="font-display text-[13px] text-deep">0{i + 1}</p>
                 <h3 className="mt-1 font-display text-[1.4rem] text-ink">{step}</h3>
-                <p className="mx-auto mt-2.5 max-w-[26ch] font-body text-[14.5px] leading-relaxed">{body}</p>
+                <p className="mx-auto mt-2.5 max-w-[26ch] text-[14.5px] leading-relaxed">{body}</p>
               </div>
             ))}
           </div>
@@ -100,7 +100,7 @@ export default function PreviewB() {
         <Container>
           <div className="mx-auto max-w-[44ch] text-center">
             <h2 className="font-display text-[clamp(1.6rem,3.4vw,2.3rem)] text-ink">Working with us</h2>
-            <p className="mt-4 font-body leading-relaxed">
+            <p className="mt-4 leading-relaxed">
               Investors, broadcasters, distributors and educational partners. We would rather answer
               your questions directly.
             </p>

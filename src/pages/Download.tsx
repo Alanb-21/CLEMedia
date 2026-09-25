@@ -68,21 +68,21 @@ export default function Download() {
           <div className="max-w-[54ch]">
             {state.k === "loading" && (
               <>
-                <h1 className="text-[length:var(--text-h1)]">Preparing your download…</h1>
-                <p className="mt-4 font-body text-[length:var(--text-lead)]">One moment.</p>
+                <h1 className="display-page font-display">Preparing your download…</h1>
+                <p className="mt-4 text-[length:clamp(1.0625rem,1rem+0.4vw,1.25rem)]">One moment.</p>
               </>
             )}
 
             {state.k === "ready" && (
               <>
-                <p className="font-body text-[11px] font-semibold uppercase tracking-[0.16em] text-red-deep">
+                <p className="text-[11px] font-semibold uppercase tracking-[0.16em] text-red-deep">
                   Payment received
                 </p>
-                <h1 className="mt-4 text-[length:var(--text-h1)]">{state.title} is ready</h1>
+                <h1 className="mt-4 display-page font-display">{state.title} is ready</h1>
 
-                <div className="glass-warm mt-6 rounded-[var(--radius-lg)] border-l-[3px] !border-l-red px-5 py-4">
-                  <p className="font-body text-[15px] font-semibold text-ink">Save this file now.</p>
-                  <p className="mt-1 font-body text-[14.5px] text-body">
+                <div className="glass-warm mt-6 rounded-[var(--radius-panel)] border-l-[3px] !border-l-red px-5 py-4">
+                  <p className="text-[15px] font-semibold text-ink">Save this file now.</p>
+                  <p className="mt-1 text-[14.5px] text-slate">
                     We do not create an account for you, so there is nowhere to come back to. This
                     link works for 24 hours and up to {state.allowed} downloads
                     {state.used > 1 && `, and you have used ${state.used}`}.
@@ -98,8 +98,8 @@ export default function Download() {
 
             {state.k === "error" && (
               <>
-                <h1 className="text-[length:var(--text-h1)]">{MESSAGES[state.code].h}</h1>
-                <p className="mt-4 font-body text-[length:var(--text-lead)] leading-relaxed">
+                <h1 className="display-page font-display">{MESSAGES[state.code].h}</h1>
+                <p className="mt-4 text-[length:clamp(1.0625rem,1rem+0.4vw,1.25rem)] leading-relaxed">
                   {MESSAGES[state.code].p}
                 </p>
                 <div className="mt-8 flex flex-wrap gap-3">

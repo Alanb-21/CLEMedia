@@ -104,14 +104,14 @@ export default function Legal({ doc }: { doc: keyof typeof DOCS }) {
         <Container>
           <div className="max-w-[68ch]">
             <Kicker>Legal</Kicker>
-            <h1 className="mt-5 text-[length:var(--text-h1)]">{d.title}</h1>
-            <p className="mt-5 font-body text-[length:var(--text-lead)] leading-relaxed">{d.intro}</p>
+            <h1 className="mt-5 display-page font-display">{d.title}</h1>
+            <p className="mt-5 text-[length:clamp(1.0625rem,1rem+0.4vw,1.25rem)] leading-relaxed">{d.intro}</p>
 
             <Panel tone="warm" className="mt-8 border-l-[3px] !border-l-red p-5">
-              <p className="font-body text-[11px] font-semibold uppercase tracking-[0.14em] text-red-deep">
+              <p className="text-[11px] font-semibold uppercase tracking-[0.14em] text-red-deep">
                 Draft, pending legal review
               </p>
-              <p className="mt-2 font-body text-[14.5px] text-ink">
+              <p className="mt-2 text-[14.5px] text-ink">
                 This is a working draft written to be reviewed by a solicitor before launch. It
                 should not be relied on as it stands.
               </p>
@@ -120,15 +120,15 @@ export default function Legal({ doc }: { doc: keyof typeof DOCS }) {
             <div className="mt-12 space-y-10">
               {d.sections.map((s) => (
                 <section key={s.h}>
-                  <h2 className="text-[length:var(--text-h3)]">{s.h}</h2>
-                  <div className="mt-3 space-y-4 font-body text-[15.5px] leading-relaxed">
+                  <h2 className="text-[18px] font-semibold">{s.h}</h2>
+                  <div className="mt-3 space-y-4 text-[15.5px] leading-relaxed">
                     {s.p.map((para, i) => <p key={i}>{para}</p>)}
                   </div>
                 </section>
               ))}
             </div>
 
-            <p className="mt-12 border-t border-hairline pt-5 font-body text-[13px] text-muted">
+            <p className="mt-12 border-t border-hairline pt-5 text-[13px] text-deep">
               Last updated {new Date().toLocaleDateString("en-IE", { year: "numeric", month: "long" })}.
             </p>
           </div>

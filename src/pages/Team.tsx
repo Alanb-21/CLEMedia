@@ -1,7 +1,7 @@
 import { Seo } from "@/components/Seo";
 import { AssetPlaceholder } from "@/components/AssetPlaceholder";
 import { Container, Kicker, Lead, Panel, Section, SectionHeading } from "@/components/ui";
-import { Reveal } from "@/components/Reveal";
+import { Settle } from "@/components/Settle";
 import type { Person } from "@/lib/types";
 
 /**
@@ -60,35 +60,35 @@ const SEED: Person[] = [
   },
 ];
 
-function PersonCard({ p, advisor = false, delay = 0 }: { p: Person; advisor?: boolean; delay?: number }) {
+function PersonCard({ p, advisor = false }: { p: Person; advisor?: boolean }) {
   return (
-    <Reveal as="li" delay={delay}>
+    <Settle as="li">
       <Panel className="flex h-full flex-col overflow-hidden">
         <div className={advisor ? "flex gap-5 p-6" : "flex flex-col"}>
           <div className={advisor ? "w-[88px] shrink-0" : ""}>
             {p.photo ? (
               <img src={p.photo} alt={p.name} width={600} height={750} loading="lazy"
-                className={advisor ? "rounded-[var(--radius-md)]" : "w-full object-cover"} />
+                className={advisor ? "rounded-[var(--radius-card)]" : "w-full object-cover"} />
             ) : (
               <AssetPlaceholder
                 label={advisor ? "Headshot" : `Photograph of ${p.name}`}
                 ratio={advisor ? "1/1" : "4/3"}
                 tone={advisor ? "cream" : "clay"}
-                rounded={advisor ? "rounded-[var(--radius-md)]" : "rounded-none"}
+                rounded={advisor ? "rounded-[var(--radius-card)]" : "rounded-none"}
                 className={advisor ? "" : "!shadow-none"}
               />
             )}
           </div>
           <div className={advisor ? "min-w-0" : "p-6"}>
-            <h3 className="text-[length:var(--text-h3)]">{p.name}</h3>
-            <p className="mt-1 font-body text-[12.5px] font-semibold uppercase tracking-wider text-red-deep">
+            <h3 className="text-[18px] font-semibold">{p.name}</h3>
+            <p className="mt-1 text-[12.5px] font-semibold uppercase tracking-wider text-red-deep">
               {p.role}
             </p>
-            <p className="mt-3 font-body text-[14.5px] leading-relaxed text-body">{p.bio}</p>
+            <p className="mt-3 text-[14.5px] leading-relaxed text-slate">{p.bio}</p>
           </div>
         </div>
       </Panel>
-    </Reveal>
+    </Settle>
   );
 }
 
@@ -107,7 +107,7 @@ export default function Team() {
         <Container>
           <div className="max-w-[44ch]">
             <Kicker>Team and advisors</Kicker>
-            <h1 className="mt-5 text-[length:var(--text-h1)]">The people making it</h1>
+            <h1 className="mt-5 display-page font-display">The people making it</h1>
           </div>
           <Lead className="mt-6">
             A small core team. Between them they decide what gets made, how it gets made, and
@@ -121,7 +121,7 @@ export default function Team() {
         <Container>
           <SectionHeading id="core-h" kicker="Core team" title="Who runs the company" />
           <ul className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {team.map((p, i) => <PersonCard key={p.id} p={p} delay={(i % 3) * 80} />)}
+            {team.map((p) => <PersonCard key={p.id} p={p} />)}
           </ul>
         </Container>
       </Section>
@@ -135,7 +135,7 @@ export default function Team() {
             lead="Advisers give input within their actual remit. They are not employees, and they are shown separately for exactly that reason."
           />
           <Panel tone="warm" className="mt-10 p-8">
-            <p className="max-w-[62ch] font-body text-[15px] leading-relaxed text-ink">
+            <p className="max-w-[62ch] text-[15px] leading-relaxed text-ink">
               Our strategic advisers are shown as a separate group from the core team, with each
               person's name, title and role described only as they have approved it. Those
               confirmations are being collected now, so this section is deliberately empty rather

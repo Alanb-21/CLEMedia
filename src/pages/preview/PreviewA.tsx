@@ -14,7 +14,7 @@ export default function PreviewA() {
         <div className="absolute inset-0 flex items-end">
           <Container className="pb-12 sm:pb-16">
             <div className="max-w-[20ch] bg-paper/92 p-7 sm:p-10">
-              <p className="font-body text-[11px] font-semibold uppercase tracking-[0.16em] text-red-deep">
+              <p className="text-[11px] font-semibold uppercase tracking-[0.16em] text-red-deep">
                 Watch, Play, Learn
               </p>
               <h1 className="mt-4 font-display text-[clamp(2rem,5vw,3.5rem)] leading-[1.05] text-ink">
@@ -50,9 +50,9 @@ export default function PreviewA() {
         <section key={step} className={`grid items-center lg:grid-cols-2 ${i % 2 ? "lg:[direction:rtl]" : ""}`}>
           <AssetPlaceholder label={`${step}, supporting photograph`} ratio="4/3" className="!border-0" tone={i % 2 ? "cream" : "clay"} />
           <div className="px-6 py-14 sm:px-12 lg:px-16 lg:[direction:ltr]">
-            <p className="font-display text-[15px] text-muted">0{i + 1}</p>
+            <p className="font-display text-[15px] text-deep">0{i + 1}</p>
             <h2 className="mt-2 font-display text-[clamp(1.75rem,3.5vw,2.5rem)] text-ink">{step}</h2>
-            <p className="mt-4 max-w-[38ch] font-body leading-relaxed">
+            <p className="mt-4 max-w-[38ch] leading-relaxed">
               {step === "Watch" && "Calm, purposeful animation, paced for how young children actually take things in."}
               {step === "Play" && "Interactive follow-on that turns a story into something a child does, not only sees."}
               {step === "Learn" && "An educational spine built with early-years specialists, not bolted on afterwards."}
@@ -65,7 +65,7 @@ export default function PreviewA() {
         <Container>
           <div className="max-w-[46ch]">
             <h2 className="font-display text-[clamp(1.75rem,3.5vw,2.5rem)] text-ink">Working with us</h2>
-            <p className="mt-4 font-body text-[17px] leading-relaxed">
+            <p className="mt-4 text-[17px] leading-relaxed">
               Open to conversations with investors, broadcasters, distributors and educational partners.
             </p>
             <Button to="/contact" className="mt-7">Partnership enquiries</Button>

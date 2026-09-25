@@ -10,8 +10,8 @@ export default function ShopProduct() {
       <Section>
         <Container>
           <div className="max-w-[52ch]">
-            <h1 className="text-[length:var(--text-h1)]">We couldn't find that</h1>
-            <p className="mt-4 font-body text-[length:var(--text-lead)] leading-relaxed">
+            <h1 className="display-page font-display">We couldn't find that</h1>
+            <p className="mt-4 text-[length:clamp(1.0625rem,1rem+0.4vw,1.25rem)] leading-relaxed">
               It may have been taken down, or the link may be wrong.
             </p>
             <div className="mt-8 flex flex-wrap gap-3">

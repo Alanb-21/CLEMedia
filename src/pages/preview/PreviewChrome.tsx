@@ -11,7 +11,7 @@ export function PreviewChrome({ letter, name, note, children }: { letter: string
         <title>{`Direction ${letter}: ${name} · CLÉ`}</title>
         <meta name="robots" content="noindex,nofollow" />
       </Helmet>
-      <div className="sticky top-0 z-50 flex flex-wrap items-center gap-x-4 gap-y-1 bg-ink px-4 py-2 font-body text-[12.5px] text-[#F6EFE7]">
+      <div className="sticky top-0 z-50 flex flex-wrap items-center gap-x-4 gap-y-1 bg-ink px-4 py-2 text-[12.5px] text-[#F6EFE7]">
         <strong className="font-semibold">Direction {letter}: {name}</strong>
         <span className="text-[#F6EFE7]/65">{note}</span>
         <nav aria-label="Other directions" className="ml-auto flex gap-3">

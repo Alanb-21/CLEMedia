@@ -10,6 +10,10 @@ interface Props {
   ratio?: string;
   priority?: boolean;
   sizes?: string;
+  /** Stretch to the host column and crop, for a full-bleed band. */
+  fill?: boolean;
+  /** Where the crop favours, for a band that must keep its subject. */
+  position?: string;
 }
 
 /**
@@ -27,6 +31,8 @@ export function Figure({
   tone = "clay",
   ratio,
   priority = false,
+  fill = false,
+  position,
   sizes = "(min-width: 1024px) 50vw, 100vw",
 }: Props) {
   const a = ASSETS[asset];
@@ -36,17 +42,17 @@ export function Figure({
       <AssetPlaceholder
         label={a.label}
         source="Photography"
-        ratio={ratio ?? `${a.width}/${a.height}`}
+        ratio={fill ? undefined : (ratio ?? `${a.width}/${a.height}`)}
         tone={tone}
         rounded={rounded}
-        className={className}
+        className={`${fill ? "h-full w-full" : ""} ${className}`}
       />
     );
   }
 
   const ext = a.fallback ?? "jpg";
   return (
-    <picture>
+    <picture className={fill ? "block h-full w-full" : undefined}>
       <source
         type="image/avif"
         srcSet={`${a.base}.avif 1x, ${a.base}@2x.avif 2x`}
@@ -67,7 +73,8 @@ export function Figure({
         loading={priority ? "eager" : "lazy"}
         decoding={priority ? "sync" : "async"}
         fetchPriority={priority ? "high" : "auto"}
-        className={`h-auto w-full object-cover ${rounded} ${className}`}
+        style={position ? { objectPosition: position } : undefined}
+        className={`${fill ? "h-full w-full" : "h-auto w-full"} object-cover ${rounded} ${className}`}
       />
     </picture>
   );

@@ -1,7 +1,7 @@
 import { Seo } from "@/components/Seo";
 import { Figure } from "@/components/Figure";
 import { Button, Container, Kicker, Lead, Panel, Section } from "@/components/ui";
-import { Reveal } from "@/components/Reveal";
+import { Settle } from "@/components/Settle";
 import { IconArrow, IconExternal } from "@/components/icons";
 import { SITE } from "@/lib/site";
 
@@ -25,7 +25,7 @@ export default function Story() {
         <Container>
           <div className="max-w-[48ch]">
             <Kicker>Our story</Kicker>
-            <h1 className="mt-5 text-[length:var(--text-h1)]">
+            <h1 className="mt-5 display-page font-display">
               I did not set out to start a media company.
             </h1>
           </div>
@@ -44,13 +44,13 @@ export default function Story() {
         <Container>
           <div className="grid gap-12 lg:grid-cols-[210px_1fr] lg:gap-16">
             <nav aria-label="On this page" className="lg:sticky lg:top-28 lg:self-start">
-              <p className="font-body text-[11px] font-semibold uppercase tracking-[0.14em] text-muted">
+              <p className="text-[11px] font-semibold uppercase tracking-[0.14em] text-deep">
                 On this page
               </p>
               <ul className="mt-3 space-y-2 border-l border-hairline pl-4">
                 {SECTIONS.map((s) => (
                   <li key={s.id}>
-                    <a href={`#${s.id}`} className="font-body text-[14px] text-body hover:text-ink">
+                    <a href={`#${s.id}`} className="text-[14px] text-slate hover:text-ink">
                       {s.label}
                     </a>
                   </li>
@@ -58,10 +58,10 @@ export default function Story() {
               </ul>
             </nav>
 
-            <article className="max-w-[65ch] space-y-14 font-body text-[16.5px] leading-[1.75]">
-              <Reveal as="section" className="scroll-mt-28 space-y-5">
+            <article className="max-w-[65ch] space-y-14 text-[16.5px] leading-[1.75]">
+              <Settle as="section" className="scroll-mt-28 space-y-5">
                 <div id="what-i-saw" className="scroll-mt-28" />
-                <h2 className="text-[length:var(--text-h2)]">What I saw</h2>
+                <h2 className="display-section font-display">What I saw</h2>
                 <p>
                   I started paying proper attention to children's media the way most people do, by
                   sitting beside a small child who was watching it. What struck me was the speed.
@@ -74,18 +74,18 @@ export default function Story() {
                   come off forty minutes of it, wired and brittle and somehow tired at the same
                   time, I could not accept that this was simply how children's content had to work.
                 </p>
-              </Reveal>
+              </Settle>
 
-              <Reveal as="section" className="scroll-mt-28 space-y-5">
+              <Settle as="section" className="scroll-mt-28 space-y-5">
                 <div id="becoming-a-parent" className="scroll-mt-28" />
-                <h2 className="text-[length:var(--text-h2)]">Becoming a parent</h2>
+                <h2 className="display-section font-display">Becoming a parent</h2>
                 <p>
                   Becoming a parent changes the question from an interesting one into an urgent one.
                   It stops being about media in general and becomes about the specific twenty
                   minutes in front of you, and whether you are glad about them afterwards.
                 </p>
                 <Panel tone="warm" className="!my-9 border-l-[3px] !border-l-red p-7">
-                  <p className="font-display text-[length:var(--text-h3)] leading-snug text-ink">
+                  <p className="font-display text-[18px] font-semibold leading-snug text-ink">
                     I was not looking for something to keep her quiet. I was looking for something I
                     would be glad she had watched.
                   </p>
@@ -98,15 +98,15 @@ export default function Story() {
                 </p>
                 <figure className="!my-9">
                   <Figure asset="story.garden" tone="cream" />
-                  <figcaption className="mt-2.5 font-body text-[13px] text-muted">
+                  <figcaption className="mt-2.5 text-[13px] text-deep">
                     A frame from The Pawsitive Pugs &amp; Pals.
                   </figcaption>
                 </figure>
-              </Reveal>
+              </Settle>
 
-              <Reveal as="section" className="scroll-mt-28 space-y-5">
+              <Settle as="section" className="scroll-mt-28 space-y-5">
                 <div id="building-it" className="scroll-mt-28" />
-                <h2 className="text-[length:var(--text-h2)]">Building an alternative</h2>
+                <h2 className="display-section font-display">Building an alternative</h2>
                 <p>
                   I could not have made this on my own, and I did not try. The company came
                   together around people who knew far more than I did: Al on the creative side,
@@ -126,11 +126,11 @@ export default function Story() {
                   who set the story are the same people who check it before release, and that any
                   of them can hold a release back. That is worth more to me than volume.
                 </p>
-              </Reveal>
+              </Settle>
 
-              <Reveal as="section" className="scroll-mt-28 space-y-5">
+              <Settle as="section" className="scroll-mt-28 space-y-5">
                 <div id="how-it-reaches-you" className="scroll-mt-28" />
-                <h2 className="text-[length:var(--text-h2)]">How it reaches you</h2>
+                <h2 className="display-section font-display">How it reaches you</h2>
                 <p>
                   The model is Watch, Play, Learn, and it is more literal than it sounds. Watch an
                   episode together. Pause for a movement or a breathing prompt. Then carry on with a
@@ -145,7 +145,7 @@ export default function Story() {
                   is in development rather than available, and we will say so plainly until the day
                   it is not.
                 </p>
-              </Reveal>
+              </Settle>
 
               <div className="flex flex-wrap gap-3 border-t border-hairline pt-9">
                 <Button to="/ethical-ai">

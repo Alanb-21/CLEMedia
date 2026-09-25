@@ -3,7 +3,7 @@ import { Seo } from "@/components/Seo";
 import { AssetPlaceholder } from "@/components/AssetPlaceholder";
 import { Figure } from "@/components/Figure";
 import { Button, Container, Kicker, Lead, Panel, Section, SectionHeading } from "@/components/ui";
-import { Reveal } from "@/components/Reveal";
+import { Settle } from "@/components/Settle";
 import { IconBell, IconCheck, IconDevice, IconLock, IconNoAds, IconPlay, IconPrint, IconResearch } from "@/components/icons";
 
 /**
@@ -83,7 +83,7 @@ function NotifyForm() {
   if (sent) {
     return (
       <Panel tone="warm" className="px-5 py-4">
-        <p role="status" className="flex items-center gap-2.5 font-body text-[14.5px] text-ink">
+        <p role="status" className="flex items-center gap-2.5 text-[14.5px] text-ink">
           <span className="text-red-deep"><IconCheck size={18} /></span>
           Thanks. We will email you once, when it is live, and not for anything else.
         </p>
@@ -103,11 +103,11 @@ function NotifyForm() {
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           placeholder="you@example.com"
-          className="glass w-full rounded-[var(--radius-pill)] px-5 py-3 font-body text-[15px] text-ink placeholder:text-muted/70"
+          className="glass w-full rounded-full px-5 py-3 text-[15px] text-ink placeholder:text-deep/70"
         />
       </div>
       <Button type="submit" disabled={busy}>{busy ? "Signing up" : "Notify me"}<IconBell size={16} /></Button>
-      {error && <p role="alert" className="font-body text-[13.5px] text-red-deep sm:basis-full">{error}</p>}
+      {error && <p role="alert" className="text-[13.5px] text-red-deep sm:basis-full">{error}</p>}
     </form>
   );
 }
@@ -115,16 +115,16 @@ function NotifyForm() {
 function FeatureGrid() {
   return (
     <ul className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-      {FEATURES.map((f, i) => (
-        <Reveal as="li" key={f.title} delay={(i % 3) * 80}>
+      {FEATURES.map((f) => (
+        <Settle as="li" key={f.title}>
           <Panel className="h-full p-7 transition-transform duration-300 hover:-translate-y-1">
-            <span className="mb-4 flex h-11 w-11 items-center justify-center rounded-[var(--radius-md)] bg-white/70 text-red-deep hairline-ring">
+            <span className="mb-4 flex h-11 w-11 items-center justify-center rounded-[var(--radius-card)] bg-white/70 text-red-deep hairline-ring">
               <f.icon size={21} />
             </span>
-            <h3 className="text-[length:var(--text-h3)]">{f.title}</h3>
-            <p className="mt-2.5 font-body text-[14.5px] leading-relaxed text-body">{f.body}</p>
+            <h3 className="text-[18px] font-semibold">{f.title}</h3>
+            <p className="mt-2.5 text-[14.5px] leading-relaxed text-slate">{f.body}</p>
           </Panel>
-        </Reveal>
+        </Settle>
       ))}
     </ul>
   );
@@ -138,7 +138,7 @@ function PreLaunch() {
           <div className="grid gap-10 lg:grid-cols-[1.05fr_0.95fr] lg:gap-16">
             <div>
               <Kicker>PupsPlayer™ · In development</Kicker>
-              <h1 className="mt-5 text-[length:var(--text-h1)]">A product experience, in development</h1>
+              <h1 className="mt-5 display-page font-display">A product experience, in development</h1>
               <Lead className="mt-6">
                 We are building a product experience to hold the whole Watch, Play, Learn model in
                 one place: ad-free episodes, the play that follows them, and the offline activities
@@ -146,11 +146,11 @@ function PreLaunch() {
                 are building towards, not a list of what exists today.
               </Lead>
               <div className="mt-8 max-w-[34rem]">
-                <p className="mb-3 font-body text-[14px] font-semibold text-ink">
+                <p className="mb-3 text-[14px] font-semibold text-ink">
                   Want to know when it is ready?
                 </p>
                 <NotifyForm />
-                <p className="mt-2.5 font-body text-[12.5px] text-muted">
+                <p className="mt-2.5 text-[12.5px] text-deep">
                   One email when it is available. No list, no marketing, no sharing it with anyone.
                 </p>
               </div>
@@ -182,7 +182,7 @@ function Launched() {
           <div className="grid gap-10 lg:grid-cols-[1.05fr_0.95fr] lg:gap-16">
             <div>
               <Kicker>PupsPlayer™</Kicker>
-              <h1 className="mt-5 text-[length:var(--text-h1)]">Watch, play and learn in one place</h1>
+              <h1 className="mt-5 display-page font-display">Watch, play and learn in one place</h1>
               <Lead className="mt-6">
                 Episodes of <em>The Pawsitive Pugs &amp; Pals</em>®, the play that follows each one,
                 and the learning underneath. Built for young children and the adults beside them.
@@ -202,10 +202,10 @@ function Launched() {
           <SectionHeading kicker="Inside the app" title="What you get" />
           <FeatureGrid />
           <ul className="mt-10 grid gap-6 sm:grid-cols-3">
-            {(["app.screen1", "app.screen2", "app.screen3"] as const).map((k, i) => (
-              <Reveal as="li" key={k} delay={i * 80}>
+            {(["app.screen1", "app.screen2", "app.screen3"] as const).map((k) => (
+              <Settle as="li" key={k}>
                 <Figure asset={k} sizes="(min-width: 640px) 33vw, 100vw" />
-              </Reveal>
+              </Settle>
             ))}
           </ul>
         </Container>

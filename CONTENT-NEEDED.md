@@ -1,4 +1,4 @@
-# CONTENT NEEDED — CLÉ Family Media corporate site
+# CONTENT NEEDED, CLÉ Family Media corporate site
 
 Everything the site needs that has not been supplied. Each entry ships as a
 clearly marked placeholder until it arrives: a flat brand-colour block at the
@@ -14,7 +14,7 @@ Status: ❌ not supplied · ⚠️ partial or unconfirmed · ✅ received
 
 ---
 
-## Brand assets — BRAND TOOL KIT received and audited 2026-09-19
+## Brand assets, BRAND TOOL KIT received and audited 2026-09-19
 
 Kit audited in full: 741MB, 355 files, 13 folders. Palette and typefaces are
 resolved (`DESIGN-TOKENS.md`). The logo is not.
@@ -31,7 +31,7 @@ resolved (`DESIGN-TOKENS.md`). The logo is not.
 | Favicon / app icon source | ❌ | Favicon set | Blocked on the CLÉ mark above |
 | Character art (Finn, Fia, others) | ✅ | Show handoff module, small accents | Plentiful in `GENERAL EPISODE STILLS/`. Supporting cast only |
 
-## Photography — none exists
+## Photography, none exists
 
 **There is no photograph anywhere in the BRAND TOOL KIT.** Every image is
 AI-generated or a render; filenames and XMP carry the prompts. See QUESTIONS.md
@@ -40,7 +40,7 @@ AI-generated or a render; filenames and XMP carry the prompts. See QUESTIONS.md
 | Item | Status | Needed for | Notes |
 |---|---|---|---|
 | Garden photography | ⚠️ | Home hero, section breaks | The "garden" stills are AI-generated. Cannot be used as the real garden |
-| Founder photography — Conor, Lydia | ❌ | `/story`, `/team` | `PEOPLE/` holds five AI cartoon avatars. Unusable under the brief's hard rules |
+| Founder photography, Conor, Lydia | ❌ | `/story`, `/team` | `PEOPLE/` holds five AI cartoon avatars. Unusable under the brief's hard rules |
 | Team and advisor headshots | ❌ | `/team` | None exist. Shoot or supplied headshots required |
 | Process / behind-the-scenes / workspace | ❌ | `/story`, `/ethical-ai` | None exist |
 | Real-dog photography | ❌ | Show handoff, `/story` | The pugs in the kit are animated characters, not the real dogs |
@@ -49,30 +49,30 @@ AI-generated or a render; filenames and XMP carry the prompts. See QUESTIONS.md
 
 | Item | Status | Needed for | Notes |
 |---|---|---|---|
-| Home hero — positioning line | ❌ | `/` | One line: what CLÉ is and who it is for |
+| Home hero, positioning line | ❌ | `/` | One line: what CLÉ is and who it is for |
 | "The problem" section | ❌ | `/` | Plainly written, no scaremongering |
-| Watch · Play · Learn — three blocks | ❌ | `/` | One short block each |
+| Watch · Play · Learn, three blocks | ❌ | `/` | One short block each |
 | Company at a glance | ❌ | `/` | What CLÉ is, produces, and where it is going |
 | Research and credibility strip | ❌ | `/` | **No claim ships unsupplied.** Empty until provided |
 | Founder story, long-form | ❌ | `/story` | Carries the emotional weight of the site |
 | Team and advisor bios | ⚠️ | `/team` | Names + credited roles recovered from `CREDITS/`, and they correct the earlier list (Lydia **Harding**, not Sexton). Still no bios. See QUESTIONS.md #5 |
-| Ethical AI — position statement | ❌ | `/ethical-ai` | AI as production tool in a human-led process |
-| Ethical AI — process stages | ❌ | `/ethical-ai` | Concept → scripting → creative dev → review. Where a human decides, where a tool assists |
-| Ethical AI — safeguards and red lines | ❌ | `/ethical-ai` | The lines the company will not cross |
-| Journal — four category names | ❌ | `/journal` | One published per week |
+| Ethical AI, position statement | ❌ | `/ethical-ai` | AI as production tool in a human-led process |
+| Ethical AI, process stages | ❌ | `/ethical-ai` | Concept → scripting → creative dev → review. Where a human decides, where a tool assists |
+| Ethical AI, safeguards and red lines | ❌ | `/ethical-ai` | The lines the company will not cross |
+| Journal, four category names | ❌ | `/journal` | One published per week |
 | First four journal posts | ❌ | `/journal` | |
 | App page content | ❌ | `/app` | Features, screens, age range, availability |
 | App pre-launch copy | ❌ | `/app` | What is coming, target window, notify-me |
 | App store links and screenshots | ❌ | `/app` | Not available until launch |
 | Media / podcast entries | ❌ | `/media` | UK podcast expected December. Empty state handled meanwhile |
-| Shop products, copy, prices, PDFs | ❌ | `/shop` | ~€3–4 each |
+| Shop products, copy, prices, PDFs | ❌ | `/shop` | ~€3-4 each |
 | Company registration details, address | ❌ | Footer, `/terms` | Irish registered company details |
 | Contact email addresses | ❌ | `/contact`, footer | Separate routes for general / partnership / press |
 | Social profile links | ❌ | Footer | |
-| Privacy policy | ❌ | `/privacy` | Needs legal review — not to be drafted by me |
+| Privacy policy | ❌ | `/privacy` | Needs legal review, not to be drafted by me |
 | Terms | ❌ | `/terms` | Needs legal review. Must cover digital-goods sale |
 | Cookie policy | ❌ | `/cookies` | Depends on the analytics choice. See QUESTIONS.md #16 |
-| Press kit assets | ❌ | `/contact` | Optional — omitted if none exist |
+| Press kit assets | ❌ | `/contact` | Optional, omitted if none exist |
 
 ## Reference material I could not access
 
@@ -87,7 +87,7 @@ AI-generated or a render; filenames and XMP carry the prompts. See QUESTIONS.md
 
 Every gap renders as `<AssetPlaceholder>`: a flat brand-colour block at the
 exact final dimensions, labelled with what belongs there and its row in this
-file. They are deliberately visible, never subtle — the client should be able
+file. They are deliberately visible, never subtle, the client should be able
 to scan any page and see precisely what is still outstanding. A build that
 reaches launch with placeholders still in it has failed, so this list is the
 launch checklist for content.
@@ -115,3 +115,99 @@ Three image slots and all three logos are live. See
 The three filled slots are **frames from the animated show**, not photographs,
 and their alt text says so. They are not a substitute for the photography this
 file still lists as outstanding.
+
+---
+
+## Brand objects to export from the BRAND TOOL KIT (added 2026-09-22)
+
+The kit is on Alan's Mac and unreadable from the build. Every item below has a
+slot waiting in `src/lib/brand.ts` rendering a labelled placeholder, so
+dropping the files into `public/brand/` and setting one `base` per slot is the
+whole integration.
+
+Export as trimmed transparent PNG at 2x, metadata stripped. The kit's files
+carry XMP with generation prompts in them, which must not ship to a public
+website.
+
+| Slot | What to find | Size (1x) |
+|---|---|---|
+| `object.cle-mark` | The felted CLÉ Family Media mark, on transparent | 900x900 |
+| `object.pack` | A felted character group, for the show cross-link | 1200x700 |
+| `object.section-marker` | A neutral felted marker with no show wordmark on it | 800x500 |
+
+Still outstanding and still blocking, unchanged from the audit above: there is
+no vector CLÉ wordmark anywhere in the kit, which blocks the header lockup, the
+favicon set and every Open Graph card. QUESTIONS.md #21.
+
+## Photography still needed
+
+Real photography only. The kit's `PEOPLE/` folder is AI-generated and cannot be
+used here, and this site's Responsible AI page makes that a credibility risk
+rather than a preference.
+
+| Slot | What | Size (1x) |
+|---|---|---|
+| `person.conor` `person.al` `person.paula` `person.lydia` `person.kirstie` `person.mansi` | Headshots, square crop, consistent lighting | 900x900 |
+| `team.group` | The team together | 1680x945 |
+| `process.workspace` `process.review` `process.script` | The room, a review in progress, scripts and notes | 1400x933 |
+| `garden.real` `garden.detail` | The real garden the show's world is based on | 1680x945 |
+| `journal.default` | Default journal card image | 1200x675 |
+| `social.og` | Open Graph card. Blocked on the CLÉ mark | 1200x630 |
+
+Note, corrected 2026-09-23: an earlier version of this file asked for a
+photograph of the lettering "being made by hand: wool, hands, tools". That was
+written on the assumption that the brand's felted objects are physically made.
+The kit's own filenames (`Nano Banana 2 - create a close up of the wool
+butterfly.png`) say they are rendered. Dramatising handcraft on the site that
+promises transparency would be the worst kind of own goal, so the ask is
+withdrawn. Wool stays as the brand's visual language, and nothing on the site
+claims anyone wove anything.
+
+---
+
+## Wool objects to export (added 2026-09-23)
+
+How pawsitivepugs.com actually uses wool: as discrete rendered objects standing
+in for NAMES. The show wordmark, the episode title plates, the SEASON ONE sign,
+the sub-brand marks, the badges, and three small objects in the footer. Its
+ordinary section headings are plain set type.
+
+The corporate site follows that, more sparingly. Every item below has a slot
+waiting in `src/lib/brand.ts` rendering a labelled placeholder, so dropping the
+files into `public/brand/` and setting one `base` per slot is the whole job. No
+hand-drawn stand-ins were made: a hand-drawn felted object is worse than an
+honest empty slot.
+
+Export as trimmed transparent PNG at 2x, metadata stripped. The kit's files
+carry XMP with generation prompts in them, which must not ship to a public site.
+
+| Slot | Kit folder | What |
+|---|---|---|
+| `wool.show` | LOGOS + ICONS | The Pawsitive Pugs & Pals wordmark |
+| `wool.pupsplayer` | LOGOS + ICONS | The PupsPlayer mark |
+| `wool.cle` | does not exist | The CLÉ mark. See below |
+| `wool.ep1` to `wool.ep4` | **TITLE SLATES** | Episode plates: The Feather, Chicken Vision, The Strawberry, Cuckoo |
+| `wool.snuggle` | TITLE SLATES | Snuggle Woods, the announced series |
+| `wool.mark.paw` | LOGOS + ICONS | Small felted paw or PPP object, footer |
+| `wool.mark.post` | LOGOS + ICONS | Small felted envelope object, footer |
+
+**A note on TITLE SLATES.** `CLAUDE.md` lists that folder under "not relevant:
+show content, not migrated". That was written when this site's job was
+credibility. The job is now to show the series, so the title slates are the
+content, and they are the single highest-value export on this list.
+
+**Still blocking, unchanged.** There is no vector or rendered CLÉ Family Media
+mark anywhere in the kit, only a 3D felted render and an AI monogram. It blocks
+the header lockup, the favicon set and every Open Graph card. QUESTIONS.md #21.
+
+## The one thing that would most improve this site
+
+A real sent-back episode. The handoff refers to a case; the specifics have never
+been supplied. `ReviewGateScene` now states the process with no invented detail,
+and there is a marked slot in it waiting for: which episode, what was caught, by
+whom, what changed, and how long the release moved.
+
+An earlier build of that component invented all of it (an "Episode 004" sent
+back "nine days" with a quoted reviewer note). That has been removed. On the one
+section whose purpose is to show this company is honest, invented specifics were
+indefensible, and QUESTIONS.md #29 already said so.

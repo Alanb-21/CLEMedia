@@ -1,16 +1,33 @@
 @import "tailwindcss";
 
-/* ---------------------------------------------------------------------------
-   Typefaces, self-hosted WOFF2, SIL OFL 1.1. See public/fonts/OFL.txt.
-   Calistoga ships one weight and no italic; hierarchy comes from size, case
-   and colour, never weight. Montserrat's variable axis carries weight.
---------------------------------------------------------------------------- */
+/* ═══════════════════════════════════════════════════════════════════════════
+   CLÉ Family Media
+
+   The system is M.ind's, reskinned to the show's palette. Why that one and not
+   the eos or Managed-Energy lineage: this company's whole argument is that
+   children's media is too fast, too loud and designed to hold attention. A site
+   for them cannot carry a drifting aurora, a shader hero and scroll-pinned
+   set-pieces, because the artefact would be contradicting the argument it is
+   making. M.ind is the calm, structured register in the house library, so it is
+   the right substrate.
+
+   Wool is NOT in this file. On pawsitivepugs.com wool is not a texture: it is
+   discrete rendered objects standing in for names (the wordmark, the episode
+   title plates, SEASON ONE, the badges), while ordinary section headings are
+   plain set type. So wool lives in src/lib/brand.ts as asset slots, and the
+   ground here carries a fine paper grain exactly as M.ind's does.
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+@import "@fontsource-variable/spline-sans-mono";
+
+/* Calistoga is the show's own display face, shared with pawsitivepugs.com and
+   the single strongest link between the two sites. One weight, no italic, so it
+   is used BIG only: hierarchy below 40px comes from Hanken, never from a
+   heavier Calistoga, because there is not one. */
 @font-face {
   font-family: "Calistoga";
   src: url("/fonts/calistoga-latin.woff2") format("woff2");
-  font-weight: 400;
-  font-style: normal;
-  font-display: swap;
+  font-weight: 400; font-style: normal; font-display: swap;
   unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA,
     U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193,
     U+2212, U+2215, U+FEFF, U+FFFD;
@@ -18,199 +35,246 @@
 @font-face {
   font-family: "Calistoga";
   src: url("/fonts/calistoga-latin-ext.woff2") format("woff2");
-  font-weight: 400;
-  font-style: normal;
-  font-display: swap;
+  font-weight: 400; font-style: normal; font-display: swap;
   unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF,
     U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020,
     U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
 }
 @font-face {
-  font-family: "Montserrat";
-  src: url("/fonts/montserrat-latin.woff2") format("woff2");
-  font-weight: 100 900;
-  font-style: normal;
-  font-display: swap;
+  font-family: "Hanken Grotesk";
+  src: url("/fonts/hanken-latin.woff2") format("woff2");
+  font-weight: 300 700; font-style: normal; font-display: swap;
   unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA,
     U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193,
     U+2212, U+2215, U+FEFF, U+FFFD;
 }
 @font-face {
-  font-family: "Montserrat";
-  src: url("/fonts/montserrat-latin-ext.woff2") format("woff2");
-  font-weight: 100 900;
-  font-style: normal;
-  font-display: swap;
+  font-family: "Hanken Grotesk";
+  src: url("/fonts/hanken-latin-ext.woff2") format("woff2");
+  font-weight: 300 700; font-style: normal; font-display: swap;
   unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF,
     U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020,
     U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
 }
 
-/* ---------------------------------------------------------------------------
-   Tokens. Every value traced in DESIGN-TOKENS.md. Do not introduce a raw hex
-   anywhere else in the codebase, components use token names only.
---------------------------------------------------------------------------- */
 @theme {
-  --color-clay: #bc9e86;
-  --color-cream: #e6d4bc;
-  --color-red: #a32e32;
+  /* ─── The ground ────────────────────────────────────────────────────────
+     Three stops of the show's own warm clay, lightest to deepest. Mid-toned
+     rather than near-white, because a card has to sit LIGHTER than the ground
+     to have an edge without a heavy border. Every stop carries ink, body and
+     muted at AA or better, so text is safe anywhere on the gradient. */
+  --color-paper-1: #f5ecd9; /* ink 14.0  body 8.9  muted 5.9 */
+  --color-paper-2: #ecdfc6; /* ink 12.6  body 8.0  muted 5.3 */
+  --color-paper-3: #e0cfb0; /* ink 11.1  body 7.1  muted 4.7 */
+
+  /* Card surfaces sit ABOVE the ground, not on it. */
+  --color-raised: #fdf8ed;
+  --color-sunken: #d8c4a2;
+
+  /* ─── Ink ramp, derived along the clay hue ──────────────────────────── */
+  --color-ink:   #1a1614;
+  --color-body:  #4a352a;
+  --color-muted: #6b4e3a; /* the floor. Nothing lighter carries text */
+
+  /* ─── The one rationed accent ───────────────────────────────────────────
+     The show's red. 4.6:1 on the deepest ground stop, so it is a text colour
+     as well as a fill, but it stays at roughly 10% of any page. */
+  --color-red:      #a32e32;
   --color-red-deep: #8e2428;
-  --color-ink: #1a1614;
-  --color-body: #4a352a;
-  --color-muted: #6b4e3a;
-  --color-hairline: #d8c6ae;
-  --color-pups: #b5e2f6;
-  --color-paper: #ffffff;
 
-  --font-display: "Calistoga", Georgia, "Times New Roman", serif;
-  --font-body: "Montserrat", system-ui, -apple-system, "Segoe UI", sans-serif;
+  /* Companion registers, both sampled off pawsitivepugs.com. Navy is the one
+     deep band per page; sage is a supporting tint, never a text colour. */
+  --color-navy: #1f325b; /* white 12.6 */
+  --color-sage: #94b7a4;
 
-  --ease-house: cubic-bezier(0.22, 1, 0.36, 1);
+  --color-rule:      rgba(74, 53, 42, 0.13);
+  --color-rule-soft: rgba(74, 53, 42, 0.08);
 
-  /* Corner radii. Nothing on this site is a sharp square. */
-  --radius-xs: 8px;
-  --radius-sm: 12px;
-  --radius-md: 18px;
-  --radius-lg: 26px;
-  --radius-xl: 34px;
+  --font-display: "Calistoga", Georgia, serif;
+  --font-sans:    "Hanken Grotesk", system-ui, sans-serif;
+  --font-mono:    "Spline Sans Mono Variable", ui-monospace, Menlo, monospace;
+
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+
+  --radius-sm:   12px;
+  --radius-md:   16px;
+  --radius-lg:   22px;
+  --radius-xl:   28px;
   --radius-pill: 999px;
-
-  /* Type scale, 1.25 major third, clamped for fluid sizing */
-  --text-display: clamp(2.5rem, 1.6rem + 4.2vw, 4.5rem);
-  --text-h1: clamp(2rem, 1.4rem + 2.8vw, 3.25rem);
-  --text-h2: clamp(1.5rem, 1.2rem + 1.5vw, 2.25rem);
-  --text-h3: clamp(1.25rem, 1.1rem + 0.7vw, 1.5rem);
-  --text-lead: clamp(1.0625rem, 1rem + 0.35vw, 1.25rem);
 }
 
+html {
+  background-color: var(--color-paper-2);
+  color: var(--color-body);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-text-size-adjust: 100%;
+}
+
+/* Three washes, not one: a top-left light plus two soft blooms, so the large
+   quiet areas of a sparse page do not read as a flat fill. The blooms are the
+   brand red and the sage at very low alpha, which reads as LIGHT on clay
+   rather than as a coloured background. Static: nothing on this site drifts. */
+body {
+  min-height: 100%;
+  background-image:
+    radial-gradient(58% 42% at 88% 6%, rgba(163, 46, 50, 0.055) 0%, transparent 70%),
+    radial-gradient(48% 38% at 4% 90%, rgba(148, 183, 164, 0.10) 0%, transparent 72%),
+    radial-gradient(120% 90% at 20% 0%, var(--color-paper-1) 0%, var(--color-paper-2) 55%, var(--color-paper-3) 100%);
+  background-attachment: fixed;
+}
+
+/* Paper grain over the whole ground. One inline SVG turbulence, no request.
+   A single axis of fractal noise, which is paper tooth. NOT the crossed warp
+   and weft that reads as cloth: wool on this brand is an object, not a
+   surface treatment. */
+.grain {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  opacity: 0.4;
+  mix-blend-mode: multiply;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.82' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23g)' opacity='0.42'/%3E%3C/svg%3E");
+}
+/* Everything the page renders sits above the grain. */
+body > * { position: relative; z-index: 1; }
+
 @layer base {
-  html {
-    -webkit-text-size-adjust: 100%;
-    scroll-behavior: smooth;
-  }
-  body {
-    background: var(--color-paper);
-    background-image:
-      radial-gradient(1200px 680px at 12% -8%, rgba(230, 212, 188, 0.62), transparent 62%),
-      radial-gradient(980px 620px at 92% 2%, rgba(181, 226, 246, 0.30), transparent 58%),
-      radial-gradient(1100px 760px at 78% 96%, rgba(188, 158, 134, 0.34), transparent 60%);
-    background-attachment: fixed;
-    color: var(--color-body);
-    font-family: var(--font-body);
-    font-size: 1rem;
-    line-height: 1.65;
-    -webkit-font-smoothing: antialiased;
-    text-rendering: optimizeLegibility;
-  }
-  h1, h2, h3, h4 {
+  /* Calistoga is the display voice and appears at 40px and up. */
+  h1, h2 {
     font-family: var(--font-display);
     font-weight: 400;
     color: var(--color-ink);
+    line-height: 1.08;
+    letter-spacing: -0.015em;
     text-wrap: balance;
-    line-height: 1.12;
+  }
+  /* h3 down is Hanken. Calistoga at 20px reads as a children's face, which is
+     the one tonal shift this site exists not to make. */
+  h3, h4 {
+    font-family: var(--font-sans);
+    font-weight: 700;
+    color: var(--color-ink);
+    line-height: 1.3;
+    text-wrap: balance;
   }
   p { text-wrap: pretty; }
-
-  /* Visible focus on everything interactive, WCAG 2.4.7 */
   :focus-visible {
-    outline: 3px solid var(--color-red);
+    outline: 2px solid var(--color-red);
     outline-offset: 3px;
-    border-radius: 2px;
+    border-radius: 3px;
+  }
+  ::selection { background: var(--color-sage); color: var(--color-ink); }
+}
+
+@layer utilities {
+  /* ─── Type scale ─────────────────────────────────────────────────────── */
+  .t-display { font-size: clamp(2.5rem, 1.6rem + 3.6vw, 4rem); }
+  .t-h1      { font-size: clamp(2rem, 1.5rem + 2.2vw, 3rem); }
+  .t-h2      { font-size: clamp(1.625rem, 1.35rem + 1.2vw, 2.25rem); }
+  .t-h3      { font-size: 1.1875rem; }
+  .t-lead    { font-size: clamp(1.0625rem, 1rem + 0.35vw, 1.1875rem); line-height: 1.62; }
+  .t-body    { font-size: 0.96875rem; line-height: 1.68; }
+  .t-sm      { font-size: 0.875rem; }
+  .tnum      { font-variant-numeric: tabular-nums; }
+
+  /* The eyebrow. Mono, tracked, uppercase, and never numbered: `01 / SECTION`
+     was retired house-wide on 2026-09-03 as a top-tier AI tell. Plain
+     functional language, at most one per two sections. */
+  .eyebrow {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--color-red-deep);
   }
 
-  ::selection {
-    background: var(--color-cream);
+  /* ─── Surfaces ───────────────────────────────────────────────────────────
+     A card is LIGHTER than the clay ground and carries a hairline in ink, not
+     in white. Three near-identical surfaces stacked on each other read as one
+     washed-out area; the edge is what makes a card a card. */
+  .card {
+    background-image: linear-gradient(160deg, rgba(253, 248, 237, 0.95), rgba(250, 243, 229, 0.82));
+    border: 1px solid var(--color-rule);
+    box-shadow:
+      0 1px 0 rgba(255, 255, 255, 0.85) inset,
+      0 18px 36px -26px rgba(60, 50, 28, 0.32),
+      0 2px 6px -2px rgba(60, 50, 28, 0.05);
+  }
+  /* A tile sits INSIDE a card, so it goes a step warmer and darker rather than
+     being another sheet of the same white. */
+  .tile {
+    background: rgba(236, 223, 198, 0.75);
+    border: 1px solid var(--color-rule-soft);
+  }
+  /* A well sits BELOW the ground. */
+  .well {
+    background: var(--color-sunken);
+    box-shadow: inset 0 2px 6px rgba(60, 50, 28, 0.09);
+  }
+  .hairline { border-top: 1px solid var(--color-rule); }
+
+  /* The one deep band per page. */
+  .deep {
+    background: var(--color-navy);
+    color: #fdf8ed;
+  }
+  .deep h1, .deep h2, .deep h3, .deep h4 { color: #fdf8ed; }
+  .deep .eyebrow { color: rgba(253, 248, 237, 0.66); }
+
+  /* ─── Actions ────────────────────────────────────────────────────────── */
+  .btn {
+    display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem;
+    border-radius: var(--radius-pill);
+    padding: 0.85rem 1.6rem;
+    font-size: 0.875rem; font-weight: 600;
+    transition: background-color 0.25s var(--ease-out), border-color 0.25s var(--ease-out);
+  }
+  .btn-primary { background: var(--color-red); color: #fdf8ed; }
+  .btn-primary:hover { background: var(--color-red-deep); }
+  .btn-quiet {
+    background: transparent;
+    border: 1px solid var(--color-rule);
     color: var(--color-ink);
+  }
+  .btn-quiet:hover { border-color: rgba(74, 53, 42, 0.32); }
+
+  /* The house link: a rule that draws from the left. The only hover motion. */
+  .link-draw {
+    background-image: linear-gradient(currentColor, currentColor);
+    background-repeat: no-repeat;
+    background-position: 0 100%;
+    background-size: 0% 1px;
+    transition: background-size 0.4s var(--ease-out);
+    padding-bottom: 2px;
+  }
+  .link-draw:hover, .link-draw:focus-visible { background-size: 100% 1px; }
+
+  /* ─── Motion ─────────────────────────────────────────────────────────────
+     Near-still, deliberately. One short settle on entry and nothing else: no
+     parallax, no pinning, no ambient loops, nothing that moves on its own.
+     The company's argument is that children's media is designed to hold
+     attention, so the site demonstrates the pace it advocates.
+
+     `.settle` is released by `.is-in`, which only JS adds, so no JS, no
+     observer, reduced motion and crawlers all get finished content. */
+  .settle.is-armed { opacity: 0; transform: translateY(8px); }
+  .settle.is-armed.is-in {
+    opacity: 1;
+    transform: none;
+    transition:
+      opacity 0.7s var(--ease-out) calc(var(--i, 0) * 60ms),
+      transform 0.7s var(--ease-out) calc(var(--i, 0) * 60ms);
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  html { scroll-behavior: auto; }
+  .grain { display: none; }
+  .settle.is-armed { opacity: 1; transform: none; }
   *, *::before, *::after {
     animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
-    scroll-behavior: auto !important;
-  }
-}
-
-@layer utilities {
-  /* Scroll reveal, starts VISIBLE so the page reads with JS off or before
-     the observer fires. The animation only adds polish on top. */
-  .reveal {
-    animation: reveal var(--dur, 560ms) var(--ease-house) both;
-    animation-timeline: view();
-    animation-range: entry 0% entry 40%;
-  }
-  @keyframes reveal {
-    from { opacity: 0; transform: translateY(12px); }
-    to { opacity: 1; transform: none; }
-  }
-  @supports not (animation-timeline: view()) {
-    .reveal { animation: none; }
-  }
-}
-
-
-@layer utilities {
-  /* ---------------------------------------------------------------------
-     Glass surfaces. Kept at high opacity on purpose: a truly translucent
-     panel drags text contrast below AA once a wash moves behind it, and
-     every text colour here is verified against a solid backing.
-  --------------------------------------------------------------------- */
-  .glass {
-    background: rgba(255, 255, 255, 0.72);
-    backdrop-filter: blur(18px) saturate(150%);
-    -webkit-backdrop-filter: blur(18px) saturate(150%);
-    border: 1px solid rgba(255, 255, 255, 0.85);
-    box-shadow:
-      0 1px 2px rgba(26, 22, 20, 0.04),
-      0 12px 32px -18px rgba(26, 22, 20, 0.22);
-  }
-
-  .glass-warm {
-    background: rgba(250, 244, 236, 0.78);
-    backdrop-filter: blur(18px) saturate(150%);
-    -webkit-backdrop-filter: blur(18px) saturate(150%);
-    border: 1px solid rgba(255, 255, 255, 0.7);
-    box-shadow:
-      0 1px 2px rgba(26, 22, 20, 0.04),
-      0 12px 32px -18px rgba(26, 22, 20, 0.2);
-  }
-
-  .glass-bar {
-    background: rgba(255, 255, 255, 0.78);
-    backdrop-filter: blur(20px) saturate(160%);
-    -webkit-backdrop-filter: blur(20px) saturate(160%);
-  }
-
-  /* Soft tonal grounds, replacing the flat section fills. */
-  .wash-cream {
-    background-image: linear-gradient(
-      168deg,
-      rgba(230, 212, 188, 0.86) 0%,
-      rgba(230, 212, 188, 0.42) 46%,
-      rgba(255, 255, 255, 0.55) 100%
-    );
-  }
-  .wash-clay {
-    background-image: linear-gradient(
-      168deg,
-      rgba(188, 158, 134, 0.94) 0%,
-      rgba(200, 174, 152, 0.82) 52%,
-      rgba(215, 194, 175, 0.76) 100%
-    );
-  }
-  .wash-pups {
-    background-image: linear-gradient(
-      160deg,
-      rgba(181, 226, 246, 0.95) 0%,
-      rgba(203, 234, 249, 0.8) 55%,
-      rgba(230, 212, 188, 0.5) 100%
-    );
-  }
-
-  .hairline-ring {
-    box-shadow: inset 0 0 0 1px rgba(216, 198, 174, 0.7);
   }
 }

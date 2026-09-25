@@ -15,40 +15,43 @@ interface Props {
 }
 
 /**
- * A stand-in for photography that does not exist yet.
+ * A stand-in for an image that has not been supplied yet.
  *
- * Every image on this site has to be real. The brand kit contains no
- * photographs, and both stock imagery and generated imagery are ruled out, so
- * these blocks hold the layout until the client supplies the real thing.
+ * Every image on this site has to be real: the brand kit contains no
+ * photographs, and both stock and generated imagery are ruled out. These
+ * blocks hold the exact dimensions of the real asset so that dropping it in
+ * later changes no layout.
+ *
+ * Loud on purpose. A subtle placeholder is one that ships.
  */
 export function AssetPlaceholder({
   label,
   source,
-  ratio = "16/9",
+  ratio,
   className = "",
   tone = "clay",
   rounded = "rounded-[var(--radius-lg)]",
 }: Props) {
-  const wash = tone === "clay" ? "wash-clay" : "wash-cream";
+  const fill = tone === "clay" ? "bg-clay" : "bg-cream";
   return (
     <div
       role="img"
       aria-label={`Placeholder: ${label}. This image has not been supplied yet.`}
-      style={{ aspectRatio: ratio }}
-      className={`${wash} ${rounded} hairline-ring relative flex max-w-full items-center justify-center overflow-hidden ${className}`}
+      style={ratio ? { aspectRatio: ratio } : undefined}
+      className={`${fill} ${rounded} relative flex max-w-full items-center justify-center overflow-hidden ${className}`}
     >
       <div
         aria-hidden="true"
-        className="absolute inset-0 opacity-[0.10]"
-        style={{ backgroundImage: "repeating-linear-gradient(45deg, #1A1614 0 1px, transparent 1px 12px)" }}
+        className="absolute inset-0 opacity-[0.12]"
+        style={{ backgroundImage: "repeating-linear-gradient(45deg, #1A1614 0 1px, transparent 1px 11px)" }}
       />
-      <div className="relative mx-4 max-w-[26ch] rounded-[var(--radius-md)] bg-white/55 px-4 py-3 text-center backdrop-blur-sm">
-        <p className="font-body text-[10px] font-semibold uppercase tracking-[0.16em] text-ink/70">
-          Photography needed
+      <div className="relative mx-4 max-w-[28ch] px-5 py-4 text-center">
+        <p className="font-body text-[10px] font-semibold uppercase tracking-[0.18em] text-ink/70">
+          Image needed
         </p>
-        <p className="mt-1.5 font-body text-[13px] font-medium leading-snug text-ink">{label}</p>
+        <p className="mt-2 font-body text-[13.5px] font-semibold leading-snug text-ink">{label}</p>
         {source && (
-          <p className="mt-1 font-body text-[10px] uppercase tracking-wider text-ink/55">{source}</p>
+          <p className="mt-1.5 font-body text-[10px] uppercase tracking-[0.14em] text-ink/55">{source}</p>
         )}
       </div>
     </div>

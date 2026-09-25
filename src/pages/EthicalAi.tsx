@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Seo } from "@/components/Seo";
 import { Button, Container, Kicker, Lead, Panel, Section, SectionHeading } from "@/components/ui";
-import { Reveal } from "@/components/Reveal";
+import { Settle } from "@/components/Settle";
 import { IconArrow, IconCheck, IconHands, IconHuman, IconLearn, IconLock, IconResearch } from "@/components/icons";
 
 /** The two platforms currently in use, named because vagueness reads worse. */
@@ -116,7 +116,7 @@ function FaqItem({ q, a, open, onToggle }: { q: string; a: string; open: boolean
           type="button"
           onClick={onToggle}
           aria-expanded={open}
-          className="flex w-full items-center gap-4 p-6 text-left font-body text-[16px] font-semibold text-ink"
+          className="flex w-full items-center gap-4 p-6 text-left text-[16px] font-semibold text-ink"
         >
           {q}
           <span
@@ -129,7 +129,7 @@ function FaqItem({ q, a, open, onToggle }: { q: string; a: string; open: boolean
         </button>
       </h3>
       {open && (
-        <p className="border-t border-hairline/60 px-6 pb-6 pt-4 font-body text-[14.5px] leading-relaxed text-body">
+        <p className="border-t border-hairline/60 px-6 pb-6 pt-4 text-[14.5px] leading-relaxed text-slate">
           {a}
         </p>
       )}
@@ -152,7 +152,7 @@ export default function EthicalAi() {
         <Container>
           <div className="max-w-[50ch]">
             <Kicker>Responsible AI</Kicker>
-            <h1 className="mt-5 text-[length:var(--text-h1)]">
+            <h1 className="mt-5 display-page font-display">
               Human-led. AI-enabled. Built responsibly.
             </h1>
           </div>
@@ -169,9 +169,9 @@ export default function EthicalAi() {
       <Section tone="cream" className="!py-14" labelledBy="position-h">
         <Container>
           <div className="grid gap-8 lg:grid-cols-[0.85fr_1.15fr] lg:gap-14">
-            <h2 id="position-h" className="text-[length:var(--text-h2)]">Our position</h2>
+            <h2 id="position-h" className="display-section font-display">Our position</h2>
             <div className="max-w-[62ch] space-y-5 font-body">
-              <p className="font-display text-[length:var(--text-h3)] leading-snug text-ink">
+              <p className="font-display text-[18px] font-semibold leading-snug text-ink">
                 AI is a production tool. People remain responsible for the work.
               </p>
               <p>
@@ -199,16 +199,16 @@ export default function EthicalAi() {
             lead="Two platforms, both inside final production, neither operating on its own."
           />
           <ul className="mt-8 grid gap-5 sm:grid-cols-2">
-            {TOOLS.map((t, i) => (
-              <Reveal as="li" key={t.name} delay={i * 80}>
+            {TOOLS.map((t) => (
+              <Settle as="li" key={t.name}>
                 <Panel className="h-full p-7">
-                  <h3 className="font-display text-[length:var(--text-h3)] text-ink">{t.name}</h3>
-                  <p className="mt-2 font-body text-[14.5px] leading-relaxed text-body">{t.role}</p>
+                  <h3 className="font-display text-[18px] font-semibold text-ink">{t.name}</h3>
+                  <p className="mt-2 text-[14.5px] leading-relaxed text-slate">{t.role}</p>
                 </Panel>
-              </Reveal>
+              </Settle>
             ))}
           </ul>
-          <p className="mt-6 max-w-[64ch] font-body text-[13.5px] text-muted">
+          <p className="mt-6 max-w-[64ch] text-[13.5px] text-deep">
             Naming the platforms does not imply that either provider endorses CLÉ Family Media.
           </p>
         </Container>
@@ -223,26 +223,25 @@ export default function EthicalAi() {
             title="Six stages, each with a person accountable for it"
           />
           <ol className="mt-12">
-            {STAGES.map((s, i) => (
-              <Reveal
+            {STAGES.map((s) => (
+              <Settle
                 as="li"
                 key={s.n}
-                delay={i * 60}
                 className="grid gap-4 border-t border-hairline/70 py-7 sm:grid-cols-[68px_1fr_1.25fr] sm:gap-8"
               >
                 <span className="font-display text-[24px] leading-none text-clay" aria-hidden="true">
                   {s.n}
                 </span>
                 <div>
-                  <h3 className="text-[length:var(--text-h3)]">{s.title}</h3>
-                  <p className="mt-1.5 font-body text-[13px] font-semibold uppercase tracking-wider text-red-deep">
+                  <h3 className="text-[18px] font-semibold">{s.title}</h3>
+                  <p className="mt-1.5 text-[13px] font-semibold uppercase tracking-wider text-red-deep">
                     {s.who}
                   </p>
                 </div>
-                <p className="max-w-[48ch] font-body text-[14.5px] leading-relaxed text-body">
+                <p className="max-w-[48ch] text-[14.5px] leading-relaxed text-slate">
                   {s.body}
                 </p>
-              </Reveal>
+              </Settle>
             ))}
           </ol>
         </Container>
@@ -257,16 +256,16 @@ export default function EthicalAi() {
             title="The standards we hold ourselves to"
           />
           <ul className="mt-10 grid gap-5 sm:grid-cols-2">
-            {PRINCIPLES.map((p, i) => (
-              <Reveal as="li" key={p.title} delay={(i % 2) * 70}>
+            {PRINCIPLES.map((p) => (
+              <Settle as="li" key={p.title}>
                 <Panel className="h-full p-7">
-                  <span className="mb-4 flex h-11 w-11 items-center justify-center rounded-[var(--radius-md)] bg-white/70 text-red-deep hairline-ring">
+                  <span className="mb-4 flex h-11 w-11 items-center justify-center rounded-[var(--radius-card)] bg-white/70 text-red-deep hairline-ring">
                     <p.icon size={21} />
                   </span>
-                  <h3 className="text-[length:var(--text-h3)]">{p.title}</h3>
-                  <p className="mt-2.5 font-body text-[14.5px] leading-relaxed text-body">{p.body}</p>
+                  <h3 className="text-[18px] font-semibold">{p.title}</h3>
+                  <p className="mt-2.5 text-[14.5px] leading-relaxed text-slate">{p.body}</p>
                 </Panel>
-              </Reveal>
+              </Settle>
             ))}
           </ul>
         </Container>
@@ -295,17 +294,17 @@ export default function EthicalAi() {
         <Container>
           <div className="max-w-[60ch]">
             <Kicker>Our commitment</Kicker>
-            <h2 id="commit-h" className="mt-4 text-[length:var(--text-h2)]">
+            <h2 id="commit-h" className="mt-4 display-section font-display">
               The technology will keep changing. The responsibility will not.
             </h2>
-            <p className="mt-5 font-body text-[length:var(--text-lead)] leading-relaxed">
+            <p className="mt-5 text-[length:clamp(1.0625rem,1rem+0.4vw,1.25rem)] leading-relaxed">
               As the company grows we will keep reviewing our practice around human creative
               authorship, intellectual property and commercial rights, performer and voice consent,
               tool selection, transparency with audiences and partners, child safety, educational
               integrity, and making sure technology supports rather than replaces meaningful human
               creativity.
             </p>
-            <p className="mt-5 max-w-[56ch] font-body text-[15.5px] leading-relaxed text-ink">
+            <p className="mt-5 max-w-[56ch] text-[15.5px] leading-relaxed text-ink">
               If something here does not satisfy you, whether you are a parent, an educator or a
               distribution partner, we would genuinely rather have the conversation than have you
               assume.

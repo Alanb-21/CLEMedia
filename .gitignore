@@ -10,3 +10,4 @@ dist-ssr
 *.log
 dist-preview
 .playwright-mcp/
+*.tsbuildinfo

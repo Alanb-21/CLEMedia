@@ -19,11 +19,11 @@ export default function JournalPost() {
       <Section>
         <Container>
           <div className="max-w-[52ch]">
-            <p className="font-body text-[11px] font-semibold uppercase tracking-[0.16em] text-red-deep">
+            <p className="text-[11px] font-semibold uppercase tracking-[0.16em] text-red-deep">
               Journal
             </p>
-            <h1 className="mt-4 text-[length:var(--text-h1)]">We couldn't find that post</h1>
-            <p className="mt-4 font-body text-[length:var(--text-lead)] leading-relaxed">
+            <h1 className="mt-4 display-page font-display">We couldn't find that post</h1>
+            <p className="mt-4 text-[length:clamp(1.0625rem,1rem+0.4vw,1.25rem)] leading-relaxed">
               It may have been unpublished, or the link may be wrong. The journal index has
               everything that's live.
             </p>

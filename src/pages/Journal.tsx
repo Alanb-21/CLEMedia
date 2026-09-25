@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Seo } from "@/components/Seo";
 import { Container, Kicker, Lead, Panel, Section } from "@/components/ui";
-import { Reveal } from "@/components/Reveal";
+import { Settle } from "@/components/Settle";
 
 /**
  * Four rotating strands, one published per week. Names drafted from the
@@ -47,7 +47,7 @@ export default function Journal() {
         <Container>
           <div className="max-w-[44ch]">
             <Kicker>Journal</Kicker>
-            <h1 className="mt-5 text-[length:var(--text-h1)]">Notes from the studio</h1>
+            <h1 className="mt-5 display-page font-display">Notes from the studio</h1>
           </div>
           <Lead className="mt-6">
             Four strands, one post a week. We write about the research, the process, the parenting
@@ -67,10 +67,10 @@ export default function Journal() {
                     type="button"
                     onClick={() => setActive(c.slug)}
                     aria-current={active === c.slug ? "true" : undefined}
-                    className={`rounded-[var(--radius-pill)] px-4 py-2 font-body text-[13.5px] transition-all ${
+                    className={`rounded-full px-4 py-2 text-[13.5px] transition-all ${
                       active === c.slug
                         ? "bg-red text-paper shadow-[0_8px_20px_-12px_rgba(163,46,50,0.8)]"
-                        : "glass text-body hover:bg-white/95"
+                        : "glass text-slate hover:bg-white/95"
                     }`}
                   >
                     {c.name}
@@ -81,22 +81,22 @@ export default function Journal() {
           </nav>
 
           <ul className="mt-10 grid gap-5 sm:grid-cols-2">
-            {shown.map((c, i) => (
-              <Reveal as="li" key={c.slug} delay={i * 70}>
+            {shown.map((c) => (
+              <Settle as="li" key={c.slug}>
                 <Panel className="h-full p-7 transition-transform duration-300 hover:-translate-y-1">
-                  <p className="font-body text-[11px] font-semibold uppercase tracking-[0.14em] text-red-deep">
+                  <p className="text-[11px] font-semibold uppercase tracking-[0.14em] text-red-deep">
                     {c.name}
                   </p>
-                  <p className="mt-3 font-body text-[15px] leading-relaxed text-body">{c.blurb}</p>
-                  <p className="mt-5 font-body text-[13px] text-muted">
+                  <p className="mt-3 text-[15px] leading-relaxed text-slate">{c.blurb}</p>
+                  <p className="mt-5 text-[13px] text-deep">
                     First post arriving shortly.
                   </p>
                 </Panel>
-              </Reveal>
+              </Settle>
             ))}
           </ul>
 
-          <p className="mt-8 max-w-[58ch] font-body text-[14px] text-muted">
+          <p className="mt-8 max-w-[58ch] text-[14px] text-deep">
             Posts are written and published from the admin panel. Once the first pieces go live they
             appear here, newest first, filtered by strand.
           </p>
