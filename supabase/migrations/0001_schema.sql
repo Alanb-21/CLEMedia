@@ -1,4 +1,4 @@
--- CLÉ Family Media — schema
+-- CLÉ Family Media, schema
 -- Nine tables, exactly as specified. RLS on every one, no exceptions.
 
 create extension if not exists "pgcrypto";
@@ -145,7 +145,7 @@ alter table public.orders         enable row level security;
 alter table public.enquiries      enable row level security;
 alter table public.settings       enable row level security;
 
--- Public read — only what is genuinely public.
+-- Public read, only what is genuinely public.
 create policy "public read" on public.content_blocks for select using (true);
 create policy "public read" on public.categories     for select using (true);
 create policy "public read" on public.media_items    for select using (true);

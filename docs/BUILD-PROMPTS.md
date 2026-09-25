@@ -1,4 +1,4 @@
-# Build prompts — stages 2 to 13
+# Build prompts, stages 2 to 13
 
 Paste these into the local Claude Code session, one per stage, in order.
 
@@ -15,7 +15,7 @@ Paste these into the local Claude Code session, one per stage, in order.
 
 ---
 
-## 0. Correction — run this first
+## 0. Correction: run this first
 
 The stage 1 audit concluded that no brand colour passes AA as text. That is
 wrong, and the error makes the client conversation harder than it needs to be.
@@ -35,7 +35,7 @@ wrong. I verified all 25 text/background combinations independently:
 
 Two things follow:
 
-1. Brand red #A32E32 is 7.01:1 on white — it passes AAA for body text, and white
+1. Brand red #A32E32 is 7.01:1 on white: it passes AAA for body text, and white
    on red is also 7.01:1, so red is a valid button fill. The palette DOES have an
    accessible text colour. Reframe the finding as "clay and cream cannot carry
    text; red can."
@@ -50,13 +50,13 @@ Update QUESTIONS.md #20 to match, then commit and push.
 
 ---
 
-## Stage 2 — Scaffold, schema, deploy pipeline
+## Stage 2: Scaffold, schema, deploy pipeline
 
 No gate. Run this now; it doesn't depend on the client approving tokens.
 
 ```
 Stage 2. Scaffold the project, build the Supabase schema, and get a blank shell
-deployed. No page content yet — that's stage 3 onwards.
+deployed. No page content yet, that's stage 3 onwards.
 
 Scaffold:
 - Vite + React + TypeScript, Tailwind, shadcn/ui, react-router-dom,
@@ -64,7 +64,7 @@ Scaffold:
 - Design tokens from DESIGN-TOKENS.md as CSS custom properties, surfaced through
   the Tailwind theme so components use token names, never raw hex.
 - Self-host Calistoga and Montserrat as WOFF2 from the files already in
-  web-exports/. Do not use the Google CDN — it leaks visitor IPs and this site's
+  web-exports/. Do not use the Google CDN: it leaks visitor IPs and this site's
   positioning makes that a bad look. font-display: swap, preload the two faces
   actually used above the fold.
 - Routes for every path in the CLAUDE.md sitemap, each rendering a bare stub.
@@ -72,7 +72,7 @@ Scaffold:
   props, visible label naming what belongs there. This is what every missing
   asset renders as for the rest of the build.
 
-Supabase — exactly the nine tables in CLAUDE.md, no more:
+Supabase, exactly the nine tables in CLAUDE.md, no more:
 content_blocks, posts, categories, people, media_items, products, orders,
 enquiries, settings.
 
@@ -81,7 +81,7 @@ enquiries, settings.
   public data (published posts, visible people, active products, public content
   blocks, settings). Writes only for the authenticated admin. orders and enquiries
   are never publicly readable.
-- Buckets: public-media (public) and product-files (PRIVATE — never publicly
+- Buckets: public-media (public) and product-files (PRIVATE, never publicly
   readable, served only through short-lived signed URLs).
 - Seed settings with the app launch flag defaulting to false.
 
@@ -97,22 +97,22 @@ deploy URL. Then commit and push.
 
 ---
 
-## Stage 3 — Three home page directions → CLIENT GATE
+## Stage 3: Three home page directions → CLIENT GATE
 
 ```
 Stage 3. Build three genuinely different home page directions at /preview/a,
 /preview/b and /preview/c, using the real tokens from DESIGN-TOKENS.md.
 
-They must be different designs, not three colourways of one layout — different
+They must be different designs, not three colourways of one layout, different
 grids, different type treatment, different rhythm. The client will pick one or mix
 components across them.
 
-A. Garden Light — photography led. Full-bleed hero, editorial type over image,
+A. Garden Light, photography led. Full-bleed hero, editorial type over image,
    generous white space, photography carrying the emotion.
-B. Watercolour Studio — illustrative and crafted. Paper texture, watercolour
+B. Watercolour Studio, illustrative and crafted. Paper texture, watercolour
    washes between sections, type-led hero on a painted backdrop, characters as
    small painted accents.
-C. Corporate Warm — closest to m.ind.coach. Structured, quiet, type-first, tight
+C. Corporate Warm, closest to m.ind.coach. Structured, quiet, type-first, tight
    grid, colour sparingly as accent, photography in disciplined framed blocks.
 
 All three cover the same home sections so they're comparable: hero with
@@ -124,7 +124,7 @@ Constraints:
 - Every photograph is an <AssetPlaceholder>. There is no usable photography and
   none may be invented, generated or sourced from stock.
 - The research and credibility strip has no supplied claims. Render the structure
-  with placeholders — no invented statistics, testimonials, logos or awards.
+  with placeholders, no invented statistics, testimonials, logos or awards.
 - Honour the pairing rules: clay only takes --ink for body text, red never on clay.
 - Hard rules from CLAUDE.md: mobile first, no gradients, no blanket shadows, no
   bouncing, no auto-rotating carousels, fades and short scroll reveals only,
@@ -141,12 +141,12 @@ Then STOP. The client picks a direction before stage 4.
 
 ---
 
-## Stage 4 — Design system and global layout
+## Stage 4: Design system and global layout
 
 Only after the client has picked. Replace the bracket with what they chose.
 
 ```
-Stage 4. The client picked [DIRECTION — and any components to carry over from the
+Stage 4. The client picked [DIRECTION, and any components to carry over from the
 others]. Lock the design system and global layout.
 
 - Type scale as named tokens, derived from the specimen. Calistoga is one weight
@@ -167,7 +167,7 @@ Show me the header and footer at 320px, 768px and 1440px. Commit and push.
 
 ---
 
-## Stage 5 — Home, final
+## Stage 5: Home, final
 
 ```
 Stage 5. Build the final home page on the locked design system, every section from
@@ -176,7 +176,7 @@ the CLAUDE.md sitemap.
 - Every editable headline, body block and image reads from content_blocks, with
   the copy that exists as seeded defaults.
 - The show handoff module is a proper piece of design, not a link in a paragraph.
-  Characters allowed here. Use the show logo from the kit — it's flat, clean and
+  Characters allowed here. Use the show logo from the kit, it's flat, clean and
   vectorises.
 - Latest from the journal pulls the three most recent published posts, with a real
   empty state before any exist.
@@ -184,33 +184,33 @@ the CLAUDE.md sitemap.
 - Use ® on The Pawsitive Pugs & Pals and ™ on PupsPlayer at first use on the page.
 - Credibility strip stays empty with placeholders until the client supplies claims.
 
-Lighthouse on mobile before you call it done — report the four scores rather than
+Lighthouse on mobile before you call it done, report the four scores rather than
 asserting they're fine. Commit and push.
 ```
 
 ---
 
-## Stage 6 — Story, Team, Ethical AI
+## Stage 6: Story, Team, Ethical AI
 
 ```
 Stage 6. Build /story, /team and /ethical-ai.
 
-/story — long-form editorial. Pull quotes, generous measure, scroll-based section
+/story, long-form editorial. Pull quotes, generous measure, scroll-based section
 anchors. Real photography placeholders throughout. If no founder story copy has
 been supplied, structure the page fully and mark every copy block as needed.
 
-/team — profiles from the people table, CMS managed and reorderable. Advisors
+/team, profiles from the people table, CMS managed and reorderable. Advisors
 visually distinguished from core team. The creative director's track record gets
 proper space. Use the credited names pending confirmation, and flag in the page
 that they're unconfirmed rather than silently presenting them as final:
 Conor Sexton, Lydia Harding (Co-Producer), Paula Walshe (Educational Content
 Advisor), Al Compton (Written & Directed By). Do not invent a single line of bio.
 
-/ethical-ai — the most important trust page on the site. Three parts: the position
+/ethical-ai, the most important trust page on the site. Three parts: the position
 (AI as a production tool inside a human-led process, never the author of children's
 content), the process step by step showing where a human decides and where a tool
 assists, and the safeguards and the lines the company will not cross. Build the
-process as a real diagram or numbered stages — inline SVG or a proper staged
+process as a real diagram or numbered stages, inline SVG or a proper staged
 layout, not three paragraphs of text. Where the client hasn't supplied the actual
 process detail, build the structure and mark the content as needed.
 
@@ -219,20 +219,20 @@ Nothing on this page may be AI-generated imagery. Commit and push.
 
 ---
 
-## Stage 7 — Journal
+## Stage 7: Journal
 
 ```
 Stage 7. Build the journal end to end.
 
-/journal — index with category filtering across the four rotating categories, real
+/journal, index with category filtering across the four rotating categories, real
 empty state before any posts exist.
-/journal/:slug — hero image, author, date, category, share links, related posts.
+/journal/:slug, hero image, author, date, category, share links, related posts.
 
 CMS: create, edit, schedule, publish, unpublish, categorise. Scheduled posts don't
 appear publicly until published_at passes.
 
 Per post: Article JSON-LD, Open Graph and Twitter cards, a generated OG image.
-Category names are still unconfirmed — build the system to take four and seed
+Category names are still unconfirmed, build the system to take four and seed
 placeholders rather than inventing names.
 
 Commit and push.
@@ -240,12 +240,12 @@ Commit and push.
 
 ---
 
-## Stage 8 — App page, launch toggle, Media
+## Stage 8: App page, launch toggle, Media
 
 ```
 Stage 8. Build /app and /media.
 
-/app — the full page (what it does, screens, features, age range, availability,
+/app, the full page (what it does, screens, features, age range, availability,
 store links, screenshots) behind the settings.app_launched flag. While the flag is
 false the route serves the pre-launch page: what's coming, the target window, and a
 notify-me capture writing to enquiries.
@@ -253,36 +253,36 @@ notify-me capture writing to enquiries.
 The client flips one toggle in /admin at launch. No developer involvement, no
 redeploy, no rebuild. Test both states.
 
-Store links and screenshots don't exist yet — placeholders, and add them to
+Store links and screenshots don't exist yet, placeholders, and add them to
 CONTENT-NEEDED.md.
 
-/media — CMS-editable press, interviews and podcast appearances from media_items.
+/media, CMS-editable press, interviews and podcast appearances from media_items.
 Each entry: title, outlet, date, description, thumbnail, external link, optional
 embed (Spotify, Apple, YouTube). Lazy-load embeds so they don't cost page weight
 before interaction. A UK podcast appearance is expected in December, so the empty
-state has to be graceful — it ships before the first entry exists.
+state has to be graceful, it ships before the first entry exists.
 
 Commit and push.
 ```
 
 ---
 
-## Stage 9 — Shop and Stripe → CLIENT GATE
+## Stage 9: Shop and Stripe → CLIENT GATE
 
 ```
 Stage 9. Build the shop and Stripe checkout end to end.
 
 /shop and /shop/:slug from the products table.
 
-/api/create-checkout-session — creates the Stripe Checkout session server side.
+/api/create-checkout-session, creates the Stripe Checkout session server side.
 Price comes from the database, never from the client request. Validate the product
 is active before creating a session.
 
-/api/stripe-webhook — verifies the Stripe signature before doing anything. On
+/api/stripe-webhook, verifies the Stripe signature before doing anything. On
 checkout.session.completed, creates an orders row and a single-use download token.
 Idempotent: Stripe retries, and a retry must not mint a second token.
 
-/download/:token — serves a short-lived signed URL from the private product-files
+/download/:token, serves a short-lived signed URL from the private product-files
 bucket. Token valid 24 hours, capped at five downloads, counter incremented
 server side. Clear "save this file now" message. Expired and exhausted tokens get
 a helpful page, not a stack trace.
@@ -302,31 +302,31 @@ before anything goes live.
 
 ---
 
-## Stage 10 — Contact, utility, 404
+## Stage 10: Contact, utility, 404
 
 ```
 Stage 10. Build /contact, the utility pages and the 404.
 
-/contact — three split paths: general enquiry, partnership and distribution, press.
+/contact, three split paths: general enquiry, partnership and distribution, press.
 Partnership is the priority route and should feel like a serious business contact
 page, not a support form. Posts to enquiries typed by route, plus an email
-notification. Press kit download only if assets exist — omit the block otherwise.
+notification. Press kit download only if assets exist, omit the block otherwise.
 
 Validate server side as well as client side. Honeypot or similar against bots, no
 CAPTCHA that hurts accessibility.
 
-/privacy, /terms, /cookies — structure and headings only. Do not draft legal copy;
+/privacy, /terms, /cookies, structure and headings only. Do not draft legal copy;
 these need a solicitor, and terms have to cover the sale of digital goods. Mark
 them in CONTENT-NEEDED.md as needing legal review.
 
-404 — fits the brand, gives people a route back, no dead end.
+404, fits the brand, gives people a route back, no dead end.
 
 Commit and push.
 ```
 
 ---
 
-## Stage 11 — Admin panel
+## Stage 11: Admin panel
 
 ```
 Stage 11. Finish and polish /admin.
@@ -338,7 +338,7 @@ and flip the app live.
 
 - Supabase Auth, email and password, single admin role, extensible to more users.
 - Image upload with crop and required alt text. Refuse to save an image with no alt
-  text — it's an accessibility requirement, not a nice-to-have.
+  text, it's an accessibility requirement, not a nice-to-have.
 - A simple block editor for page copy. Simple. Not a CMS framework.
 - Drag to reorder people, media items and products.
 - Journal: draft, schedule, publish, unpublish.
@@ -347,14 +347,14 @@ and flip the app live.
 - The whole panel works one-handed on a phone. Test it at 390px, not just resized
   in a desktop browser.
 
-Then write docs/ADMIN-GUIDE.md in plain language — the audience is not technical.
+Then write docs/ADMIN-GUIDE.md in plain language, the audience is not technical.
 
 Commit and push.
 ```
 
 ---
 
-## Stage 12 — SEO, performance, accessibility
+## Stage 12: SEO, performance, accessibility
 
 ```
 Stage 12. Full SEO, performance and accessibility pass.
@@ -368,12 +368,12 @@ SEO:
   owns show and episode terms, this site owns the company, the founders, ethical AI
   in children's media and the EdTech angle. Write the separation into docs/SEO.md.
 
-Performance — target Lighthouse 95+ on mobile across all four categories:
+Performance, target Lighthouse 95+ on mobile across all four categories:
 - Images lazy-loaded below the fold, explicit width and height, no layout shift.
 - AVIF and WebP with fallbacks, 1x and 2x.
 - Check the real bundle size and code-split the admin panel out of the public bundle.
 
-Accessibility — WCAG 2.1 AA verified, not assumed:
+Accessibility, WCAG 2.1 AA verified, not assumed:
 - Run axe or equivalent on every route and fix what it finds.
 - Check every text and UI element against the contrast matrix.
 - Full keyboard navigation, visible focus, semantic landmarks, alt text everywhere.
@@ -385,7 +385,7 @@ Commit and push.
 
 ---
 
-## Stage 13 — Launch
+## Stage 13: Launch
 
 ```
 Stage 13. Launch preparation and handover.
@@ -394,12 +394,12 @@ Stage 13. Launch preparation and handover.
   re-pointed and re-verified, env vars set in Vercel production, analytics live,
   cookie banner if GA4 was chosen, sitemap submitted.
 - Swap Stripe to live keys and re-test one real purchase end to end. The test-mode
-  webhook secret is different from the live one — a lot of launches break here.
+  webhook secret is different from the live one, a lot of launches break here.
 - Verify both sites link to each other clearly.
 - Confirm every placeholder is gone and CONTENT-NEEDED.md is empty. If it isn't,
   list what's still outstanding rather than launching around it.
 - docs/: ADMIN-GUIDE.md, INTEGRATIONS.md (including the mSocial webhook payload
-  shape — title, excerpt, url, image, category, published_at — documented and
+  shape, title, excerpt, url, image, category, published_at, documented and
   flagged off by default), ENVIRONMENT.md listing every variable and where it comes
   from.
 - Record the walkthrough video for Conor.

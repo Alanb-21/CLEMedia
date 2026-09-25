@@ -1,4 +1,4 @@
-# DESIGN TOKENS — CLÉ Family Media
+# DESIGN TOKENS, CLÉ Family Media
 
 **Stage 1 gate artifact. Proposed, not approved.** Nothing here ships until Conor
 signs off. Source: `BRAND TOOL KIT` (741MB, 355 files) + the live show site CSS
@@ -15,24 +15,24 @@ two core colours, which is why they are proposed as authoritative:
 
 | Source | Weight |
 |---|---|
-| Live show site CSS (`pawsitivepugs.com`, Wix) | **Authoritative** — the declared values, unaffected by compression |
-| `OTHER IMAGES/wall 000.jpg`, `wall 001.jpg` | Flat two-tone brand swatches. JPEG drift of 1–3 per channel |
+| Live show site CSS (`pawsitivepugs.com`, Wix) | **Authoritative**, the declared values, unaffected by compression |
+| `OTHER IMAGES/wall 000.jpg`, `wall 001.jpg` | Flat two-tone brand swatches. JPEG drift of 1-3 per channel |
 | `OTHER IMAGES/header-frame.jpg`, `GRADIENTS/header background.png` | Applied usage |
 
 ---
 
 ## Colour
 
-### Core brand — taken from the kit, unchanged
+### Core brand, taken from the kit, unchanged
 
 | Token | Hex | Source | Role |
 |---|---|---|---|
-| `--cle-clay` | `#BC9E86` | Live site CSS; swatches read `#B99A85`–`#BD9F87` | Primary warm neutral. Surfaces, rules, fills |
-| `--cle-cream` | `#E6D4BC` | Live site CSS; swatches read `#E6D1BC`–`#E7D2BD` | Page background, cards |
+| `--cle-clay` | `#BC9E86` | Live site CSS; swatches read `#B99A85`-`#BD9F87` | Primary warm neutral. Surfaces, rules, fills |
+| `--cle-cream` | `#E6D4BC` | Live site CSS; swatches read `#E6D1BC`-`#E7D2BD` | Page background, cards |
 | `--cle-red` | `#A32E32` | Live site CSS (also `#A32E30`) | The single rationed accent |
 | `--pups-blue` | `#B5E2F6` | `LOGOS + ICONS/PP-logo.png`, 95.7% flat | PupsPlayer™ mark only. Not a site colour |
 
-### Added — required, because the brand palette has no accessible *neutral*
+### Added, required, because the brand palette has no accessible *neutral*
 
 **This is the one real decision in this document and it needs explicit approval.**
 
@@ -42,7 +42,7 @@ valid text colour and a valid button fill. The palette does have an accessible
 colour.
 
 What it does not have is an accessible **neutral**. Clay on white is **2.51:1**,
-cream on white is **1.45:1** — neither carries text at any size. Red is the
+cream on white is **1.45:1**, neither carries text at any size. Red is the
 accent, rationed to roughly 10% of the page, so it cannot carry body copy
 either; a page set in red is unreadable regardless of what the ratio says. So
 the palette needs a dark ink and a clay ramp derived from the brand hue, not
@@ -53,12 +53,12 @@ invented from nowhere.
 | `--ink` | `#1A1614` | 17.97:1 AAA | 12.41:1 AAA | Headings, strong text |
 | `--body` | `#4A352A` | 11.45:1 AAA | 7.91:1 AAA | Body copy |
 | `--muted` | `#6B4E3A` | 7.56:1 AAA | 5.23:1 AA | Secondary text, captions |
-| `--hairline` | `#D8C6AE` | — | — | Rules, dividers, table borders |
+| `--hairline` | `#D8C6AE` |, |, | Rules, dividers, table borders |
 | `--red-deep` | `#8E2428` | 8.63:1 AAA | 5.96:1 AA | Red on cream, where `--cle-red` is tight at 4.85 |
 
 `--muted` is the floor. Nothing lighter carries text anywhere on the site.
 
-### Contrast matrix — every pairing, measured
+### Contrast matrix, every pairing, measured
 
 Also carried in `docs/BUILD-PROMPTS.md`; keep the two in step if either changes.
 
@@ -79,7 +79,7 @@ white         1.00-    1.45-    2.51-    7.01+    1.38-
   only just (4.57), and `--muted` at large sizes or UI only (3.02). Set clay
   sections in `--ink` and keep the copy short.
 - **Red is never used on clay** (2.80, fails). Red on cream is 4.85, which passes
-  but is tight — prefer red on white.
+  but is tight, prefer red on white.
 - **Cream and PupsPlayer blue take everything.** Any of the three neutrals works
   on either.
 - **Red as a fill** takes white text at 7.01:1. That is the button pattern.
@@ -104,10 +104,10 @@ Pro) is Wix platform chrome, not brand.
 
 | Role | Face | Weights | Licence |
 |---|---|---|---|
-| Display | **Calistoga** | 400 only | **SIL OFL 1.1** — `google/fonts/ofl/calistoga` |
-| Body | **Montserrat** | Variable `[wght]` | **SIL OFL 1.1** — `google/fonts/ofl/montserrat` |
+| Display | **Calistoga** | 400 only | **SIL OFL 1.1**, `google/fonts/ofl/calistoga` |
+| Body | **Montserrat** | Variable `[wght]` | **SIL OFL 1.1**, `google/fonts/ofl/montserrat` |
 
-### Licensing — clear
+### Licensing, clear
 
 Both are in Google Fonts' `ofl/` tree, so SIL Open Font License 1.1. Web
 embedding, self-hosting and modification are all permitted with no fee and no

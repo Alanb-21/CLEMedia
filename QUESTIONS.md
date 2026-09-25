@@ -1,7 +1,6 @@
-# QUESTIONS — CLÉ Family Media corporate site
+# QUESTIONS, CLÉ Family Media corporate site
 
-Running list of things to confirm rather than guess. Add, never delete —
-mark answered inline with the date and the answer.
+Running list of things to confirm rather than guess. Add, never delete, mark answered inline with the date and the answer.
 
 Status key: **BLOCKING** stops work now · **OPEN** needed before a named stage · **PARKED** nice to have
 
@@ -9,12 +8,12 @@ Status key: **BLOCKING** stops work now · **OPEN** needed before a named stage 
 
 ## Blocking now
 
-### 1. BRAND TOOL KIT — where is it, and how do I get it into the build environment?
-**BLOCKING — stage 1 (asset audit and design tokens) cannot start.**
+### 1. BRAND TOOL KIT, where is it, and how do I get it into the build environment?
+**BLOCKING, stage 1 (asset audit and design tokens) cannot start.**
 
 The folder is not present. Searched, and found nothing:
 - the whole container filesystem, for `BRAND TOOL KIT` and close variants
-- the repo (`Alanb-21/CLEMedia` is empty — zero commits)
+- the repo (`Alanb-21/CLEMedia` is empty, zero commits)
 - Google Drive on `brosnanalan48@gmail.com`: folders named `*BRAND*`, titles
   containing `CLE` / `Pawsitive` / `Pugs` / `Tool Kit` / `Toolkit` / `Sexton`,
   all folders shared with the account, and a full-text search for
@@ -31,7 +30,7 @@ Two separate things are needed:
 
 Note: the original client handoff doc lists the brand kit under *"Content/assets
 expected from Connor"*, alongside the image folder, team details and garden
-imagery — so it may simply not have been delivered yet. Worth confirming with
+imagery, so it may simply not have been delivered yet. Worth confirming with
 Conor before hunting further.
 
 **ANSWERED 2026-09-19.** Delivered. Kit is on Alan's Mac at
@@ -40,7 +39,7 @@ session as an additional working directory. 741MB, 355 files, 13 top-level
 folders. Audited in full. The earlier "not present" note was written from a
 cloud container that could not see it. **Resolved.**
 
-### 2. Live show site review — blocked by network policy
+### 2. Live show site review, blocked by network policy
 **BLOCKING for design fidelity, not for scaffolding.**
 
 `pawsitivepugs.com` and the reference site `m.ind.coach` are both refused by
@@ -52,7 +51,7 @@ screenshots plus the current team/advisor copy pasted in.
 
 ---
 
-## Open — needed before the stage named
+## Open, needed before the stage named
 
 **ANSWERED 2026-09-19.** Egress works from this machine. `pawsitivepugs.com`
 fetched (200, Wix-hosted). Brand fonts and palette pulled from its live CSS and
@@ -78,7 +77,7 @@ using the Google CDN, to keep visitor IPs out of Google's hands.
 One consequence that needs a decision, carried as **#20** below: the brand
 palette contains no colour that passes WCAG AA as text.
 
-### 4. The UX designer's proposed colour direction — replacing or extending?
+### 4. The UX designer's proposed colour direction, replacing or extending?
 Blocks stage 1. The brief says retain the existing palette; a separate designer
 colour direction is also referenced. These conflict unless one extends the
 other. Which governs?
@@ -93,8 +92,8 @@ Need: correct spellings and role titles, who is core team vs advisory board,
 substantive bios, cleared photographs, and any advisor not on the show site.
 The creative director's track record needs its own supplied copy.
 
-**PARTIALLY ANSWERED 2026-09-19 — and the starting list above is wrong.** The
-show's own end-credit cards (`CREDITS/01–07.png`) give names and roles that
+**PARTIALLY ANSWERED 2026-09-19, and the starting list above is wrong.** The
+show's own end-credit cards (`CREDITS/01-07.png`) give names and roles that
 contradict what was inferred from the show site:
 
 | Name | Credited role |
@@ -113,50 +112,49 @@ whether they are related is not stated and is not being guessed at.
 
 Credits are a stronger source than the site, but they are show credits, not
 company roles. **Still needed:** confirmation of each person's CLÉ title, who is
-core team vs advisory board, written bios, and cleared photographs. See #21 —
-no usable photograph of any of these people exists in the kit.
+core team vs advisory board, written bios, and cleared photographs. See #21, no usable photograph of any of these people exists in the kit.
 
 ### 6. Founder story source material
 Blocks stage 6 (`/story`). Does interview material or a written piece exist, or
-does this need to be written? If written — by whom?
+does this need to be written? If written, by whom?
 
 ### 7. Who is writing the site copy, and by when?
-Blocks stages 5–10. Every page needs real copy. Nothing will be invented, so
+Blocks stages 5-10. Every page needs real copy. Nothing will be invented, so
 unwritten sections ship as marked placeholders.
 
-### 8. The four journal categories, named — and the first four posts
+### 8. The four journal categories, named, and the first four posts
 Blocks stage 7.
 
-### 9. Garden imagery — does usable photography exist, and who owns the rights?
+### 9. Garden imagery, does usable photography exist, and who owns the rights?
 Blocks stages 3 and 5. This is a candidate hero and full-bleed section break, so
 resolution and orientation matter. Commercial use must be cleared.
 
-### 10. Real-dog photography — available, and cleared for commercial use?
+### 10. Real-dog photography, available, and cleared for commercial use?
 Blocks stage 5. The handoff doc mentions "the real pugs that inspired the
 characters" as a content theme.
 
 ### 11. Stripe account details, and VAT treatment on digital goods
 Blocks stage 9. Test keys to build against; live keys at launch.
-**VAT is a question for the client and their accountant, not for me** — EU
+**VAT is a question for the client and their accountant, not for me**, EU
 digital-goods VAT on B2C sales has place-of-supply rules I will not guess at.
 Confirm whether Stripe Tax should be switched on.
 
 ### 12. The first set of shop products, priced, with final PDFs
-Blocks stage 9. Roughly €3–4 each per the brief.
+Blocks stage 9. Roughly €3-4 each per the brief.
 
-### 13. mSocial — exact workflow with David
+### 13. mSocial: exact workflow with David
 Blocks the integration flag. Automatic publish or approval-gated? Is there an
 actual API and docs? Are Instagram and Facebook in scope, or LinkedIn only?
 Until answered, this ships as a documented outbound webhook, flagged off.
 
-### 14. App — store links, screenshots, confirmed launch date, and who flips the switch
+### 14. App: store links, screenshots, confirmed launch date, and who flips the switch
 Blocks stage 8. Target is mid-October 2026, launching with the site.
 
 ### 15. Domain for this site, and where is DNS managed?
 Blocks stage 13. Also decides the canonical strategy that keeps this site from
 competing with `pawsitivepugs.com` in search.
 
-### 16. Analytics — Plausible or GA4?
+### 16. Analytics: Plausible or GA4?
 Blocks stage 12. The answer determines whether a cookie consent banner is
 required: Plausible is cookieless and generally needs none, GA4 does. This is a
 GDPR question for an Irish company, so the client should decide deliberately.
@@ -165,9 +163,9 @@ GDPR question for an Irish company, so the client should decide deliberately.
 
 ## Parked
 
-### 17. Press kit — do downloadable assets exist for `/contact`?
+### 17. Press kit, do downloadable assets exist for `/contact`?
 
-### 18. Email notifications — Resend, or Supabase functions?
+### 18. Email notifications, Resend, or Supabase functions?
 Resend needs an account and a verified sending domain. Whose?
 
 ### 19. Is there a second admin user at launch, or Conor only?
@@ -175,12 +173,12 @@ Schema supports more; the question is what to seed.
 
 ---
 
-## Raised by the stage 1 asset audit — 2026-09-19
+## Raised by the stage 1 asset audit, 2026-09-19
 
 ### 20. The brand palette has no accessible *neutral*. Approve the added ink ramp?
-**BLOCKING — stage 1 token gate.**
+**BLOCKING, stage 1 token gate.**
 
-**Corrected 2026-09-19** — the first version of this entry said the palette had
+**Corrected 2026-09-19**, the first version of this entry said the palette had
 no accessible colour at all. That was wrong. Brand red `#A32E32` is **7.01:1 on
 white**, which passes AAA, and white on red is also 7.01:1, so red works as text
 and as a button fill.
@@ -188,7 +186,7 @@ and as a button fill.
 The real gap is narrower and still real: there is no accessible **neutral**.
 Clay `#BC9E86` on white is **2.51:1**, cream `#E6D4BC` on white is **1.45:1**;
 WCAG 2.1 AA needs 4.5:1. Red is the rationed accent, so it cannot carry body
-copy either — a page set in red is unreadable whatever the ratio says.
+copy either, a page set in red is unreadable whatever the ratio says.
 
 The show site sidesteps this by setting text in black or white. A type-led
 corporate site cannot, so `DESIGN-TOKENS.md` proposes a dark ink plus a clay
@@ -198,7 +196,7 @@ the brief says retain the existing palette, so Conor should approve them
 explicitly rather than have them slipped in.
 
 ### 21. There is no usable CLÉ Family Media logo, and no real photography of anyone
-**BLOCKING — stages 1, 4, 5, 6.**
+**BLOCKING, stages 1, 4, 5, 6.**
 
 Two separate gaps, both serious for a credibility site.
 
@@ -234,7 +232,7 @@ AI-generated too, not photography of a real garden.
 The site's most important trust page tells investors and educators that AI is a
 production tool inside a human-led process and never the author. If a journalist
 drops the site's own hero image into a detector, or simply reads the filenames in
-the kit, the position has to hold up. It probably does for *show frames* — those
+the kit, the position has to hold up. It probably does for *show frames*, those
 are the animated output of the production pipeline, and a cartoon is not passed
 off as a photograph. It does not hold for a **founder's face**, a **company
 logo**, or a **photograph of the real garden**.
@@ -251,16 +249,16 @@ Proposed line, needs Conor's sign-off before any of it is built:
   plainly on `/ethical-ai`. Hiding it is the bigger risk.
 
 ### 23. Do real photographs of the garden, the pugs or the team exist at all?
-**BLOCKING — stages 3 and 5.** Follows from #22.
+**BLOCKING, stages 3 and 5.** Follows from #22.
 
 Nothing in the kit is a photograph. If real photography of the garden, the real
 pugs behind Finn and Fia, or the team exists on Conor's phone, a camera roll or
-a hard drive, it is the single highest-value thing he can send. If it does not
+a hard drive: it is the single highest-value thing he can send. If it does not
 exist, a shoot needs scheduling now, because it gates the home hero, `/story`
 and `/team`, and four weeks is not long.
 
 ### 24. Is `wall 000.jpg` / `wall 001.jpg` the official palette sheet?
-**OPEN — confirms stage 1.** Both are flat two-tone clay-over-cream swatches and
+**OPEN, confirms stage 1.** Both are flat two-tone clay-over-cream swatches and
 match the live site CSS to within JPEG drift, which is why they were treated as
 the palette source. Worth one line of confirmation that they are the intended
 brand swatches and not a set dressing texture that happens to match.
@@ -340,7 +338,7 @@ Needed: permission to name the episode, and enough detail to describe what was
 caught and what changed. Not written yet, because inventing the specifics of a
 real production incident would be worse than leaving it out.
 
-### 30. Evidence, and what may not be shown
+### 30. Evidence: and what may not be shown
 The handoff rules out displaying, without approval and supporting records:
 school names, participant images, partner logos, expert quotations, view counts,
 and the "100 plus settings" figure. The evidence section is built to separate

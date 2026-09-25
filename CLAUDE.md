@@ -1,4 +1,4 @@
-# CLÉ Family Media — corporate website
+# CLÉ Family Media, corporate website
 
 Paid client build for MTMN Digital. Production work, not a demo.
 
@@ -7,7 +7,7 @@ Paid client build for MTMN Digital. Production work, not a demo.
 The **company** site for CLÉ Family Media, the Irish company behind the
 children's show *The Pawsitive Pugs & Pals®*.
 
-`pawsitivepugs.com` is the **show** site — playful, character-led, for kids and
+`pawsitivepugs.com` is the **show** site, playful, character-led, for kids and
 parents. **It stays live and unchanged. We are not migrating it.** The two sites
 link clearly to each other in both directions.
 
@@ -18,26 +18,26 @@ This site's job is **credibility**. Audiences in priority order:
 4. Parents who want to know who is behind what their children watch
 
 Someone with money or distribution power should land here and conclude this is a
-serious, research-backed, human-led children's media company — not a YouTube
+serious, research-backed, human-led children's media company, not a YouTube
 channel.
 
 Positioning to carry through every page: **edutainment. Watch, Play, Learn.
 Parents helping parents. Responsible, human-led use of AI. Research underpinning
 the model.**
 
-## Stack — non-negotiable
+## Stack, non-negotiable
 
 - Vite + React + TypeScript
 - Tailwind CSS + shadcn/ui
-- Supabase (Postgres, Auth, Storage) — CMS and product files
+- Supabase (Postgres, Auth, Storage), CMS and product files
 - Stripe Checkout via Vercel serverless functions in `/api`
 - Vercel hosting, GitHub repo under `Alanb-21`
 - `react-router-dom` routing, `react-helmet-async` per-page meta
 
 No page builders, no WordPress, no third-party CMS. The admin panel is part of
-this codebase. Don't over-engineer — build what the brief specifies, no more.
+this codebase. Don't over-engineer, build what the brief specifies, no more.
 
-## Spelling — get these right everywhere
+## Spelling, get these right everywhere
 
 - The show: **The Pawsitive Pugs & Pals®**
 - The player: **PupsPlayer™**
@@ -64,7 +64,7 @@ migrated) and `GRADIENTS` (the design rules rule gradients out).
 
 **Reading from it:** every image, logo and font comes from this folder unless
 told otherwise. Copy into the repo at `public/brand/` and `src/assets/`,
-optimised — WebP and AVIF at 1x and 2x, compressed, metadata stripped.
+optimised, WebP and AVIF at 1x and 2x, compressed, metadata stripped.
 Originals untouched. Never link to the folder directly from code.
 
 **Writing back to it:** anything generated (optimised exports, favicon set, OG
@@ -81,15 +81,14 @@ typography. Sister brand to the show, not a new one.
 
 - Raise the level: white space, strong type hierarchy, editorial grid,
   restrained motion. Annual report crossed with a design studio site.
-- **People first.** Real photography of founders, team, advisors, process —
-  faces, hands, workspaces, the garden.
+- **People first.** Real photography of founders, team, advisors, process, faces, hands, workspaces, the garden.
 - **Characters are supporting cast.** Finn, Fia and the rest appear as small
   accents, watermarks, section markers, or one dedicated module. They never lead
   a page on this site.
-- Watercolour treatment as connective tissue is worth exploring — soft washes,
+- Watercolour treatment as connective tissue is worth exploring, soft washes,
   torn edges, paper grain. Subtle. Craft, not a children's colouring page.
 - The garden that inspired the show's world is a strong hero candidate.
-- Reference: `m.ind.coach` — corporate but warm and nostalgic, type-led.
+- Reference: `m.ind.coach`, corporate but warm and nostalgic, type-led.
 
 ### Hard rules
 
@@ -114,15 +113,14 @@ details, email, social, both-site cross-links, copyright.
 `/ethical-ai` is the most important trust page for investors and educators.
 Position (AI as a production tool in a human-led process, never the author of
 children's content), the process step by step, and the safeguards and red lines.
-Build it as a proper explainer with a process diagram or numbered stages — not
+Build it as a proper explainer with a process diagram or numbered stages, not
 three paragraphs.
 
 ## CMS
 
 Admin panel at `/admin`, Supabase Auth (email + password, single admin role,
 extensible). Conor must be able to change any photo, paragraph or link, publish a
-journal post, add a podcast entry, add a product, and flip the app live —
-**on his own, from his phone, without training.**
+journal post, add a podcast entry, add a product, and flip the app live, **on his own, from his phone, without training.**
 
 Tables: `content_blocks` · `posts` · `categories` · `people` · `media_items` ·
 `products` · `orders` · `enquiries` · `settings`
@@ -135,7 +133,7 @@ through the authenticated admin. The private bucket is never publicly readable.
 
 ## Shop
 
-Downloadable PDFs around €3–4. Product page → `/api/create-checkout-session`
+Downloadable PDFs around €3-4. Product page → `/api/create-checkout-session`
 (**price from the database, never the client**) → Stripe → `/api/stripe-webhook`
 verifies signature, creates `orders` row and single-use download token →
 `/download/:token` serves a signed URL. Token valid 24 hours, capped at five
@@ -145,14 +143,14 @@ No account, no email gate, no signup. Stripe collects email for its own receipt;
 we don't require it and never add anyone to a mailing list from a purchase.
 
 Test keys until the client provides live keys. **Keys in env vars only, never in
-the repo.** VAT on digital goods is for the client and their accountant — do not
+the repo.** VAT on digital goods is for the client and their accountant, do not
 guess the treatment.
 
 ## Guardrails
 
 - Do not migrate episode pages, colouring resources or show content. Link to it.
 - Do not let characters take over. This site sells the company.
-- **Do not write claims the client has not given you** — no invented statistics,
+- **Do not write claims the client has not given you**, no invented statistics,
   fake testimonials, "trusted by" logos, awards, user numbers or research
   findings. A credibility block with no supplied claim stays empty and gets
   listed in `CONTENT-NEEDED.md`.
@@ -172,18 +170,17 @@ dimensions, visible label), add it to `CONTENT-NEEDED.md`, keep moving.
 
 Keep `QUESTIONS.md` current. Add to it rather than guessing.
 
-## Build order — stop at each gate
+## Build order, stop at each gate
 
-1. Asset audit and design tokens — **gate: client approves tokens**
+1. Asset audit and design tokens, **gate: client approves tokens**
 2. Scaffold, Supabase schema + RLS, deploy pipeline, blank shell on Vercel
-3. Three home directions at `/preview/a`, `/preview/b`, `/preview/c` —
-   **gate: client picks a direction**
+3. Three home directions at `/preview/a`, `/preview/b`, `/preview/c`, **gate: client picks a direction**
 4. Design system and global layout locked
 5. Home, final
 6. Founder story, Team and advisors, Ethical AI
 7. Journal: index, post template, categories, CMS wiring
 8. App page + pre-launch state + launch toggle. Media and podcast page
-9. Shop and Stripe end to end — **gate: purchase-to-download test with client**
+9. Shop and Stripe end to end, **gate: purchase-to-download test with client**
 10. Contact, utility pages, 404
 11. Admin panel polish + walkthrough video for Conor
 12. SEO, performance, accessibility pass. Cross-linking with the show site
@@ -201,5 +198,4 @@ WCAG 2.1 AA verified. Four weeks of build, joint launch with the app mid-October
 
 ## Current state
 
-Stage 0. `QUESTIONS.md` and `CONTENT-NEEDED.md` exist. No application code yet —
-the token gate is not passed because the brand kit has not been read.
+Stage 0. `QUESTIONS.md` and `CONTENT-NEEDED.md` exist. No application code yet, the token gate is not passed because the brand kit has not been read.

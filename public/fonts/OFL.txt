@@ -1,8 +1,8 @@
 Calistoga and Montserrat are used here under the SIL Open Font License, Version 1.1.
 
-Calistoga  — Copyright (c) The Calistoga Project Authors.
+Calistoga, Copyright (c) The Calistoga Project Authors.
              https://github.com/googlefonts/calistoga
-Montserrat — Copyright (c) The Montserrat Project Authors.
+Montserrat, Copyright (c) The Montserrat Project Authors.
              https://github.com/JulietaUla/Montserrat
 
 Full licence text: https://openfontlicense.org/open-font-license-official-text/
