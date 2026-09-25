@@ -4,6 +4,7 @@ import { NAV, SITE } from "@/lib/site";
 import { Wordmark } from "@/components/Wordmark";
 import { IconExternal, IconMail } from "@/components/icons";
 import { Container, TextLink } from "@/components/ui";
+import { SmoothScroll } from "@/components/SmoothScroll";
 
 function ShowSiteLink({ className = "" }: { className?: string }) {
   return (
@@ -189,6 +190,7 @@ export function Layout() {
   }, [pathname]);
 
   return (
+    <SmoothScroll>
     <div className="flex min-h-screen flex-col">
       <a
         href="#main"
@@ -202,6 +204,7 @@ export function Layout() {
         <Outlet />
       </main>
       <Footer />
-    </div>
+      </div>
+    </SmoothScroll>
   );
 }

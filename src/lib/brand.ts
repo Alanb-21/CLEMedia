@@ -177,14 +177,19 @@ const assets = {
      `brand.cle` and `brand.show` are the felted CLE mark and the felted show
      wordmark, and both are already here and in use.
 
-     CLAUDE.md lists TITLE SLATES as "not relevant: show content, not
-     migrated". That was written when this site's job was credibility. The job
-     is now to show the series, so the plates are the content.
+     FILLED 2026-09-25 from the four public YouTube uploads, at David's go:
+     maxresdefault thumbnails, which are the show's own artwork and the frames
+     Conor himself chose per episode. Optimised into the house AVIF, WebP and
+     JPG pipeline at 1x and 2x with metadata stripped.
+
+     These can be swapped for the kit's TITLE SLATES exports whenever Alan
+     pulls them; the slot names do not change. Flagged to Conor in
+     CONTENT-NEEDED.md so he can substitute preferred stills.
   ───────────────────────────────────────────────────────────────────────── */
-  "slate.ep1": { base: null, alt: "Episode one, The Feather", width: 1200, height: 900, label: "TITLE SLATES: episode 001 The Feather", fallback: "png" },
-  "slate.ep2": { base: null, alt: "Episode two, Chicken Vision", width: 1200, height: 900, label: "TITLE SLATES: episode 002 Chicken Vision", fallback: "png" },
-  "slate.ep3": { base: null, alt: "Episode three, The Strawberry", width: 1200, height: 900, label: "TITLE SLATES: episode 003 The Strawberry", fallback: "png" },
-  "slate.ep4": { base: null, alt: "Episode four, Cuckoo", width: 1200, height: 900, label: "TITLE SLATES: episode 004 Cuckoo", fallback: "png" },
+  "slate.ep1": { base: "/brand/slate-ep1", alt: "Episode one, The Feather, its felted title slate", width: 640, height: 360, label: "Episode still" },
+  "slate.ep2": { base: "/brand/slate-ep2", alt: "Episode two, The Strawberry, its felted title slate", width: 640, height: 360, label: "Episode still" },
+  "slate.ep3": { base: "/brand/slate-ep3", alt: "Episode three, Chicken Vision, its felted title slate", width: 640, height: 360, label: "Episode still" },
+  "slate.ep4": { base: "/brand/slate-ep4", alt: "Episode four, The Cuckoo\u2019s Incredible Journey, its felted title slate", width: 640, height: 360, label: "Episode still" },
 
   "app.screen1": { base: null, alt: "PupsPlayer episode library", width: 540, height: 960, label: "App screenshot 1", fallback: "png" },
   "app.screen2": { base: null, alt: "PupsPlayer play activity", width: 540, height: 960, label: "App screenshot 2", fallback: "png" },

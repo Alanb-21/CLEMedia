@@ -308,3 +308,139 @@ body > * { position: relative; z-index: 1; }
 }
 .drift { animation: drift 9s ease-in-out infinite; }
 .drift-slow { animation: drift 13s ease-in-out infinite; }
+
+/* ---------------------------------------------------------------------------
+   Reveals: clip-path wipes, not fades.
+
+   Probing the reference sites headless found the same thing on three of five:
+   content is unmasked from an edge with `inset(0 0 100%)` to `inset(0)`. The
+   fade-up-on-scroll is the tell, and `.settle` was exactly that, so this
+   replaces it as the default reveal.
+
+   TRAP, found the hard way and worth keeping written down: IntersectionObserver
+   accounts for clipping. An element clipped to zero height by its own clip-path
+   reports intersectionRatio 0 forever and can never trigger its own reveal. The
+   observer therefore goes on the WRAPPER, which is never clipped, and the
+   wrapper toggles the child.
+--------------------------------------------------------------------------- */
+.wipe > * {
+  clip-path: inset(0 0 100% 0);
+  transition:
+    clip-path 0.95s cubic-bezier(0.16, 1, 0.3, 1) calc(var(--i, 0) * 90ms),
+    opacity 0.5s linear calc(var(--i, 0) * 90ms);
+  opacity: 0.001;
+}
+.wipe.is-in > * {
+  clip-path: inset(0 0 0 0);
+  opacity: 1;
+}
+/* Only JS ever arms it, so no JS, a crawler, a prerender and reduced motion all
+   get finished content rather than a page clipped to nothing. */
+.wipe:not(.is-armed) > * {
+  clip-path: none;
+  opacity: 1;
+  transition: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .wipe > *, .wipe.is-armed > * { clip-path: none !important; opacity: 1 !important; transition: none !important; }
+}
+
+/* ---------------------------------------------------------------------------
+   The filmstrip.
+
+   Perforated stock: two sprocket rails running the width of the strip, with the
+   slates between them. The holes are one repeating radial gradient rather than
+   markup, so the count adapts to the width for free.
+--------------------------------------------------------------------------- */
+.filmstrip {
+  background: #1a1614;
+  border-radius: var(--radius-md);
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.06) inset,
+    0 26px 50px -34px rgba(40, 30, 18, 0.7);
+}
+.sprockets {
+  display: block;
+  height: 20px;
+  background-image: radial-gradient(
+    circle at 11px 50%,
+    rgba(246, 240, 226, 0.9) 0 4.2px,
+    transparent 4.6px
+  );
+  background-size: 26px 100%;
+  background-repeat: repeat-x;
+}
+.sprockets-top { border-radius: var(--radius-md) var(--radius-md) 0 0; }
+.sprockets-bottom { border-radius: 0 0 var(--radius-md) var(--radius-md); }
+
+.filmstrip-rail {
+  scroll-snap-type: x proximity;
+  scrollbar-width: none;
+  padding-inline: 1.25rem;
+  cursor: grab;
+}
+.filmstrip-rail::-webkit-scrollbar { display: none; }
+.filmstrip-rail:active { cursor: grabbing; }
+.filmstrip-rail > li { scroll-snap-align: center; }
+
+/* A slate inside the strip sits on the dark stock, so its own chrome loses the
+   paper card treatment and keeps only the frame. */
+.filmstrip-rail .card {
+  background-image: linear-gradient(160deg, rgba(253, 248, 237, 0.97), rgba(247, 239, 223, 0.9));
+}
+
+/* ---------------------------------------------------------------------------
+   Grid breaking. Three utilities, used sparingly and never together on the
+   same element, because a page where everything is off-axis is just a
+   different kind of flat.
+--------------------------------------------------------------------------- */
+/* Lets an object cross the boundary between two bands. */
+.bleed-up { margin-top: clamp(-7rem, -6vw, -3rem); }
+.bleed-down { margin-bottom: clamp(-7rem, -6vw, -3rem); }
+/* Pushes a block off the centre axis the rest of the page sits on. */
+.off-left { margin-right: auto; margin-left: 0; }
+.off-right { margin-left: auto; margin-right: 0; }
+@media (min-width: 1024px) {
+  .off-left { transform: translateX(-3.5%); }
+  .off-right { transform: translateX(3.5%); }
+}
+/* Placed by hand, not by a grid. */
+.tilt-a { transform: rotate(-0.8deg); }
+.tilt-b { transform: rotate(0.6deg); }
+
+@media (prefers-reduced-motion: reduce) {
+  .filmstrip-rail { scroll-behavior: auto; }
+}
+
+/* ---------------------------------------------------------------------------
+   The stage stack. Sticky, not scripted: each card pins and the next rides
+   over it, offset so the deck edge stays visible underneath.
+--------------------------------------------------------------------------- */
+.stage-stack { display: block; }
+.stage-stack-item {
+  position: sticky;
+  /* Each card needs scroll distance of its own, or they all arrive at once
+     and the stack never reads as a sequence. */
+  min-height: 62vh;
+  /* Each card pins a little lower than the one before, so the stack reads as
+     a deck rather than one card being replaced. */
+  top: calc(12vh + var(--n) * 2.2rem);
+  padding-bottom: 2.5rem;
+}
+/* A stacked card MUST be opaque. The default .card fill is a translucent
+   gradient, which is right when one card sits on paper and wrong the moment
+   two of them overlap: the card beneath reads straight through the one on top. */
+.stage-stack-item > .card {
+  background-image: none;
+  background-color: #fdf8ed;
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.85) inset,
+    0 30px 60px -38px rgba(60, 50, 28, 0.5),
+    0 2px 6px -2px rgba(60, 50, 28, 0.06);
+}
+/* Sticky needs room to travel, so the list gets height from its children only.
+   On a short viewport the pin is pointless and the stack goes plain. */
+@media (max-height: 640px), (prefers-reduced-motion: reduce) {
+  .stage-stack-item { position: static; padding-bottom: 1.25rem; }
+}

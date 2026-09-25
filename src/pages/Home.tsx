@@ -2,10 +2,14 @@ import { useState, type FormEvent } from "react";
 import { Seo, organizationJsonLd } from "@/components/Seo";
 import { Figure } from "@/components/Figure";
 import { Settle } from "@/components/Settle";
+import { Wipe } from "@/components/Wipe";
+import { type Episode } from "@/components/home/EpisodeSlate";
+import { FilmStrip } from "@/components/home/FilmStrip";
+import { StageStack, type Stage } from "@/components/home/StageStack";
 import { ReviewGateScene } from "@/components/home/ReviewGateScene";
 import {
-  Button, Card, Container, Kicker, Lead, Rail, Section,
-  SectionHeading, TextLink, Tile, type RailItem,
+  Button, Card, Container, Kicker, Lead, Section,
+  SectionHeading, TextLink,
 } from "@/components/ui";
 import { IconArrow, IconExternal, IconMail } from "@/components/icons";
 import { SITE } from "@/lib/site";
@@ -25,19 +29,32 @@ import { SITE } from "@/lib/site";
    from what exists instead, and the gap is listed in CONTENT-NEEDED.md.
    ========================================================================== */
 
-const MODEL: RailItem[] = [
-  { index: "01", title: "Watch", body: "An episode, together. Calm stories paced for how young children actually take things in, with nothing autoplaying into something nobody chose." },
-  { index: "02", title: "Play", body: "A pause for a movement or breathing prompt, so the episode becomes something a child does rather than only sees." },
-  { index: "03", title: "Learn", body: "A printable or an educator-designed activity afterwards, moving the learning off the screen entirely." },
+const STAGES: Stage[] = [
+  { n: "01", title: "Watch", body: "An episode, together. Calm stories paced for how young children actually take things in, with nothing autoplaying into something nobody chose." },
+  { n: "02", title: "Play", body: "A pause for a movement or breathing prompt, so the episode becomes something a child does rather than only sees." },
+  { n: "03", title: "Learn", body: "A printable or an educator-designed activity afterwards, moving the learning off the screen entirely." },
 ];
 
 /* Titles and synopses are the show's own, from its site. Runtime, age range and
    theme are not known and are not invented. */
-const EPISODES = [
-  { n: "001", title: "The Feather", line: "A drifting feather leads Finn and Fia on a garden adventure where slowing down helps them discover the hidden beauty of the tiny world around them." },
-  { n: "002", title: "Chicken Vision", line: "Finn and Fia meet a hen who sees the garden differently, and discover the world can look magical in many different ways." },
-  { n: "003", title: "The Strawberry", line: "After a rainy night in the garden, Finn and Fia help a tiny field mouse reach a strawberry just out of reach." },
-  { n: "004", title: "Cuckoo", line: "Finn and Fia go on a new adventure and meet a cuckoo who has travelled a very long way to get back to the garden." },
+/* Episode numbers, titles and runtimes are the REAL ones, read off the felted
+   title slates and the YouTube metadata, not off the show site's section
+   ordering, which lists them in a different sequence. The Strawberry is 002 and
+   Chicken Vision is 003; the show site implies the reverse. Runtimes are the
+   actual durations. */
+const EPISODES: Episode[] = [
+  { n: "001", title: "The Feather", runtime: "9:16", asset: "slate.ep1",
+    href: "https://www.youtube.com/watch?v=duMH0f12JM0",
+    line: "A drifting feather leads Finn and Fia on a garden adventure where slowing down helps them discover the hidden beauty of the tiny world around them." },
+  { n: "002", title: "The Strawberry", runtime: "11:10", asset: "slate.ep2",
+    href: "https://www.youtube.com/watch?v=ZzhkZJgQEK0",
+    line: "After a rainy night in the garden, Finn and Fia help a tiny field mouse reach a strawberry just out of reach." },
+  { n: "003", title: "Chicken Vision", runtime: "10:41", asset: "slate.ep3",
+    href: "https://www.youtube.com/watch?v=CpgIzsn500Q",
+    line: "Finn and Fia meet a hen who sees the garden differently, and discover the world can look magical in many different ways." },
+  { n: "004", title: "The Cuckoo's Incredible Journey", runtime: "9:58", asset: "slate.ep4",
+    href: "https://www.youtube.com/watch?v=yHYYBpMfE6M",
+    line: "Finn and Fia go on a new adventure and meet a cuckoo who has travelled a very long way to get back to the garden." },
 ];
 
 /* No portraits. Four empty portrait frames were four more blank rectangles on a
@@ -166,74 +183,58 @@ export default function Home() {
         </Container>
       </Section>
 
-      {/* ═══ 3. THE MODEL, against the swing. The art is the left column. ═══ */}
-      <Section labelledBy="model-h" className="!py-0">
-        <div className="grid items-stretch lg:grid-cols-[0.9fr_1.1fr]">
-          <Figure
-            asset="story.garden" fill
-            rounded="rounded-none"
-            className="h-[46vh] min-h-[320px] w-full lg:h-full"
-            sizes="(min-width: 1024px) 45vw, 100vw"
-          />
-          <div className="px-5 py-20 sm:px-10 lg:px-16 lg:py-28">
-            <Settle>
-              <SectionHeading
-                id="model-h"
-                kicker="The model"
-                title="One episode, three stages"
-                lead="Designed to move a child from the screen into play and conversation, rather than to hold them in front of it."
+      {/* ═══ 3. THE MODEL. The one genuine sequence on the page, so the one
+          thing that pins: each stage sticks and the next rides over it. The
+          garden runs alongside it, crossing up into the band above. ═══ */}
+      <Section labelledBy="model-h" className="!pt-0">
+        <Container width="wide">
+          <div className="grid gap-12 lg:grid-cols-[0.82fr_1.18fr] lg:gap-16">
+            <div className="lg:sticky lg:top-[14vh] lg:self-start">
+              <Figure
+                asset="story.garden"
+                rounded="rounded-[var(--radius-lg)]"
+                className="tilt-a bleed-up shadow-[0_30px_60px_-38px_rgba(60,50,28,0.55)]"
+                sizes="(min-width: 1024px) 40vw, 92vw"
               />
-            </Settle>
-            <Settle className="mt-10">
-              <Rail items={MODEL} />
-            </Settle>
+              <div className="mt-10">
+                <SectionHeading
+                  id="model-h"
+                  kicker="The model"
+                  title="One episode, three stages"
+                  lead="Designed to move a child from the screen into play and conversation, rather than to hold them in front of it."
+                />
+              </div>
+            </div>
+            <StageStack stages={STAGES} />
           </div>
-        </div>
+        </Container>
       </Section>
 
-      {/* ═══ 4. THE SERIES. The felted wordmark leads it, the characters
-          carry it, the four episodes sit underneath as text. ═══ */}
+      {/* ═══ 4. THE SERIES. A filmstrip, because perforated stock IS the
+          trade. Runs sideways to break the vertical stack, and the header sits
+          off the centre axis the rest of the page uses. ═══ */}
       <Section labelledBy="series-h">
         <Container width="wide">
-          <Settle className="text-center">
+          <Wipe className="off-left max-w-[44rem]">
             <Figure
               asset="brand.show"
               rounded="rounded-[var(--radius-lg)]"
-              className="mx-auto w-full max-w-[460px]"
-              sizes="460px"
+              className="tilt-b w-full max-w-[380px]"
+              sizes="380px"
             />
-            <h2 id="series-h" className="t-h2 mx-auto mt-8 max-w-[20ch]">Our first original series</h2>
-            <Lead className="mx-auto mt-5">
+            <h2 id="series-h" className="t-h2 mt-8 max-w-[18ch]">Our first original series</h2>
+            <Lead className="mt-5">
               Finn, the fawn pug, and Fia, the black pug, in a garden that rewards slowing down.
-              Four episodes released so far.
+              Four episodes released so far, nine to eleven minutes each.
             </Lead>
-          </Settle>
-
-          <Settle className="mt-12">
-            <Card className="overflow-hidden p-3">
-              <Figure
-                asset="home.characters" fill
-                rounded="rounded-[var(--radius-md)]"
-                className="h-[38vh] min-h-[260px] w-full"
-                sizes="(min-width: 1280px) 1100px, 92vw"
-              />
-            </Card>
-          </Settle>
-
-          <Settle className="mt-8 grid gap-4 sm:grid-cols-2">
-            {EPISODES.map((ep) => (
-              <Tile key={ep.n} className="p-6">
-                <p className="eyebrow">Episode {ep.n}</p>
-                <h3 className="t-h3 mt-3">{ep.title}</h3>
-                <p className="t-body mt-2 text-body">{ep.line}</p>
-              </Tile>
-            ))}
-          </Settle>
-
-          <Settle className="mt-9 text-center">
-            <Button href={SITE.showUrl}>Watch the episodes<IconExternal size={15} /></Button>
-          </Settle>
+          </Wipe>
         </Container>
+
+        <div className="mt-14">
+          <Container width="wide">
+            <FilmStrip episodes={EPISODES} />
+          </Container>
+        </div>
       </Section>
 
       {/* ═══ 5. WHO CHECKS IT ═══ */}
