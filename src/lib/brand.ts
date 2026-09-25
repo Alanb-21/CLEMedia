@@ -44,6 +44,12 @@ export interface BrandAsset {
    * a mismatch 404s loudly instead, but it still has to be right.
    */
   fallback?: "jpg" | "png";
+  /**
+   * Set when no AVIF exists for this asset. <picture> does NOT fall through to
+   * the next source if the one it chose 404s, so emitting an AVIF source for a
+   * file that is not there shows a broken image in every AVIF-capable browser.
+   */
+  noAvif?: boolean;
 }
 
 const assets = {
@@ -95,11 +101,16 @@ const assets = {
     fallback: "png",
   },
   "brand.cle": {
-    base: "/brand/cle-logo",
+    /* Keyed off its green backdrop 2026-09-25. The source render sits on a
+       deep green that appears nowhere else in the palette, so dropped onto the
+       clay ground it read as a pasted-in tile. The knockout is a measured
+       chroma key on greenness plus a shadow pass, not a threshold guess. */
+    base: "/brand/cle-mark",
     alt: "The CLÉ Family Media logo, the letters formed from needle-felted animals",
-    width: 900, height: 900,
+    width: 591, height: 591,
     label: "CLÉ Family Media logo",
-    fallback: "jpg",
+    fallback: "png",
+    noAvif: true,
   },
   "brand.show": {
     base: "/brand/show-logo",

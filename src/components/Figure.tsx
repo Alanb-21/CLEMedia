@@ -53,11 +53,13 @@ export function Figure({
   const ext = a.fallback ?? "jpg";
   return (
     <picture className={fill ? "block h-full w-full" : undefined}>
-      <source
-        type="image/avif"
-        srcSet={`${a.base}.avif 1x, ${a.base}@2x.avif 2x`}
-        sizes={sizes}
-      />
+      {!a.noAvif && (
+        <source
+          type="image/avif"
+          srcSet={`${a.base}.avif 1x, ${a.base}@2x.avif 2x`}
+          sizes={sizes}
+        />
+      )}
       <source
         type="image/webp"
         srcSet={`${a.base}.webp 1x, ${a.base}@2x.webp 2x`}

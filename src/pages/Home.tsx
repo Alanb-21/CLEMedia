@@ -5,7 +5,7 @@ import { Settle } from "@/components/Settle";
 import { Wipe } from "@/components/Wipe";
 import { type Episode } from "@/components/home/EpisodeSlate";
 import { FilmStrip } from "@/components/home/FilmStrip";
-import { StageStack, type Stage } from "@/components/home/StageStack";
+import { type Stage } from "@/components/home/StageStack";
 import { ReviewGateScene } from "@/components/home/ReviewGateScene";
 import {
   Button, Card, Container, Kicker, Lead, Section,
@@ -119,41 +119,54 @@ export default function Home() {
         jsonLd={organizationJsonLd}
       />
 
-      {/* ═══ 1. HERO. The company's own felted mark, large, the way the show
-          site opens on its felted wordmark. Then the line, then the art. ═══ */}
-      <Section className="!pb-0 !pt-14 sm:!pt-16">
+      {/* ═══ 1. HERO. The mark carries it, but placed rather than centred:
+          it sits in the left column at real size against the headline, with
+          the garden as a framed object beside them, not a full-bleed band.
+          The previous version stacked a centred logo, a headline, two buttons
+          and then a big picture, which is the most conventional shape there
+          is. ═══ */}
+      {/* pt-0: the mark hangs on strings that run off its top edge, so they have
+          to meet the header rather than start in mid air. */}
+      <Section className="!pt-0">
         <Container width="wide">
-          <Settle className="text-center">
-            <Figure
-              asset="brand.cle"
-              priority
-              rounded="rounded-[var(--radius-xl)]"
-              className="mx-auto w-full max-w-[420px]"
-              sizes="420px"
-            />
-            <h1 className="t-display mx-auto mt-10 max-w-[16ch]">
-              Children's media made by people
-            </h1>
-            <Lead className="mx-auto mt-6">
-              Calm stories for young children, and the activities that take them off the screen
-              afterwards. Every episode is reviewed by a named person before it is released.
-            </Lead>
-            <div className="mt-9 flex flex-wrap items-center justify-center gap-4">
-              <Button to="/ethical-ai">How we make it<IconArrow size={16} /></Button>
-              <Button href={SITE.showUrl} variant="quiet">Visit the show<IconExternal size={15} /></Button>
-            </div>
-          </Settle>
-        </Container>
+          <div className="grid items-center gap-12 lg:grid-cols-[1.05fr_0.95fr] lg:gap-16">
+            <Settle>
+              {/* The width lives on the wrapper, not on the Figure. Figure puts
+                  `w-full` on its own <img>, and Tailwind resolves a conflict
+                  between two width utilities by stylesheet order, not by the
+                  order they appear in the class attribute, so a `w-[clamp(...)]`
+                  passed in as className loses and the mark renders full column. */}
+              <div className="w-[clamp(190px,24vw,280px)]">
+                <Figure
+                  asset="brand.cle"
+                  priority
+                  rounded="rounded-none"
+                  className="drop-shadow-[0_18px_28px_rgba(74,53,42,0.18)]"
+                  sizes="280px"
+                />
+              </div>
+              <h1 className="t-display mt-10 max-w-[13ch]">Children's media made by people</h1>
+              <Lead className="mt-7">
+                Calm stories for young children, and the activities that take them off the screen
+                afterwards. Every episode is reviewed by a named person before it is released.
+              </Lead>
+              <div className="mt-9 flex flex-wrap items-center gap-4">
+                <Button to="/ethical-ai">How we make it<IconArrow size={16} /></Button>
+                <Button href={SITE.showUrl} variant="quiet">Visit the show<IconExternal size={15} /></Button>
+              </div>
+            </Settle>
 
-        {/* The garden the show is set in, full bleed. */}
-        <Settle className="mt-16">
-          <Figure
-            asset="home.hero" fill position="50% 62%"
-            rounded="rounded-none"
-            className="h-[42vh] min-h-[280px] w-full sm:h-[52vh]"
-            sizes="100vw"
-          />
-        </Settle>
+            <Settle className="lg:pl-6">
+              <Card className="tilt-b overflow-hidden p-2.5">
+                <Figure
+                  asset="home.hero"
+                  rounded="rounded-[var(--radius-md)]"
+                  sizes="(min-width: 1024px) 44vw, 92vw"
+                />
+              </Card>
+            </Settle>
+          </div>
+        </Container>
       </Section>
 
       {/* ═══ 2. THESIS ═══ */}
@@ -183,29 +196,37 @@ export default function Home() {
         </Container>
       </Section>
 
-      {/* ═══ 3. THE MODEL. The one genuine sequence on the page, so the one
-          thing that pins: each stage sticks and the next rides over it. The
-          garden runs alongside it, crossing up into the band above. ═══ */}
-      <Section labelledBy="model-h" className="!pt-0">
+      {/* ═══ 3. THE MODEL. Three across, not a pinned stack. A sticky stack
+          spends the reader's scroll to deliver its content, and three cards of
+          two lines each do not earn 186vh of it. ═══ */}
+      <Section labelledBy="model-h">
         <Container width="wide">
-          <div className="grid gap-12 lg:grid-cols-[0.82fr_1.18fr] lg:gap-16">
-            <div className="lg:sticky lg:top-[14vh] lg:self-start">
-              <Figure
-                asset="story.garden"
-                rounded="rounded-[var(--radius-lg)]"
-                className="tilt-a bleed-up shadow-[0_30px_60px_-38px_rgba(60,50,28,0.55)]"
-                sizes="(min-width: 1024px) 40vw, 92vw"
+          <div className="grid gap-12 lg:grid-cols-[0.8fr_1.2fr] lg:gap-16">
+            <Settle>
+              <SectionHeading
+                id="model-h"
+                kicker="The model"
+                title="One episode, three stages"
+                lead="Designed to move a child from the screen into play and conversation, rather than to hold them in front of it."
               />
-              <div className="mt-10">
-                <SectionHeading
-                  id="model-h"
-                  kicker="The model"
-                  title="One episode, three stages"
-                  lead="Designed to move a child from the screen into play and conversation, rather than to hold them in front of it."
+              <Card className="tilt-a mt-10 overflow-hidden p-2.5">
+                <Figure
+                  asset="story.garden"
+                  rounded="rounded-[var(--radius-md)]"
+                  sizes="(min-width: 1024px) 34vw, 92vw"
                 />
-              </div>
-            </div>
-            <StageStack stages={STAGES} />
+              </Card>
+            </Settle>
+
+            <Settle className="grid gap-5 sm:grid-cols-3 lg:self-start">
+              {STAGES.map((st) => (
+                <Card key={st.n} className="flex h-full flex-col p-7">
+                  <span className="tnum font-mono text-[13px] tracking-[0.16em] text-red-deep">{st.n}</span>
+                  <h3 className="t-h3 mt-4 font-display">{st.title}</h3>
+                  <p className="t-body mt-3 text-slate">{st.body}</p>
+                </Card>
+              ))}
+            </Settle>
           </div>
         </Container>
       </Section>
