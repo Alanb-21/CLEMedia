@@ -86,8 +86,10 @@ export function FilmStrip({ episodes }: { episodes: Episode[] }) {
 
   return (
     <div className="relative">
-      {/* Controls sit with the count, not floating over the art. */}
-      <div className="mb-6 flex items-center gap-4 px-[var(--rail-pad,0)]">
+      {/* Controls sit with the count, not floating over the art. The right
+          gutter is theirs alone: the strip below bleeds off the page edge, and
+          a button hard against that edge reads as clipped. */}
+      <div className="mb-6 flex items-center gap-4 pr-5 sm:pr-8">
         <p className="font-mono text-[11px] uppercase tracking-[0.18em] text-deep">
           {episodes.length} episodes
         </p>

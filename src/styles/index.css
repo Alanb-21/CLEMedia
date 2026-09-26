@@ -463,34 +463,19 @@ body > * { position: relative; z-index: 1; }
   .filmstrip-rail { scroll-behavior: auto; }
 }
 
+
 /* ---------------------------------------------------------------------------
-   The stage stack. Sticky, not scripted: each card pins and the next rides
-   over it, offset so the deck edge stays visible underneath.
+   The strip runs off the right edge of the page, because film does not stop at
+   a container. Its left edge stays on the wide container's gutter so the first
+   slate lines up with the heading above it.
 --------------------------------------------------------------------------- */
-.stage-stack { display: block; }
-.stage-stack-item {
-  position: sticky;
-  /* Each card needs scroll distance of its own, or they all arrive at once
-     and the stack never reads as a sequence. */
-  min-height: 62vh;
-  /* Each card pins a little lower than the one before, so the stack reads as
-     a deck rather than one card being replaced. */
-  top: calc(12vh + var(--n) * 2.2rem);
-  padding-bottom: 2.5rem;
+.rail-bleed { padding-left: calc((100% - min(100%, 78rem)) / 2 + 1.25rem); }
+@media (min-width: 640px) {
+  .rail-bleed { padding-left: calc((100% - min(100%, 78rem)) / 2 + 2rem); }
 }
-/* A stacked card MUST be opaque. The default .card fill is a translucent
-   gradient, which is right when one card sits on paper and wrong the moment
-   two of them overlap: the card beneath reads straight through the one on top. */
-.stage-stack-item > .card {
-  background-image: none;
-  background-color: #fdf8ed;
-  box-shadow:
-    0 1px 0 rgba(255, 255, 255, 0.85) inset,
-    0 30px 60px -38px rgba(60, 50, 28, 0.5),
-    0 2px 6px -2px rgba(60, 50, 28, 0.06);
-}
-/* Sticky needs room to travel, so the list gets height from its children only.
-   On a short viewport the pin is pointless and the stack goes plain. */
-@media (max-height: 640px), (prefers-reduced-motion: reduce) {
-  .stage-stack-item { position: static; padding-bottom: 1.25rem; }
+.rail-bleed .filmstrip,
+.rail-bleed .sprockets-top,
+.rail-bleed .sprockets-bottom {
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
 }

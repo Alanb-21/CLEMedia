@@ -5,7 +5,6 @@ import { Settle } from "@/components/Settle";
 import { Wipe } from "@/components/Wipe";
 import { type Episode } from "@/components/home/EpisodeSlate";
 import { FilmStrip } from "@/components/home/FilmStrip";
-import { type Stage } from "@/components/home/StageStack";
 import { ReviewGateScene } from "@/components/home/ReviewGateScene";
 import {
   Button, Card, Container, Kicker, Lead, Section,
@@ -29,7 +28,7 @@ import { SITE } from "@/lib/site";
    from what exists instead, and the gap is listed in CONTENT-NEEDED.md.
    ========================================================================== */
 
-const STAGES: Stage[] = [
+const STAGES = [
   { n: "01", title: "Watch", body: "An episode, together. Calm stories paced for how young children actually take things in, with nothing autoplaying into something nobody chose." },
   { n: "02", title: "Play", body: "A pause for a movement or breathing prompt, so the episode becomes something a child does rather than only sees." },
   { n: "03", title: "Learn", body: "A printable or an educator-designed activity afterwards, moving the learning off the screen entirely." },
@@ -232,29 +231,38 @@ export default function Home() {
       </Section>
 
       {/* ═══ 4. THE SERIES. A filmstrip, because perforated stock IS the
-          trade. Runs sideways to break the vertical stack, and the header sits
-          off the centre axis the rest of the page uses. ═══ */}
+          trade. The felted show wordmark is a photograph of a real object on a
+          lit felt backdrop, so it cannot be knocked out the way the CLE mark
+          was. It is framed instead, the same treatment the hero gives the
+          garden, which reads as a placed object rather than a pasted tile.
+
+          The strip then runs off the right edge of the page. Boxed inside the
+          container it stopped dead at a hard vertical edge mid-slate, which
+          reads as a clipping bug rather than as film continuing. ═══ */}
       <Section labelledBy="series-h">
         <Container width="wide">
-          <Wipe className="off-left max-w-[44rem]">
-            <Figure
-              asset="brand.show"
-              rounded="rounded-[var(--radius-lg)]"
-              className="tilt-b w-full max-w-[380px]"
-              sizes="380px"
-            />
-            <h2 id="series-h" className="t-h2 mt-8 max-w-[18ch]">Our first original series</h2>
-            <Lead className="mt-5">
+          <Wipe className="grid gap-10 lg:grid-cols-[1fr_0.85fr] lg:items-end lg:gap-16">
+            <div>
+              <div className="w-[clamp(220px,26vw,330px)]">
+                <Card className="tilt-b overflow-hidden p-2">
+                  <Figure
+                    asset="brand.show"
+                    rounded="rounded-[var(--radius-md)]"
+                    sizes="330px"
+                  />
+                </Card>
+              </div>
+              <h2 id="series-h" className="t-h2 mt-9 max-w-[16ch]">Our first original series</h2>
+            </div>
+            <Lead className="lg:pb-2">
               Finn, the fawn pug, and Fia, the black pug, in a garden that rewards slowing down.
               Four episodes released so far, nine to eleven minutes each.
             </Lead>
           </Wipe>
         </Container>
 
-        <div className="mt-14">
-          <Container width="wide">
-            <FilmStrip episodes={EPISODES} />
-          </Container>
+        <div className="rail-bleed mt-14">
+          <FilmStrip episodes={EPISODES} />
         </div>
       </Section>
 
